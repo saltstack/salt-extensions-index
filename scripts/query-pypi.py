@@ -12,6 +12,7 @@ import trio
 from lxml import html
 from tqdm import tqdm
 
+DISABLE_TQDM = "CI" in os.environ
 HEADERS = {"user-agent": "https://github.com/salt-extensions/salt-extensions-index"}
 LOCAL_CACHE_PATH = pathlib.Path(
     os.environ.get("LOCAL_CACHE_PATH") or pathlib.Path(os.getcwd()).joinpath(".cache")
@@ -80,7 +81,7 @@ async def download_pypi_simple_index(session, index_info, limiter, progress):
                         unit_scale=True,
                         unit_divisor=1024,
                         unit="B",
-                        disable=None,  # Disable on non-TTY environments
+                        disable=DISABLE_TQDM,
                     ) as dprogress:
                         dprogress.set_description("Downloading PyPi simple index")
                         num_bytes_downloaded = response.num_bytes_downloaded
@@ -194,7 +195,7 @@ async def main():
         unit="pkg",
         unit_scale=True,
         desc=f"{' ' * 60} :",
-        disable=None,  # Disable on non-TTY environments
+        disable=DISABLE_TQDM,
     )
     with progress:
         with get_index_info(progress) as index_info:
@@ -210,7 +211,9 @@ async def main():
                     await download_pypi_simple_index(
                         session, index_info, limiter, progress
                     )
-                    progress.reset(total=len(index_info["packages"]))
+                    if DISABLE_TQDM is False:
+                        # We can't reset tqdm if it's disabled
+                        progress.reset(total=len(index_info["packages"]))
                     await collect_packages_information(
                         session, index_info, limiter, progress
                     )
