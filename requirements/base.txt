@@ -1,0 +1,4 @@
+lxml
+trio
+httpx[http2]
+msgpack
