@@ -9,6 +9,9 @@ on:
       package_url:
         description: The package URL
         required: true
+      package_version:
+        description: The package version
+        required: true
       salt_versions:
         description: The salt versions to test the package against
         required: true
@@ -18,7 +21,7 @@ on:
 
 jobs:
 
-  Linux:
+  Results-Cache:
     runs-on: ubuntu-latest
 
     strategy:
@@ -31,6 +34,50 @@ jobs:
         salt-version: ${{ fromJSON(github.event.inputs.salt_versions) }}
 
     steps:
+
+      - name: Configure the results cache
+        uses: pat-s/always-upload-cache@v2.1.0
+        with:
+          path: .cache/results
+          key: |
+            cache-results
+            ${{ hashFiles('.cache/results/**') }}
+
+      - name: Set Results Cache Path
+        run: echo "RCACHE_DIR=.cache/results/${{ github.event.inputs.package }}/${{ github.event.inputs.package_version }}/${{ matrix.salt-version }}/py${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Results Cache Setup
+        run: |
+          mkdir -p ${{ env.RCACHE_DIR }}
+
+  Linux:
+    runs-on: ubuntu-latest
+    needs: Results-Cache
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        package:
+          - ${{ github.event.inputs.package }}
+        python-version: ${{ fromJSON(github.event.inputs.python_versions) }}
+        salt-version: ${{ fromJSON(github.event.inputs.salt_versions) }}
+
+    steps:
+
+      - name: Configure the results cache
+        uses: pat-s/always-upload-cache@v2.1.0
+        with:
+          path: .cache/results
+          key: |
+            cache-results
+            ${{ hashFiles('.cache/results/**') }}
+
+      - name: Add job run to results cache
+        run: |
+          export RCACHE_DIR=.cache/results/${{ github.event.inputs.package }}/${{ github.event.inputs.package_version }}/${{ matrix.salt-version }}/py${{ matrix.python-version }}
+          echo https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID > $RCACHE_DIR/${{ runner.os }}.run
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
         with:
@@ -40,7 +87,7 @@ jobs:
         run: |
           mkdir pkg
           cd pkg
-          wget -O - ${{ github.event.inputs.package_url }} | tar zxvf - --strip 1
+          curl -Ls ${{ github.event.inputs.package_url }} | tar zxvf - --strip 1
           ls -lah
 
       - name: Install Nox
@@ -57,6 +104,7 @@ jobs:
 
   Windows:
     runs-on: windows-latest
+    needs: Results-Cache
 
     strategy:
       fail-fast: false
@@ -68,6 +116,21 @@ jobs:
         salt-version: ${{ fromJSON(github.event.inputs.salt_versions) }}
 
     steps:
+
+      - name: Configure the results cache
+        uses: pat-s/always-upload-cache@v2.1.0
+        with:
+          path: .cache/results
+          key: |
+            cache-results
+            ${{ hashFiles('.cache/results/**') }}
+
+      - name: Add job run to results cache
+        shell: bash
+        run: |
+          export RCACHE_DIR=.cache/results/${{ github.event.inputs.package }}/${{ github.event.inputs.package_version }}/${{ matrix.salt-version }}/py${{ matrix.python-version }}
+          echo https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID > $RCACHE_DIR/${{ runner.os }}.run
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
         with:
@@ -78,7 +141,7 @@ jobs:
         run: |
           mkdir pkg
           cd pkg
-          wget -O - ${{ github.event.inputs.package_url }} | tar zxvf - --strip 1
+          curl -Ls ${{ github.event.inputs.package_url }} | tar zxvf - --strip 1
           ls -lah
 
       - name: Install Nox
@@ -95,6 +158,7 @@ jobs:
 
   macOS:
     runs-on: macOS-latest
+    needs: Results-Cache
 
     strategy:
       fail-fast: false
@@ -106,6 +170,20 @@ jobs:
         salt-version: ${{ fromJSON(github.event.inputs.salt_versions) }}
 
     steps:
+
+      - name: Configure the results cache
+        uses: pat-s/always-upload-cache@v2.1.0
+        with:
+          path: .cache/results
+          key: |
+            cache-results
+            ${{ hashFiles('.cache/results/**') }}
+
+      - name: Add job run to results cache
+        run: |
+          export RCACHE_DIR=.cache/results/${{ github.event.inputs.package }}/${{ github.event.inputs.package_version }}/${{ matrix.salt-version }}/py${{ matrix.python-version }}
+          echo https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID > $RCACHE_DIR/${{ runner.os }}.run
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
         with:
@@ -115,7 +193,7 @@ jobs:
         run: |
           mkdir pkg
           cd pkg
-          wget -O - ${{ github.event.inputs.package_url }} | tar zxvf - --strip 1
+          curl -Ls ${{ github.event.inputs.package_url }} | tar zxvf - --strip 1
           ls -lah
 
       - name: Install Nox
