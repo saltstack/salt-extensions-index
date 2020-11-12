@@ -76,7 +76,11 @@ async def download_pypi_simple_index(session, index_info, limiter, progress):
                     total = int(response.headers["Content-Length"])
 
                     with tqdm(
-                        total=total, unit_scale=True, unit_divisor=1024, unit="B"
+                        total=total,
+                        unit_scale=True,
+                        unit_divisor=1024,
+                        unit="B",
+                        disable=None,  # Disable on non-TTY environments
                     ) as dprogress:
                         dprogress.set_description("Downloading PyPi simple index")
                         num_bytes_downloaded = response.num_bytes_downloaded
@@ -186,7 +190,11 @@ async def download_package_info(session, package, package_info, limiter, progres
 async def main():
     timeout = 120 * 60  # move on after 2 hours
     progress = tqdm(
-        total=sys.maxsize, unit="pkg", unit_scale=True, desc=f"{' ' * 60} :"
+        total=sys.maxsize,
+        unit="pkg",
+        unit_scale=True,
+        desc=f"{' ' * 60} :",
+        disable=None,  # Disable on non-TTY environments
     )
     with progress:
         with get_index_info(progress) as index_info:
