@@ -4,8 +4,8 @@ on:
   schedule:
     # Every day at 1:30 UTC
     - cron: "30 1 * * *"
-  push:
-    branches: [ main ]
+#  push:
+#    branches: [ main ]
 
 jobs:
   Search-PyPi:
