@@ -152,6 +152,7 @@ jobs:
       - name: Test
         env:
           SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+          EXTRA_REQUIREMENTS_INSTALL: Cython
         run: |
           cd pkg
           nox --force-color -e tests-3 -- -vv tests/
