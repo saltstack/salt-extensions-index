@@ -1,0 +1,29 @@
+<table>
+  <thead>
+    <tr>
+      <th>Salt Version</th>
+      {%- for osname in osnames %}
+      <th colspan="{{ python_versions|length }}">{{ osname }}</th>
+      {%- endfor %}
+    </tr>
+  </thead>
+  <tbody>
+  {%- for salt_version in results %}
+    <tr>
+      <td rowspan="2">{{ salt_version }}</td>
+    {%- for os in results[salt_version] %}
+      {%- for python_version in results[salt_version][os] %}
+      <td>{{ python_version }}</td>
+      {%- endfor %}
+    {%- endfor %}
+    </tr>
+    <tr>
+      {%- for os in results[salt_version] %}
+        {%- for python_version, info in results[salt_version][os].items() %}
+      <td><a href="{{ info.url }}">{{ info.status }}</a></td>
+        {%- endfor %}
+      {%- endfor %}
+    </tr>
+  {%- endfor %}
+  </tbody>
+</table>

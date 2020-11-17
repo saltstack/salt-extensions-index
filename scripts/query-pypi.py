@@ -4,6 +4,7 @@ import pathlib
 import pprint
 import sys
 import tempfile
+import traceback
 from contextlib import contextmanager
 
 import httpx
@@ -14,14 +15,17 @@ from tqdm import tqdm
 
 DISABLE_TQDM = "CI" in os.environ
 HEADERS = {"user-agent": "https://github.com/salt-extensions/salt-extensions-index"}
+
+REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
 LOCAL_CACHE_PATH = pathlib.Path(
-    os.environ.get("LOCAL_CACHE_PATH") or pathlib.Path(os.getcwd()).joinpath(".cache")
+    os.environ.get("LOCAL_CACHE_PATH") or REPO_ROOT.joinpath(".cache")
 )
 if not LOCAL_CACHE_PATH.is_dir():
     LOCAL_CACHE_PATH.mkdir(0o755)
 PACKAGE_INFO_CACHE = LOCAL_CACHE_PATH / "packages-info"
 if not PACKAGE_INFO_CACHE.is_dir():
     PACKAGE_INFO_CACHE.mkdir(0o755)
+
 
 print(f"Local Cache Path: {LOCAL_CACHE_PATH}", file=sys.stderr, flush=True)
 
@@ -119,10 +123,17 @@ async def download_pypi_simple_index(session, index_info, limiter, progress):
                     )
                     for package in old_packages:
                         package_list.pop(package)
+                        package_info_cache = PACKAGE_INFO_CACHE / f"{package}.msgpack"
+                        if package_info_cache.exists():
+                            package_info_cache.unlink()
                 progress.write(
                     f"The PyPi index server had {len(package_list)} packages. "
                     f"{len(new_packages)} were new. {len(old_packages)} were old and were deleted"
                 )
+                if len(new_packages) <= 100:
+                    progress.write("New packages:")
+                    for package in new_packages:
+                        progress.write(f" * {package}")
                 set_progress_description(progress, "Parsing HTML for packages complete")
     finally:
         progress.update()
@@ -144,6 +155,8 @@ async def collect_packages_information(session, index_info, limiter, progress):
 
 async def download_package_info(session, package, package_info, limiter, progress):
     try:
+        if package_info.get("not-found"):
+            return
         url = f"https://pypi.org/pypi/{package}/json"
         headers = {}
         etag = package_info.get("etag")
@@ -158,6 +171,8 @@ async def download_package_info(session, package, package_info, limiter, progres
             # The package information has not changed:
             return
         if req.status_code != 200:
+            if req.status_code == 404:
+                package_info["not-found"] = True
             progress.write(
                 f"Failed to query info for {package}. Status code: {req.status_code}"
             )
@@ -182,8 +197,8 @@ async def download_package_info(session, package, package_info, limiter, progres
                 package_info_cache = PACKAGE_INFO_CACHE / f"{package}.msgpack"
                 package_info_cache.write_bytes(msgpack.packb(data))
         except Exception:
-            pprint.pprint(data)
-            raise
+            progress.write(traceback.format_exc())
+            progress.write("Data:\n{}".format(pprint.pformat(data)))
     finally:
         progress.update()
 

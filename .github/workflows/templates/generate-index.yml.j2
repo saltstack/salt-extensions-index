@@ -1,0 +1,100 @@
+{%- raw %}
+
+  Generate-Extensions-Index:
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+{%- endraw %}
+    needs:
+      {%- for need in needs %}
+      - {{ need }}
+      {%- endfor %}
+{%- raw %}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+
+      - name: Set PIP Cache Key
+        run: echo "PY=$(python --version --version | sha256sum | cut -d' ' -f1)" >> $GITHUB_ENV
+
+      - name: Restore PIP cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements/docs.txt') }}|${{ env.PY }}
+          restore-keys: |
+            ${{ runner.os }}-pip-docs
+
+      - name: Install Requirements
+        run: |
+          python -m pip install -U pip
+          python -m pip install -r requirements/base.txt
+          python -m pip install -r requirements/docs.txt
+
+      - name: Setup Packages Information Cache
+        uses: actions/cache@v2.1.3
+        with:
+          path: .cache
+          key: salt-extensions-cache
+
+      - name: Download Results
+        uses: actions/download-artifact@v2
+        with:
+          path: results
+
+      - name: Generate Index
+        env:
+          LOCAL_CACHE_PATH: .cache
+        run: |
+          find .cache -print
+          find results -print
+          echo "---"
+          python scripts/generate-docs-index.py
+          cd docs
+          make html
+          cp -Rp _build/html extensions-index
+
+      - name: Upload Generated HTML Index
+        uses: actions/upload-artifact@v2
+        with:
+          name: extensions-index-html
+          path: docs/_build/html
+
+  Publish-Extensions-Index:
+    runs-on: ubuntu-latest
+    needs:
+      - Generate-Extensions-Index
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Download Generated HTML Index
+        uses: actions/download-artifact@v2
+        with:
+          path: generated-html
+          name: extensions-index-html
+
+      - name: Update Extensions Index HTML
+        run: |
+          ls -lah generated-html
+          find . -not -name ".git*" -not -name generated-html -not -name CNAME -maxdepth 1 -exec rm -rf {} \;
+          cp -Rp generated-html/* .
+          rm -rf generated-html
+          git diff
+          git add .
+
+      - name: Commit updated extensions index
+        uses: actions-js/push@v1.2
+        with:
+          branch: gh-pages
+          message: Update Extensions Index
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+{%- endraw %}

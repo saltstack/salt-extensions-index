@@ -1,0 +1,67 @@
+
+  {{ package }}-Linux:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          {%- for python_version in python_versions %}
+          - {{ python_version}}
+          {%- endfor %}
+        salt-version:
+          {%- for salt_version in salt_versions %}
+          - {{ salt_version}}
+          {%- endfor %}
+
+    steps:
+      {%- raw %}
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+      {%- endraw %}
+
+      - name: Download And Extract {{ package }}
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls {{ package_url }} | tar zxvf - --strip 1
+          ls -lah
+
+      {%- raw %}
+
+      - name: Install Nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        env:
+          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+        run: |
+          cd pkg
+          nox --force-color -e tests-3 -- -vv tests/
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          echo ${{ job.status }} > ${{ env.RESULTS_DIR }}/status
+      {%- endraw %}
+
+      - name: Upload Results
+        {%- raw %}
+        if: ${{ always() }}
+        {%- endraw %}
+        uses: actions/upload-artifact@v2
+        with:
+          name: {{ package }}
+          path: .cache
