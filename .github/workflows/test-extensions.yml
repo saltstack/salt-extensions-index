@@ -276,7 +276,9 @@ jobs:
           ls -lah generated-html
           find . -not -name ".git*" -not -name generated-html -not -name CNAME -maxdepth 1 -exec rm -rf {} \;
           cp -Rp generated-html/* .
-          git diff
+          rm -rf generated-html
+          mv _static static
+          sed -i 's/_static/static/g' *.html
           git add .
 
       - name: Commit updated extensions index

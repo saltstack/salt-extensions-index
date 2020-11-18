@@ -88,7 +88,8 @@
           find . -not -name ".git*" -not -name generated-html -not -name CNAME -maxdepth 1 -exec rm -rf {} \;
           cp -Rp generated-html/* .
           rm -rf generated-html
-          git diff
+          mv _static static
+          sed -i 's/_static/static/g' *.html
           git add .
 
       - name: Commit updated extensions index
