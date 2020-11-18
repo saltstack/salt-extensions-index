@@ -108,10 +108,10 @@ html_theme_options = {
     # Set you GA account ID to enable tracking
     # "google_analytics_account": "",
     # Set the repo location to get a badge with stats (only if public repo)
-    "repo_url": "https://github.com/salt-extensions",
+    "repo_url": "https://github.com/saltstack",
     # "repo_name": dist.metadata["Name"],
     "repo_type": "github",
-    "repo_name": "salt-extensions",
+    "repo_name": "salt-extensions-index",
     # Visible levels of the global TOC; -1 means unlimited
     "globaltoc_depth": 3,
     # If False, expand all TOC entries
