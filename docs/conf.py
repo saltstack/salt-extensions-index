@@ -121,8 +121,8 @@ html_theme_options = {
     # hide tabs?
     "master_doc": False,
     # Minify for smaller HTML/CSS assets
-    "html_minify": True,
-    "css_minify": True,
+    "html_minify": False,
+    "css_minify": False,
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
