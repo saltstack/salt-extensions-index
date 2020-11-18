@@ -1,0 +1,14 @@
+salt-ext-tidx1
+--------------
+# tidx1
+Test Extension 1
+
+DO NOT USE IN SALT
+
+.. raw:: html
+   :file: results/salt-ext-tidx1.html
+
+
+.. |date| date::
+
+Last Updated on |date|
