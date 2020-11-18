@@ -1,0 +1,55 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+}
+
+body,input,h1,h2,h3,h4,h5{
+    -webkit-font-feature-settings:"kern","liga";
+    font-feature-settings:"kern","liga";
+    font-family:'Roboto', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #000;
+}
+
+.md-header,
+.md-hero,
+.md-footer-nav,
+.md-tabs{
+	background-color: #222!important;
+}
+
+.md-search__input {
+	background-color: rgba(255,255,255,.26)!important;
+}
+
+.md-typeset h1{
+	font-size: 50px;
+	font-weight: 700;
+	color: #000000;
+}
+
+.md-typeset h2{
+	font-size: 35px;
+	font-weight: 100;
+}
+
+.md-typeset h3{
+	font-size: 24px;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.md-typeset{
+	font-weight: 300;
+}
+
+.md-typeset a{
+	color: #03B7A2!important;
+	font-weight: 500;
+}
