@@ -9,6 +9,17 @@ DO NOT USE IN SALT
    :file: results/salt-ext-tidx1.html
 
 
+salt-tidx2-extension
+--------------------
+# tidx2
+Test Extension 2
+
+DO NOT USE IN SALT
+
+.. raw:: html
+   :file: results/salt-tidx2-extension.html
+
+
 .. |date| date::
 
 Last Updated on |date|
