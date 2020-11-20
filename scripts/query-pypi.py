@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import functools
 import os
 import pathlib
 import pprint
@@ -25,6 +26,7 @@ if not LOCAL_CACHE_PATH.is_dir():
 PACKAGE_INFO_CACHE = LOCAL_CACHE_PATH / "packages-info"
 if not PACKAGE_INFO_CACHE.is_dir():
     PACKAGE_INFO_CACHE.mkdir(0o755)
+STATE_DIR = REPO_ROOT / ".state"
 
 
 print(f"Local Cache Path: {LOCAL_CACHE_PATH}", file=sys.stderr, flush=True)
@@ -100,6 +102,7 @@ async def download_pypi_simple_index(session, index_info, limiter, progress):
                         )
 
                 index_info["etag"] = response.headers.get("etag")
+                STATE_DIR.joinpath("pypi-index-etag").write_text(index_info["etag"])
 
                 set_progress_description(
                     progress, "Querying packages from PyPi completed"
@@ -140,17 +143,30 @@ async def download_pypi_simple_index(session, index_info, limiter, progress):
 
 
 async def collect_packages_information(session, index_info, limiter, progress):
-    async with trio.open_nursery() as nursery:
-        for package in index_info["packages"]:
-            async with limiter:
-                nursery.start_soon(
-                    download_package_info,
-                    session,
-                    package,
-                    index_info["packages"][package],
-                    limiter,
-                    progress,
-                )
+    try:
+        async with trio.open_nursery() as nursery:
+            for package in index_info["packages"]:
+                async with limiter:
+                    nursery.start_soon(
+                        download_package_info,
+                        session,
+                        package,
+                        index_info["packages"][package],
+                        limiter,
+                        progress,
+                    )
+    finally:
+        # Store the known extensions hash into state to trigger a cache hit/miss/update
+        # on the Github Actions CI pipeline
+        extensions = {}
+        for path in PACKAGE_INFO_CACHE.glob("*.msgpack"):
+            extension_data = msgpack.unpackb(path.read_bytes())
+            extensions[path.stem] = extension_data
+        extensions_hash = functools.reduce(
+            lambda x, y: x ^ y,
+            [hash((key, repr(value))) for (key, value) in sorted(extensions.items())],
+        )
+        STATE_DIR.joinpath("known-extensions-hash").write_text(f"{extensions_hash}")
 
 
 async def download_package_info(session, package, package_info, limiter, progress):
