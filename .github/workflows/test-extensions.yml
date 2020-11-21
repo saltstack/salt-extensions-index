@@ -2,8 +2,8 @@ name: Generate Salt Extensions Index
 
 on:
   schedule:
-    # Every day at 1:30 UTC
-    - cron: "30 1 * * *"
+    # Every Sunday at 1:30 UTC
+    - cron: "30 1 * * 0"
   push:
     branches: [ main ]
 
@@ -414,7 +414,7 @@ jobs:
         with:
           path: .cache
           key: salt-extensions-cache-${{ hashFiles('.state/*') }}
-          restore_keys: |
+          restore-keys: |
             salt-extensions-cache-${{ hashFiles('.state/*') }}
             salt-extensions-cache
 
