@@ -63,6 +63,7 @@ jobs:
           git add .github/workflows/test-extensions.yml
 
       - name: Commit Extension Tests Workflow Changes
+        if: github.repository == 'saltstack/salt-extensions-index'
         uses: actions-js/push@v1.2
         with:
           branch: ${{ github.ref }}

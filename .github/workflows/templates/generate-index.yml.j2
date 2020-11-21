@@ -97,6 +97,7 @@
           git add .
 
       - name: Commit updated extensions index
+        if: github.repository == 'saltstack/salt-extensions-index'
         uses: actions-js/push@v1.2
         with:
           branch: gh-pages
