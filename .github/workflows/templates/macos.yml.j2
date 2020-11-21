@@ -29,6 +29,7 @@
       {%- endraw %}
 
       - name: Download And Extract {{ package }}
+        id: download-and-extract
         run: |
           mkdir pkg
           cd pkg
@@ -38,11 +39,14 @@
       {%- raw %}
 
       - name: Install Nox
+        id: install-nox
         run: |
           python -m pip install --upgrade pip
           pip install nox
 
       - name: Test
+        id: run-tests
+        continue-on-error: true
         env:
           SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
         run: |
@@ -54,7 +58,7 @@
         run: |
           mkdir -p ${{ env.RESULTS_DIR }}
           echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
-          echo ${{ job.status }} > ${{ env.RESULTS_DIR }}/status
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
       {%- endraw %}
 
       - name: Upload Results
