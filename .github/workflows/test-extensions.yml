@@ -37,6 +37,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Download And Extract salt-ext-tidx1
+        id: download-and-extract
         run: |
           mkdir pkg
           cd pkg
@@ -44,13 +45,17 @@ jobs:
           ls -lah
 
       - name: Install Nox
+        id: install-nox
         run: |
           python -m pip install --upgrade pip
           pip install nox
 
       - name: Test
+        id: run-tests
+        continue-on-error: true
         env:
           SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+
         run: |
           cd pkg
           nox --force-color -e tests-3 -- -vv tests/
@@ -60,7 +65,7 @@ jobs:
         run: |
           mkdir -p ${{ env.RESULTS_DIR }}
           echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
-          echo ${{ job.status }} > ${{ env.RESULTS_DIR }}/status
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -96,6 +101,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Download And Extract salt-ext-tidx1
+        id: download-and-extract
         run: |
           mkdir pkg
           cd pkg
@@ -103,11 +109,14 @@ jobs:
           ls -lah
 
       - name: Install Nox
+        id: install-nox
         run: |
           python -m pip install --upgrade pip
           pip install nox
 
       - name: Test
+        id: run-tests
+        continue-on-error: true
         env:
           SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
         run: |
@@ -119,7 +128,7 @@ jobs:
         run: |
           mkdir -p ${{ env.RESULTS_DIR }}
           echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
-          echo ${{ job.status }} > ${{ env.RESULTS_DIR }}/status
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -156,6 +165,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Download And Extract salt-ext-tidx1
+        id: download-and-extract
         shell: bash
         run: |
           mkdir pkg
@@ -164,11 +174,14 @@ jobs:
           ls -lah
 
       - name: Install Nox
+        id: install-nox
         run: |
           python -m pip install --upgrade pip
           pip install nox
 
       - name: Test
+        id: run-tests
+        continue-on-error: true
         env:
           SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
           EXTRA_REQUIREMENTS_INSTALL: Cython
@@ -182,7 +195,7 @@ jobs:
         run: |
           mkdir -p ${{ env.RESULTS_DIR }}
           echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
-          echo ${{ job.status }} > ${{ env.RESULTS_DIR }}/status
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         uses: actions/upload-artifact@v2
@@ -218,6 +231,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Download And Extract salt-tidx2-extension
+        id: download-and-extract
         run: |
           mkdir pkg
           cd pkg
@@ -225,13 +239,17 @@ jobs:
           ls -lah
 
       - name: Install Nox
+        id: install-nox
         run: |
           python -m pip install --upgrade pip
           pip install nox
 
       - name: Test
+        id: run-tests
+        continue-on-error: true
         env:
           SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+
         run: |
           cd pkg
           nox --force-color -e tests-3 -- -vv tests/
@@ -241,7 +259,7 @@ jobs:
         run: |
           mkdir -p ${{ env.RESULTS_DIR }}
           echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
-          echo ${{ job.status }} > ${{ env.RESULTS_DIR }}/status
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -277,6 +295,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Download And Extract salt-tidx2-extension
+        id: download-and-extract
         run: |
           mkdir pkg
           cd pkg
@@ -284,11 +303,14 @@ jobs:
           ls -lah
 
       - name: Install Nox
+        id: install-nox
         run: |
           python -m pip install --upgrade pip
           pip install nox
 
       - name: Test
+        id: run-tests
+        continue-on-error: true
         env:
           SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
         run: |
@@ -300,7 +322,7 @@ jobs:
         run: |
           mkdir -p ${{ env.RESULTS_DIR }}
           echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
-          echo ${{ job.status }} > ${{ env.RESULTS_DIR }}/status
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -337,6 +359,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Download And Extract salt-tidx2-extension
+        id: download-and-extract
         shell: bash
         run: |
           mkdir pkg
@@ -345,11 +368,14 @@ jobs:
           ls -lah
 
       - name: Install Nox
+        id: install-nox
         run: |
           python -m pip install --upgrade pip
           pip install nox
 
       - name: Test
+        id: run-tests
+        continue-on-error: true
         env:
           SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
           EXTRA_REQUIREMENTS_INSTALL: Cython
@@ -363,7 +389,7 @@ jobs:
         run: |
           mkdir -p ${{ env.RESULTS_DIR }}
           echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
-          echo ${{ job.status }} > ${{ env.RESULTS_DIR }}/status
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         uses: actions/upload-artifact@v2
@@ -470,6 +496,7 @@ jobs:
           git add .
 
       - name: Commit updated extensions index
+        if: github.repository == 'saltstack/salt-extensions-index'
         uses: actions-js/push@v1.2
         with:
           branch: gh-pages
