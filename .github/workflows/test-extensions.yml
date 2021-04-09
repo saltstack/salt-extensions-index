@@ -9,6 +9,200 @@ on:
 
 jobs:
 
+  salt-cumin-Linux:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+        salt-version:
+          - 3001.3
+          - 3002.1
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-cumin
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/e8/be/fed3e10ffee7059390256468c4040aa4c149dc8f3c4308ae4ac630c6c7f0/salt-cumin-0.7.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+
+        run: |
+          cd pkg
+          nox --force-color -e tests-3 -- -vv tests/
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-cumin
+          path: .cache
+  salt-cumin-macOS:
+    runs-on: macOS-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+        salt-version:
+          - 3001.3
+          - 3002.1
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-cumin
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/e8/be/fed3e10ffee7059390256468c4040aa4c149dc8f3c4308ae4ac630c6c7f0/salt-cumin-0.7.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+        run: |
+          cd pkg
+          nox --force-color -e tests-3 -- -vv tests/
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-cumin
+          path: .cache
+  salt-cumin-Windows:
+    runs-on: windows-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+        salt-version:
+          - 3001.3
+          - 3002.1
+
+    steps:
+      - name: Define Results Directory
+        shell: bash
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-cumin
+        id: download-and-extract
+        shell: bash
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/e8/be/fed3e10ffee7059390256468c4040aa4c149dc8f3c4308ae4ac630c6c7f0/salt-cumin-0.7.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+          EXTRA_REQUIREMENTS_INSTALL: Cython
+        run: |
+          cd pkg
+          nox --force-color -e tests-3 -- -vv tests/
+
+      - name: Store Job Status
+        shell: bash
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: salt-cumin
+          path: .cache
   salt-ext-tidx1-Linux:
     runs-on: ubuntu-latest
     continue-on-error: true
@@ -397,17 +591,611 @@ jobs:
         with:
           name: salt-tidx2-extension
           path: .cache
+  spiro-deploy-Linux:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+        salt-version:
+          - 3001.3
+          - 3002.1
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spiro-deploy
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/2e/c6/e3cae1e09029ce603c787b6bfcade070a2327327cb5d8c183ed2a6e574b9/spiro-deploy-0.4.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+
+        run: |
+          cd pkg
+          nox --force-color -e tests-3 -- -vv tests/
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: spiro-deploy
+          path: .cache
+  spiro-deploy-macOS:
+    runs-on: macOS-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+        salt-version:
+          - 3001.3
+          - 3002.1
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spiro-deploy
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/2e/c6/e3cae1e09029ce603c787b6bfcade070a2327327cb5d8c183ed2a6e574b9/spiro-deploy-0.4.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+        run: |
+          cd pkg
+          nox --force-color -e tests-3 -- -vv tests/
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: spiro-deploy
+          path: .cache
+  spiro-deploy-Windows:
+    runs-on: windows-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+        salt-version:
+          - 3001.3
+          - 3002.1
+
+    steps:
+      - name: Define Results Directory
+        shell: bash
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spiro-deploy
+        id: download-and-extract
+        shell: bash
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/2e/c6/e3cae1e09029ce603c787b6bfcade070a2327327cb5d8c183ed2a6e574b9/spiro-deploy-0.4.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+          EXTRA_REQUIREMENTS_INSTALL: Cython
+        run: |
+          cd pkg
+          nox --force-color -e tests-3 -- -vv tests/
+
+      - name: Store Job Status
+        shell: bash
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: spiro-deploy
+          path: .cache
+  spiro-network-Linux:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+        salt-version:
+          - 3001.3
+          - 3002.1
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spiro-network
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/42/da/f31b11d9ec13562fd633fa7f9e7f8ea3a5dd2aee864ea8526645d3859c6a/spiro-network-0.2.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+
+        run: |
+          cd pkg
+          nox --force-color -e tests-3 -- -vv tests/
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: spiro-network
+          path: .cache
+  spiro-network-macOS:
+    runs-on: macOS-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+        salt-version:
+          - 3001.3
+          - 3002.1
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spiro-network
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/42/da/f31b11d9ec13562fd633fa7f9e7f8ea3a5dd2aee864ea8526645d3859c6a/spiro-network-0.2.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+        run: |
+          cd pkg
+          nox --force-color -e tests-3 -- -vv tests/
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: spiro-network
+          path: .cache
+  spiro-network-Windows:
+    runs-on: windows-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+        salt-version:
+          - 3001.3
+          - 3002.1
+
+    steps:
+      - name: Define Results Directory
+        shell: bash
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spiro-network
+        id: download-and-extract
+        shell: bash
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/42/da/f31b11d9ec13562fd633fa7f9e7f8ea3a5dd2aee864ea8526645d3859c6a/spiro-network-0.2.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+          EXTRA_REQUIREMENTS_INSTALL: Cython
+        run: |
+          cd pkg
+          nox --force-color -e tests-3 -- -vv tests/
+
+      - name: Store Job Status
+        shell: bash
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: spiro-network
+          path: .cache
+  spirofs-Linux:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+        salt-version:
+          - 3001.3
+          - 3002.1
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spirofs
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/ad/71/cc56e9558f11f0f45e5c167fbf19fe9eed1943df629d9d4da3b417295bb1/spirofs-0.3.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+
+        run: |
+          cd pkg
+          nox --force-color -e tests-3 -- -vv tests/
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: spirofs
+          path: .cache
+  spirofs-macOS:
+    runs-on: macOS-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+        salt-version:
+          - 3001.3
+          - 3002.1
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spirofs
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/ad/71/cc56e9558f11f0f45e5c167fbf19fe9eed1943df629d9d4da3b417295bb1/spirofs-0.3.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+        run: |
+          cd pkg
+          nox --force-color -e tests-3 -- -vv tests/
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: spirofs
+          path: .cache
+  spirofs-Windows:
+    runs-on: windows-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+        salt-version:
+          - 3001.3
+          - 3002.1
+
+    steps:
+      - name: Define Results Directory
+        shell: bash
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spirofs
+        id: download-and-extract
+        shell: bash
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/ad/71/cc56e9558f11f0f45e5c167fbf19fe9eed1943df629d9d4da3b417295bb1/spirofs-0.3.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+          EXTRA_REQUIREMENTS_INSTALL: Cython
+        run: |
+          cd pkg
+          nox --force-color -e tests-3 -- -vv tests/
+
+      - name: Store Job Status
+        shell: bash
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: spirofs
+          path: .cache
 
   Generate-Extensions-Index:
     runs-on: ubuntu-latest
     if: ${{ always() }}
     needs:
+      - salt-cumin-Linux
+      - salt-cumin-macOS
+      - salt-cumin-Windows
       - salt-ext-tidx1-Linux
       - salt-ext-tidx1-macOS
       - salt-ext-tidx1-Windows
       - salt-tidx2-extension-Linux
       - salt-tidx2-extension-macOS
       - salt-tidx2-extension-Windows
+      - spiro-deploy-Linux
+      - spiro-deploy-macOS
+      - spiro-deploy-Windows
+      - spiro-network-Linux
+      - spiro-network-macOS
+      - spiro-network-Windows
+      - spirofs-Linux
+      - spirofs-macOS
+      - spirofs-Windows
 
     steps:
       - uses: actions/checkout@v2
