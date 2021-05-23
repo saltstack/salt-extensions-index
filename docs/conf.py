@@ -12,7 +12,6 @@ import datetime
 import os
 import sys
 
-import sphinx_material_saltstack
 
 try:
     docs_basepath = os.path.abspath(os.path.dirname(__file__))
@@ -37,7 +36,7 @@ if this_year == 2020:
 else:
     copyright_year = f"2020 - {this_year}"
 project = "Salt Extensions"
-author = "SaltStack"
+author = "VMware, Inc."
 copyright = f"{copyright_year}, {author}"
 
 # The full version, including alpha/beta/rc tags
@@ -60,7 +59,7 @@ rst_prolog = """
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    "sphinx_material_saltstack",
+    "furo",
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
@@ -93,37 +92,8 @@ autosummary_generate = True
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = "sphinx_material_saltstack"
-html_theme_path = sphinx_material_saltstack.html_theme_path()
-html_context = sphinx_material_saltstack.get_html_context()
-html_sidebars = {
-    "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
-}
-html_sidebars = {"**": ["logo-text.html", "globaltoc.html", "localtoc.html"]}
-# html_sidebars = {"**": ["logo-text.html"]}
-# html_sidebars = {"**": []}
-html_theme_options = {
-    # Set the name of the project to appear in the navigation.
-    "nav_title": "Salt Extensions",
-    # Set you GA account ID to enable tracking
-    # "google_analytics_account": "",
-    # Set the repo location to get a badge with stats (only if public repo)
-    "repo_url": "https://github.com/saltstack",
-    # "repo_name": dist.metadata["Name"],
-    "repo_type": "github",
-    "repo_name": "salt-extensions-index",
-    # Visible levels of the global TOC; -1 means unlimited
-    "globaltoc_depth": 3,
-    # If False, expand all TOC entries
-    "globaltoc_collapse": False,
-    # If True, show hidden TOC entries
-    "globaltoc_includehidden": True,
-    # hide tabs?
-    "master_doc": False,
-    # Minify for smaller HTML/CSS assets
-    "html_minify": False,
-    "css_minify": False,
-}
+html_theme = "furo"
+html_title = project
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -132,25 +102,13 @@ html_static_path = ["_static"]
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = os.path.join(
-    html_theme_path[0],
-    "sphinx_material_saltstack",
-    "static",
-    "images",
-    "saltstack-logo.png",
-)
+html_logo = "_static/img/SaltProject_altlogo_teal.png"
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large. Favicons can be up to at least 228x228. PNG
 # format is supported as well, not just .ico'
-html_favicon = os.path.join(
-    html_theme_path[0],
-    "sphinx_material_saltstack",
-    "static",
-    "images",
-    "favicon.png",
-)
+html_favicon = "_static/img/SaltProject_Logomark_teal.png"
 
 
 html_show_sourcelink = False
