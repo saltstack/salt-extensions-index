@@ -397,6 +397,200 @@ jobs:
         with:
           name: salt-ext-tidx1
           path: .cache
+  salt-sproxy-Linux:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+        salt-version:
+          - 3001.3
+          - 3002.1
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-sproxy
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/52/f0/b5e948ee3799855215fc83dee139583ca7f5996df9095214eb2415329e18/salt-sproxy-2021.6.0.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+
+        run: |
+          cd pkg
+          nox --force-color -e tests-3 -- -vv tests/
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-sproxy
+          path: .cache
+  salt-sproxy-macOS:
+    runs-on: macOS-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+        salt-version:
+          - 3001.3
+          - 3002.1
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-sproxy
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/52/f0/b5e948ee3799855215fc83dee139583ca7f5996df9095214eb2415329e18/salt-sproxy-2021.6.0.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+        run: |
+          cd pkg
+          nox --force-color -e tests-3 -- -vv tests/
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-sproxy
+          path: .cache
+  salt-sproxy-Windows:
+    runs-on: windows-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+        salt-version:
+          - 3001.3
+          - 3002.1
+
+    steps:
+      - name: Define Results Directory
+        shell: bash
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-sproxy
+        id: download-and-extract
+        shell: bash
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/52/f0/b5e948ee3799855215fc83dee139583ca7f5996df9095214eb2415329e18/salt-sproxy-2021.6.0.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+          EXTRA_REQUIREMENTS_INSTALL: Cython
+        run: |
+          cd pkg
+          nox --force-color -e tests-3 -- -vv tests/
+
+      - name: Store Job Status
+        shell: bash
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: salt-sproxy
+          path: .cache
   salt-tidx2-extension-Linux:
     runs-on: ubuntu-latest
     continue-on-error: true
@@ -1184,6 +1378,9 @@ jobs:
       - salt-ext-tidx1-Linux
       - salt-ext-tidx1-macOS
       - salt-ext-tidx1-Windows
+      - salt-sproxy-Linux
+      - salt-sproxy-macOS
+      - salt-sproxy-Windows
       - salt-tidx2-extension-Linux
       - salt-tidx2-extension-macOS
       - salt-tidx2-extension-Windows
