@@ -429,7 +429,7 @@ jobs:
         run: |
           mkdir pkg
           cd pkg
-          curl -Ls https://files.pythonhosted.org/packages/52/f0/b5e948ee3799855215fc83dee139583ca7f5996df9095214eb2415329e18/salt-sproxy-2021.6.0.tar.gz | tar zxvf - --strip 1
+          curl -Ls https://files.pythonhosted.org/packages/ef/82/a28bebda453fc46ca83b1e7a6806134399b64c235c3c668f8843198ebb64/salt-sproxy-2021.6.1.tar.gz | tar zxvf - --strip 1
           ls -lah
 
       - name: Install Nox
@@ -493,7 +493,7 @@ jobs:
         run: |
           mkdir pkg
           cd pkg
-          curl -Ls https://files.pythonhosted.org/packages/52/f0/b5e948ee3799855215fc83dee139583ca7f5996df9095214eb2415329e18/salt-sproxy-2021.6.0.tar.gz | tar zxvf - --strip 1
+          curl -Ls https://files.pythonhosted.org/packages/ef/82/a28bebda453fc46ca83b1e7a6806134399b64c235c3c668f8843198ebb64/salt-sproxy-2021.6.1.tar.gz | tar zxvf - --strip 1
           ls -lah
 
       - name: Install Nox
@@ -558,7 +558,7 @@ jobs:
         run: |
           mkdir pkg
           cd pkg
-          curl -Ls https://files.pythonhosted.org/packages/52/f0/b5e948ee3799855215fc83dee139583ca7f5996df9095214eb2415329e18/salt-sproxy-2021.6.0.tar.gz | tar zxvf - --strip 1
+          curl -Ls https://files.pythonhosted.org/packages/ef/82/a28bebda453fc46ca83b1e7a6806134399b64c235c3c668f8843198ebb64/salt-sproxy-2021.6.1.tar.gz | tar zxvf - --strip 1
           ls -lah
 
       - name: Install Nox
