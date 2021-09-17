@@ -182,7 +182,7 @@ async def download_package_info(session, package, package_info, limiter, progres
         set_progress_description(progress, f"Querying info for {package}")
         try:
             req = await session.get(url, headers=headers, timeout=15)
-        except httpx.TimeoutException as exc:
+        except (httpx.TimeoutException, trio.ClosedResourceError) as exc:
             progress.write(f"Failed to query info for {package}: {exc}")
             return
         package_info["etag"] = req.headers.get("etag")
