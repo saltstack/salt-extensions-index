@@ -4,8 +4,8 @@ on:
   schedule:
     # Every day at 1:30 UTC
     - cron: "30 1 * * *"
-#  push:
-#    branches: [ main ]
+  push:
+    branches: [ main ]
 
 jobs:
   Search-PyPi:
@@ -38,14 +38,14 @@ jobs:
           python -m pip install -U pip
           python -m pip install -r requirements/base.txt
 
-      - name: Setup Packages Information Cache
-        uses: pat-s/always-upload-cache@v2.1.3
+      - name: Download Previous Cache Artifacts
+        continue-on-error: true
+        uses: dawidd6/action-download-artifact@v2
         with:
+          workflow: search-extensions.yml
+          branch: ${{ github.base_ref || 'main' }}
           path: .cache
-          key: salt-extensions-cache-${{ hashFiles('.state/*') }}
-          restore-keys: |
-            salt-extensions-cache-${{ hashFiles('.state/*') }}
-            salt-extensions-cache
+          name: salt-extensions-cache
 
       - name: Search Salt Extensions on PyPi
         env:
@@ -61,6 +61,13 @@ jobs:
           git diff
           git add .state
           git add .github/workflows/test-extensions.yml
+
+      - name: Upload Cache Artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-extensions-cache
+          path: .cache
 
       - name: Commit Extension Tests Workflow Changes
         if: github.repository == 'saltstack/salt-extensions-index'
