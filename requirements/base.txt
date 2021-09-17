@@ -4,3 +4,4 @@ httpx[http2]
 msgpack
 tqdm
 jinja2
+python-slugify

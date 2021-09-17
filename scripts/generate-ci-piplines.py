@@ -5,6 +5,7 @@ import sys
 
 import msgpack
 from jinja2 import Template
+from slugify import slugify
 from tqdm import tqdm
 
 DISABLE_TQDM = "CI" in os.environ
@@ -75,12 +76,14 @@ def main():
         for package, url in packages.items():
             set_progress_description(progress, f"Processing {package}")
             context = common_context.copy()
+            slug = slugify(package)
+            context["slug"] = slug
             context["package"] = package
             context["package_url"] = url
             for template_path in platform_templates:
                 content += Template(template_path.read_text()).render(**context)
-            for platform in ("Linux", "macOS", "Windows"):
-                needs.append(f"{package}-{platform}")
+            for platform in ("linux", "macos", "windows"):
+                needs.append(f"{slug}-{platform}")
             progress.update()
         generate_extensions_index = (
             REPO_ROOT / ".github" / "workflows" / "templates" / "generate-index.yml.j2"
