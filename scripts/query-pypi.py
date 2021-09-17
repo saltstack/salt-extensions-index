@@ -180,7 +180,11 @@ async def download_package_info(session, package, package_info, limiter, progres
             headers["If-None-Match"] = etag
 
         set_progress_description(progress, f"Querying info for {package}")
-        req = await session.get(url, headers=headers, timeout=10)
+        try:
+            req = await session.get(url, headers=headers, timeout=15)
+        except httpx.TimeoutException as exc:
+            progress.write(f"Failed to query info for {package}: {exc}")
+            return
         package_info["etag"] = req.headers.get("etag")
         if req.status_code == 304:
             set_progress_description(progress, f"No changes for {package}")
