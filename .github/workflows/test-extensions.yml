@@ -9,7 +9,9 @@ on:
 
 jobs:
 
-  salt-cumin-Linux:
+
+  salt-cumin-linux:
+    name: salt-cumin Linux
     runs-on: ubuntu-latest
     continue-on-error: true
 
@@ -73,7 +75,9 @@ jobs:
         with:
           name: salt-cumin
           path: .cache
-  salt-cumin-macOS:
+
+  salt-cumin-macos:
+    name: salt-cumin macOS
     runs-on: macOS-latest
     continue-on-error: true
 
@@ -136,7 +140,9 @@ jobs:
         with:
           name: salt-cumin
           path: .cache
-  salt-cumin-Windows:
+
+  salt-cumin-windows:
+    name: salt-cumin Windows
     runs-on: windows-latest
     continue-on-error: true
 
@@ -203,7 +209,9 @@ jobs:
         with:
           name: salt-cumin
           path: .cache
-  salt-ext-tidx1-Linux:
+
+  salt-ext-tidx1-linux:
+    name: salt-ext-tidx1 Linux
     runs-on: ubuntu-latest
     continue-on-error: true
 
@@ -267,7 +275,9 @@ jobs:
         with:
           name: salt-ext-tidx1
           path: .cache
-  salt-ext-tidx1-macOS:
+
+  salt-ext-tidx1-macos:
+    name: salt-ext-tidx1 macOS
     runs-on: macOS-latest
     continue-on-error: true
 
@@ -330,7 +340,9 @@ jobs:
         with:
           name: salt-ext-tidx1
           path: .cache
-  salt-ext-tidx1-Windows:
+
+  salt-ext-tidx1-windows:
+    name: salt-ext-tidx1 Windows
     runs-on: windows-latest
     continue-on-error: true
 
@@ -397,7 +409,9 @@ jobs:
         with:
           name: salt-ext-tidx1
           path: .cache
-  salt-sproxy-Linux:
+
+  salt-sproxy-linux:
+    name: salt-sproxy Linux
     runs-on: ubuntu-latest
     continue-on-error: true
 
@@ -461,7 +475,9 @@ jobs:
         with:
           name: salt-sproxy
           path: .cache
-  salt-sproxy-macOS:
+
+  salt-sproxy-macos:
+    name: salt-sproxy macOS
     runs-on: macOS-latest
     continue-on-error: true
 
@@ -524,7 +540,9 @@ jobs:
         with:
           name: salt-sproxy
           path: .cache
-  salt-sproxy-Windows:
+
+  salt-sproxy-windows:
+    name: salt-sproxy Windows
     runs-on: windows-latest
     continue-on-error: true
 
@@ -591,7 +609,9 @@ jobs:
         with:
           name: salt-sproxy
           path: .cache
-  salt-tidx2-extension-Linux:
+
+  salt-tidx2-extension-linux:
+    name: salt-tidx2-extension Linux
     runs-on: ubuntu-latest
     continue-on-error: true
 
@@ -655,7 +675,9 @@ jobs:
         with:
           name: salt-tidx2-extension
           path: .cache
-  salt-tidx2-extension-macOS:
+
+  salt-tidx2-extension-macos:
+    name: salt-tidx2-extension macOS
     runs-on: macOS-latest
     continue-on-error: true
 
@@ -718,7 +740,9 @@ jobs:
         with:
           name: salt-tidx2-extension
           path: .cache
-  salt-tidx2-extension-Windows:
+
+  salt-tidx2-extension-windows:
+    name: salt-tidx2-extension Windows
     runs-on: windows-latest
     continue-on-error: true
 
@@ -785,7 +809,9 @@ jobs:
         with:
           name: salt-tidx2-extension
           path: .cache
-  saltext.vmware-Linux:
+
+  saltext-vmware-linux:
+    name: saltext.vmware Linux
     runs-on: ubuntu-latest
     continue-on-error: true
 
@@ -849,7 +875,9 @@ jobs:
         with:
           name: saltext.vmware
           path: .cache
-  saltext.vmware-macOS:
+
+  saltext-vmware-macos:
+    name: saltext.vmware macOS
     runs-on: macOS-latest
     continue-on-error: true
 
@@ -912,7 +940,9 @@ jobs:
         with:
           name: saltext.vmware
           path: .cache
-  saltext.vmware-Windows:
+
+  saltext-vmware-windows:
+    name: saltext.vmware Windows
     runs-on: windows-latest
     continue-on-error: true
 
@@ -979,7 +1009,9 @@ jobs:
         with:
           name: saltext.vmware
           path: .cache
-  spiro-deploy-Linux:
+
+  spiro-deploy-linux:
+    name: spiro-deploy Linux
     runs-on: ubuntu-latest
     continue-on-error: true
 
@@ -1043,7 +1075,9 @@ jobs:
         with:
           name: spiro-deploy
           path: .cache
-  spiro-deploy-macOS:
+
+  spiro-deploy-macos:
+    name: spiro-deploy macOS
     runs-on: macOS-latest
     continue-on-error: true
 
@@ -1106,7 +1140,9 @@ jobs:
         with:
           name: spiro-deploy
           path: .cache
-  spiro-deploy-Windows:
+
+  spiro-deploy-windows:
+    name: spiro-deploy Windows
     runs-on: windows-latest
     continue-on-error: true
 
@@ -1173,7 +1209,9 @@ jobs:
         with:
           name: spiro-deploy
           path: .cache
-  spiro-network-Linux:
+
+  spiro-network-linux:
+    name: spiro-network Linux
     runs-on: ubuntu-latest
     continue-on-error: true
 
@@ -1237,7 +1275,9 @@ jobs:
         with:
           name: spiro-network
           path: .cache
-  spiro-network-macOS:
+
+  spiro-network-macos:
+    name: spiro-network macOS
     runs-on: macOS-latest
     continue-on-error: true
 
@@ -1300,7 +1340,9 @@ jobs:
         with:
           name: spiro-network
           path: .cache
-  spiro-network-Windows:
+
+  spiro-network-windows:
+    name: spiro-network Windows
     runs-on: windows-latest
     continue-on-error: true
 
@@ -1367,7 +1409,9 @@ jobs:
         with:
           name: spiro-network
           path: .cache
-  spirofs-Linux:
+
+  spirofs-linux:
+    name: spirofs Linux
     runs-on: ubuntu-latest
     continue-on-error: true
 
@@ -1431,7 +1475,9 @@ jobs:
         with:
           name: spirofs
           path: .cache
-  spirofs-macOS:
+
+  spirofs-macos:
+    name: spirofs macOS
     runs-on: macOS-latest
     continue-on-error: true
 
@@ -1494,7 +1540,9 @@ jobs:
         with:
           name: spirofs
           path: .cache
-  spirofs-Windows:
+
+  spirofs-windows:
+    name: spirofs Windows
     runs-on: windows-latest
     continue-on-error: true
 
@@ -1566,30 +1614,30 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ always() }}
     needs:
-      - salt-cumin-Linux
-      - salt-cumin-macOS
-      - salt-cumin-Windows
-      - salt-ext-tidx1-Linux
-      - salt-ext-tidx1-macOS
-      - salt-ext-tidx1-Windows
-      - salt-sproxy-Linux
-      - salt-sproxy-macOS
-      - salt-sproxy-Windows
-      - salt-tidx2-extension-Linux
-      - salt-tidx2-extension-macOS
-      - salt-tidx2-extension-Windows
-      - saltext.vmware-Linux
-      - saltext.vmware-macOS
-      - saltext.vmware-Windows
-      - spiro-deploy-Linux
-      - spiro-deploy-macOS
-      - spiro-deploy-Windows
-      - spiro-network-Linux
-      - spiro-network-macOS
-      - spiro-network-Windows
-      - spirofs-Linux
-      - spirofs-macOS
-      - spirofs-Windows
+      - salt-cumin-linux
+      - salt-cumin-macos
+      - salt-cumin-windows
+      - salt-ext-tidx1-linux
+      - salt-ext-tidx1-macos
+      - salt-ext-tidx1-windows
+      - salt-sproxy-linux
+      - salt-sproxy-macos
+      - salt-sproxy-windows
+      - salt-tidx2-extension-linux
+      - salt-tidx2-extension-macos
+      - salt-tidx2-extension-windows
+      - saltext-vmware-linux
+      - saltext-vmware-macos
+      - saltext-vmware-windows
+      - spiro-deploy-linux
+      - spiro-deploy-macos
+      - spiro-deploy-windows
+      - spiro-network-linux
+      - spiro-network-macos
+      - spiro-network-windows
+      - spirofs-linux
+      - spirofs-macos
+      - spirofs-windows
 
     steps:
       - uses: actions/checkout@v2
