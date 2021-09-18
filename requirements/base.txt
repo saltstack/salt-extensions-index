@@ -5,3 +5,5 @@ msgpack
 tqdm
 jinja2
 python-slugify
+packaging
+pygithub

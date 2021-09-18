@@ -3,7 +3,9 @@ import os
 import pathlib
 import sys
 
+import github
 import msgpack
+import packaging.version
 from jinja2 import Template
 from slugify import slugify
 from tqdm import tqdm
@@ -33,6 +35,29 @@ def set_progress_description(progress, message):
     progress.set_description(f"{message: <60}")
 
 
+def get_lastest_major_releases(count=3):
+    # This logic might have to change because the order of tags seems to be by creation time
+    gh = github.Github(os.environ.get("GITHUB_TOKEN"))
+    repo = gh.get_repository("saltstack/salt")
+    releases = []
+    last_version = None
+    for tag in repo.get_tags():
+        if len(releases) == count:
+            break
+        version = packaging.version.parse(tag.name)
+        if version.major < 3000:
+            # Don't test versions of salt older than 3000
+            continue
+        if last_version is None:
+            last_version = version
+            releases.append(tag.name)
+            continue
+        if version.major == last_version.major:
+            continue
+        releases.append(tag.name)
+    return releases
+
+
 def collect_extensions_info():
     packages = {}
     for path in sorted(PACKAGE_INFO_CACHE.glob("*.msgpack")):
@@ -55,8 +80,8 @@ def main():
         REPO_ROOT / ".github" / "workflows" / "templates" / "generate-index-base.yml"
     ).read_text()
     common_context = {
-        "salt_versions": ["3001.3", "3002.1"],
-        "python_versions": ["3.5", "3.6", "3.7", "3.8"],
+        "salt_versions": get_lastest_major_releases(),
+        "python_versions": ["3.5", "3.6", "3.7", "3.8", "3.9"],
     }
     platform_templates = (
         REPO_ROOT / ".github" / "workflows" / "templates" / "linux.yml.j2",
