@@ -143,6 +143,8 @@ async def download_pypi_simple_index(session, index_info, limiter, progress):
 
 
 async def collect_packages_information(session, index_info, limiter, progress):
+    processed = 0
+    muted_processed_iterations = 1500
     try:
         async with trio.open_nursery() as nursery:
             for package in index_info["packages"]:
@@ -155,7 +157,17 @@ async def collect_packages_information(session, index_info, limiter, progress):
                         limiter,
                         progress,
                     )
+                if DISABLE_TQDM:
+                    processed += 1
+                    muted_processed_iterations -= 1
+                    if not muted_processed_iterations:
+                        muted_processed_iterations = 1500
+                        progress.write(
+                            f"Processed {processed} of {len(index_info['packages'])}"
+                        )
     finally:
+        if DISABLE_TQDM:
+            progress.write(f"Processed {processed} of {len(index_info['packages'])}")
         # Store the known extensions hash into state to trigger a cache hit/miss/update
         # on the Github Actions CI pipeline
         extensions = {}
