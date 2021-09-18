@@ -57,6 +57,7 @@ jobs:
       - name: Generate Salt Extensions Jobs
         env:
           LOCAL_CACHE_PATH: .cache
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python scripts/generate-ci-piplines.py
           git diff
