@@ -59,6 +59,7 @@ def get_lastest_major_releases(progress, count=3):
             continue
         if version.major == last_version.major:
             continue
+        last_version = version
         releases.append(tag.name)
     progress.write(f"Found the folowing salt releases: {', '.join(releases)}")
     return releases
