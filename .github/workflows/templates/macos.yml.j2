@@ -76,6 +76,8 @@
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
       {%- endraw %}
 
       - name: Upload Results

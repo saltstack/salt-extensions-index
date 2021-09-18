@@ -85,6 +85,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -167,6 +169,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -254,6 +258,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         uses: actions/upload-artifact@v2
@@ -337,6 +343,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -419,6 +427,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -506,6 +516,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         uses: actions/upload-artifact@v2
@@ -589,6 +601,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -671,6 +685,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -758,6 +774,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         uses: actions/upload-artifact@v2
@@ -841,6 +859,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -923,6 +943,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -1010,6 +1032,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         uses: actions/upload-artifact@v2
@@ -1093,6 +1117,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -1175,6 +1201,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -1262,6 +1290,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         uses: actions/upload-artifact@v2
@@ -1345,6 +1375,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -1427,6 +1459,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -1514,6 +1548,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         uses: actions/upload-artifact@v2
@@ -1597,6 +1633,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -1679,6 +1717,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         if: ${{ always() }}
@@ -1766,6 +1806,8 @@ jobs:
           else
             echo "not-tested" > ${{ env.RESULTS_DIR }}/status
           fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
 
       - name: Upload Results
         uses: actions/upload-artifact@v2
