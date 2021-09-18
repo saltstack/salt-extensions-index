@@ -65,9 +65,9 @@
           EXTRA_REQUIREMENTS_INSTALL: Cython
         run: |
           cd pkg
-          if [ -f noxfile.py ]; then
+          if (Test-Path -Path noxfile.py -PathType Leaf) {
             nox --force-color -e tests-3 -- -vv tests/
-          fi
+          }
 
       - name: Store Job Status
         shell: bash
