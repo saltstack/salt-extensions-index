@@ -1,5 +1,9 @@
 name: Search Salt Extensions On PyPi
 
+concurrency:
+  group: ${{ github.head_ref }}
+  cancel-in-progress: true
+
 on:
   schedule:
     # Every day at 1:30 UTC

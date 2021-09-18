@@ -1,5 +1,7 @@
 name: Generate Salt Extensions Index
 
+concurrency: ${{ github.head_ref }}
+
 on:
   schedule:
     # Every Sunday at 1:30 UTC
