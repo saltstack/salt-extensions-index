@@ -1,7 +1,5 @@
 name: Generate Salt Extensions Index
 
-concurrency: ${{ github.head_ref }}
-
 on:
   schedule:
     # Every Sunday at 1:30 UTC
@@ -32,6 +30,9 @@ jobs:
           - v3003.3
           - v3002.7
           - v3001.8
+
+    concurrency:
+      group: salt-cumin-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
 
     steps:
       - name: Define Results Directory
@@ -285,6 +286,9 @@ jobs:
           - v3002.7
           - v3001.8
 
+    concurrency:
+      group: salt-ext-tidx1-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
+
     steps:
       - name: Define Results Directory
         run: |
@@ -536,6 +540,9 @@ jobs:
           - v3003.3
           - v3002.7
           - v3001.8
+
+    concurrency:
+      group: salt-sproxy-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
 
     steps:
       - name: Define Results Directory
@@ -789,6 +796,9 @@ jobs:
           - v3002.7
           - v3001.8
 
+    concurrency:
+      group: salt-tidx2-extension-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
+
     steps:
       - name: Define Results Directory
         run: |
@@ -1040,6 +1050,9 @@ jobs:
           - v3003.3
           - v3002.7
           - v3001.8
+
+    concurrency:
+      group: spiro-deploy-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
 
     steps:
       - name: Define Results Directory
@@ -1293,6 +1306,9 @@ jobs:
           - v3002.7
           - v3001.8
 
+    concurrency:
+      group: spiro-network-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
+
     steps:
       - name: Define Results Directory
         run: |
@@ -1544,6 +1560,9 @@ jobs:
           - v3003.3
           - v3002.7
           - v3001.8
+
+    concurrency:
+      group: spirofs-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
 
     steps:
       - name: Define Results Directory

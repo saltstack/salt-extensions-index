@@ -19,6 +19,9 @@
           - {{ salt_version}}
           {%- endfor %}
 
+    concurrency:
+      group: {{ slug }}-linux-{%- raw %}${{ matrix.python-version }}-${{ matrix.salt-version }}{%- endraw %}
+
     steps:
       {%- raw %}
       - name: Define Results Directory
