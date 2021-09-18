@@ -47,7 +47,7 @@
         shell: bash
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -62,7 +62,6 @@
         id: run-tests
         continue-on-error: true
         env:
-#          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
           EXTRA_REQUIREMENTS_INSTALL: Cython
         run: |
           cd pkg

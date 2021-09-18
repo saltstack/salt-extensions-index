@@ -52,7 +52,7 @@ jobs:
       - name: Set SALT_REQUIREMENT Environment Variable
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -66,9 +66,6 @@ jobs:
       - name: Test
         id: run-tests
         continue-on-error: true
-#        env:
-#          SALT_REQUIREMENT: ${{ env.SALT_REQUIREMENT }}
-
         run: |
           cd pkg
           if [ -f noxfile.py ]; then
@@ -137,7 +134,7 @@ jobs:
       - name: Set SALT_REQUIREMENT Environment Variable
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -151,8 +148,6 @@ jobs:
       - name: Test
         id: run-tests
         continue-on-error: true
-#        env:
-#          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
         run: |
           cd pkg
           if [ -f noxfile.py ]; then
@@ -224,7 +219,7 @@ jobs:
         shell: bash
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -239,7 +234,6 @@ jobs:
         id: run-tests
         continue-on-error: true
         env:
-#          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
           EXTRA_REQUIREMENTS_INSTALL: Cython
         run: |
           cd pkg
@@ -310,7 +304,7 @@ jobs:
       - name: Set SALT_REQUIREMENT Environment Variable
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -324,9 +318,6 @@ jobs:
       - name: Test
         id: run-tests
         continue-on-error: true
-#        env:
-#          SALT_REQUIREMENT: ${{ env.SALT_REQUIREMENT }}
-
         run: |
           cd pkg
           if [ -f noxfile.py ]; then
@@ -395,7 +386,7 @@ jobs:
       - name: Set SALT_REQUIREMENT Environment Variable
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -409,8 +400,6 @@ jobs:
       - name: Test
         id: run-tests
         continue-on-error: true
-#        env:
-#          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
         run: |
           cd pkg
           if [ -f noxfile.py ]; then
@@ -482,7 +471,7 @@ jobs:
         shell: bash
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -497,7 +486,6 @@ jobs:
         id: run-tests
         continue-on-error: true
         env:
-#          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
           EXTRA_REQUIREMENTS_INSTALL: Cython
         run: |
           cd pkg
@@ -568,7 +556,7 @@ jobs:
       - name: Set SALT_REQUIREMENT Environment Variable
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -582,9 +570,6 @@ jobs:
       - name: Test
         id: run-tests
         continue-on-error: true
-#        env:
-#          SALT_REQUIREMENT: ${{ env.SALT_REQUIREMENT }}
-
         run: |
           cd pkg
           if [ -f noxfile.py ]; then
@@ -653,7 +638,7 @@ jobs:
       - name: Set SALT_REQUIREMENT Environment Variable
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -667,8 +652,6 @@ jobs:
       - name: Test
         id: run-tests
         continue-on-error: true
-#        env:
-#          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
         run: |
           cd pkg
           if [ -f noxfile.py ]; then
@@ -740,7 +723,7 @@ jobs:
         shell: bash
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -755,7 +738,6 @@ jobs:
         id: run-tests
         continue-on-error: true
         env:
-#          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
           EXTRA_REQUIREMENTS_INSTALL: Cython
         run: |
           cd pkg
@@ -826,7 +808,7 @@ jobs:
       - name: Set SALT_REQUIREMENT Environment Variable
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -840,9 +822,6 @@ jobs:
       - name: Test
         id: run-tests
         continue-on-error: true
-#        env:
-#          SALT_REQUIREMENT: ${{ env.SALT_REQUIREMENT }}
-
         run: |
           cd pkg
           if [ -f noxfile.py ]; then
@@ -911,7 +890,7 @@ jobs:
       - name: Set SALT_REQUIREMENT Environment Variable
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -925,8 +904,6 @@ jobs:
       - name: Test
         id: run-tests
         continue-on-error: true
-#        env:
-#          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
         run: |
           cd pkg
           if [ -f noxfile.py ]; then
@@ -998,7 +975,7 @@ jobs:
         shell: bash
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -1013,7 +990,6 @@ jobs:
         id: run-tests
         continue-on-error: true
         env:
-#          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
           EXTRA_REQUIREMENTS_INSTALL: Cython
         run: |
           cd pkg
@@ -1084,7 +1060,7 @@ jobs:
       - name: Set SALT_REQUIREMENT Environment Variable
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -1098,9 +1074,6 @@ jobs:
       - name: Test
         id: run-tests
         continue-on-error: true
-#        env:
-#          SALT_REQUIREMENT: ${{ env.SALT_REQUIREMENT }}
-
         run: |
           cd pkg
           if [ -f noxfile.py ]; then
@@ -1169,7 +1142,7 @@ jobs:
       - name: Set SALT_REQUIREMENT Environment Variable
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -1183,8 +1156,6 @@ jobs:
       - name: Test
         id: run-tests
         continue-on-error: true
-#        env:
-#          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
         run: |
           cd pkg
           if [ -f noxfile.py ]; then
@@ -1256,7 +1227,7 @@ jobs:
         shell: bash
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -1271,7 +1242,6 @@ jobs:
         id: run-tests
         continue-on-error: true
         env:
-#          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
           EXTRA_REQUIREMENTS_INSTALL: Cython
         run: |
           cd pkg
@@ -1342,7 +1312,7 @@ jobs:
       - name: Set SALT_REQUIREMENT Environment Variable
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -1356,9 +1326,6 @@ jobs:
       - name: Test
         id: run-tests
         continue-on-error: true
-#        env:
-#          SALT_REQUIREMENT: ${{ env.SALT_REQUIREMENT }}
-
         run: |
           cd pkg
           if [ -f noxfile.py ]; then
@@ -1427,7 +1394,7 @@ jobs:
       - name: Set SALT_REQUIREMENT Environment Variable
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -1441,8 +1408,6 @@ jobs:
       - name: Test
         id: run-tests
         continue-on-error: true
-#        env:
-#          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
         run: |
           cd pkg
           if [ -f noxfile.py ]; then
@@ -1514,7 +1479,7 @@ jobs:
         shell: bash
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -1529,7 +1494,6 @@ jobs:
         id: run-tests
         continue-on-error: true
         env:
-#          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
           EXTRA_REQUIREMENTS_INSTALL: Cython
         run: |
           cd pkg
@@ -1600,7 +1564,7 @@ jobs:
       - name: Set SALT_REQUIREMENT Environment Variable
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -1614,9 +1578,6 @@ jobs:
       - name: Test
         id: run-tests
         continue-on-error: true
-#        env:
-#          SALT_REQUIREMENT: ${{ env.SALT_REQUIREMENT }}
-
         run: |
           cd pkg
           if [ -f noxfile.py ]; then
@@ -1685,7 +1646,7 @@ jobs:
       - name: Set SALT_REQUIREMENT Environment Variable
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -1699,8 +1660,6 @@ jobs:
       - name: Test
         id: run-tests
         continue-on-error: true
-#        env:
-#          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
         run: |
           cd pkg
           if [ -f noxfile.py ]; then
@@ -1772,7 +1731,7 @@ jobs:
         shell: bash
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -1787,7 +1746,6 @@ jobs:
         id: run-tests
         continue-on-error: true
         env:
-#          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
           EXTRA_REQUIREMENTS_INSTALL: Cython
         run: |
           cd pkg

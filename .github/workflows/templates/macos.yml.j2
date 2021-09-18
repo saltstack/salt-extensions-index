@@ -44,7 +44,7 @@
       - name: Set SALT_REQUIREMENT Environment Variable
         run: |
           if [ "${{ matrix.salt-version }}" == "master" ]; then
-            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
             echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
           fi
@@ -58,8 +58,6 @@
       - name: Test
         id: run-tests
         continue-on-error: true
-#        env:
-#          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
         run: |
           cd pkg
           if [ -f noxfile.py ]; then
