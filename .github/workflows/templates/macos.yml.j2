@@ -53,14 +53,20 @@
           SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
         run: |
           cd pkg
-          nox --force-color -e tests-3 -- -vv tests/
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
 
       - name: Store Job Status
         if: ${{ always() }}
         run: |
           mkdir -p ${{ env.RESULTS_DIR }}
           echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
-          echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
       {%- endraw %}
 
       - name: Upload Results
