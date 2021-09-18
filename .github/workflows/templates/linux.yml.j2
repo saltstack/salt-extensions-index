@@ -14,6 +14,7 @@
           - {{ python_version}}
           {%- endfor %}
         salt-version:
+          - master
           {%- for salt_version in salt_versions %}
           - {{ salt_version}}
           {%- endfor %}
@@ -40,6 +41,14 @@
 
       {%- raw %}
 
+      - name: Set SALT_REQUIREMENT Environment Variable
+        run: |
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="salt==git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
       - name: Install Nox
         id: install-nox
         run: |
@@ -49,8 +58,8 @@
       - name: Test
         id: run-tests
         continue-on-error: true
-        env:
-          SALT_REQUIREMENT: salt==${{ matrix.salt-version }}
+#        env:
+#          SALT_REQUIREMENT: ${{ env.SALT_REQUIREMENT }}
 
         run: |
           cd pkg
