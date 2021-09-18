@@ -35,18 +35,23 @@ def set_progress_description(progress, message):
     progress.set_description(f"{message: <60}")
 
 
-def get_lastest_major_releases(count=3):
+def get_lastest_major_releases(progress, count=3):
     # This logic might have to change because the order of tags seems to be by creation time
-    gh = github.Github(os.environ.get("GITHUB_TOKEN"))
-    repo = gh.get_repository("saltstack/salt")
+    set_progress_description(progress, "Searching for latest salt releases...")
+    gh = github.Github(login_or_token=os.environ.get("GITHUB_TOKEN") or None)
+    repo = gh.get_repo("saltstack/salt")
     releases = []
     last_version = None
     for tag in repo.get_tags():
         if len(releases) == count:
             break
         version = packaging.version.parse(tag.name)
-        if version.major < 3000:
-            # Don't test versions of salt older than 3000
+        try:
+            if version.major < 3000:
+                # Don't test versions of salt older than 3000
+                continue
+        except AttributeError:
+            progress.write(f"Failed to parse tag {tag}")
             continue
         if last_version is None:
             last_version = version
@@ -55,12 +60,14 @@ def get_lastest_major_releases(count=3):
         if version.major == last_version.major:
             continue
         releases.append(tag.name)
+    progress.write(f"Found the folowing salt releases: {', '.join(releases)}")
     return releases
 
 
 def collect_extensions_info():
     packages = {}
     for path in sorted(PACKAGE_INFO_CACHE.glob("*.msgpack")):
+        url = None
         if path.stem in BLACKLISTED_EXTENSIONS:
             continue
         package_data = msgpack.unpackb(path.read_bytes())
@@ -70,7 +77,8 @@ def collect_extensions_info():
                 url = urlinfo["url"]
                 break
 
-        packages[package] = url
+        if url is not None:
+            packages[package] = url
     return packages
 
 
@@ -79,10 +87,6 @@ def main():
     content = (
         REPO_ROOT / ".github" / "workflows" / "templates" / "generate-index-base.yml"
     ).read_text()
-    common_context = {
-        "salt_versions": get_lastest_major_releases(),
-        "python_versions": ["3.5", "3.6", "3.7", "3.8", "3.9"],
-    }
     platform_templates = (
         REPO_ROOT / ".github" / "workflows" / "templates" / "linux.yml.j2",
         REPO_ROOT / ".github" / "workflows" / "templates" / "macos.yml.j2",
@@ -96,6 +100,15 @@ def main():
         desc=f"{' ' * 60} :",
         disable=DISABLE_TQDM,
     )
+    try:
+        salt_versions = get_lastest_major_releases(progress)
+    except Exception as exc:
+        progress.write(f"Failed to get latest salt releases: {exc}")
+        return 1
+    common_context = {
+        "salt_versions": salt_versions,
+        "python_versions": ["3.5", "3.6", "3.7", "3.8", "3.9"],
+    }
     with progress:
         needs = []
         for package, url in packages.items():
