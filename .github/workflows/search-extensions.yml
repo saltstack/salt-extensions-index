@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     concurrency:
-      group: ${{ github.head_ref }}
+      group: search-pypi-${{ github.base_ref || 'main' }}
       cancel-in-progress: true
 
     steps:
