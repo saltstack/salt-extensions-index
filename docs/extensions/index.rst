@@ -1,6 +1,0 @@
-:orphan:
-
-.. toctree::
-   :glob:
-
-   *

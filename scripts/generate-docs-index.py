@@ -83,9 +83,6 @@ def main():
     sphinx_results_dir = REPO_ROOT / "docs" / "results"
     if not sphinx_results_dir.is_dir():
         sphinx_results_dir.mkdir(0o0755)
-    sphinx_extensions_dir = REPO_ROOT / "docs" / "extensions"
-    if not sphinx_extensions_dir.is_dir():
-        sphinx_extensions_dir.mkdir(0o0755)
     docs_dir = REPO_ROOT / "docs"
     table_template = REPO_ROOT / "templates" / "results.html.j2"
     sphinx_index = REPO_ROOT / "docs" / "index.rst"
@@ -122,22 +119,22 @@ def main():
                 python_versions=results["python_versions"],
                 osnames=results["osnames"],
             )
-            extension_index = sphinx_extensions_dir / f"{extension}.rst"
+            extension_index = docs_dir / f"{extension}.rst"
             table_contents = Template(table_template.read_text()).render(**context)
-            html_table_path = sphinx_extensions_dir / f"{extension}.html"
+            html_table_path = sphinx_results_dir / f"{extension}.html"
             html_table_path.write_text(table_contents)
+            html_table_rel_path = html_table_path.relative_to(docs_dir)
             contents += (
                 f"{title}\n{header}\n{summary} (:ref:`more info<{extension}>`)\n\n"
             )
-            contents += f".. raw:: html\n   :file: {html_table_path.relative_to(docs_dir)}\n\n\n"
+            contents += f".. raw:: html\n   :file: {html_table_rel_path}\n\n"
+            contents += "------------\n\n"
             extension_contents = (
+                ":orphan:\n\n"
                 f".. _{extension}:\n\n{title}\n{header.replace('-', '=')}\n\n"
             )
             extension_contents += "Compatibility\n-------------\n"
-            extension_contents += (
-                ".. raw:: html\n   :file: "
-                f"{html_table_path.relative_to(sphinx_extensions_dir)}\n\n"
-            )
+            extension_contents += f".. raw:: html\n   :file: {html_table_rel_path}\n\n"
             extension_contents += f"Description\n-----------\n{description}\n"
             extension_index.write_text(extension_contents)
             progress.update()
