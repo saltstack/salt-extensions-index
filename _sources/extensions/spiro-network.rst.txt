@@ -1,0 +1,56 @@
+.. _spiro-network:
+
+spiro-network
+=============
+
+Compatibility
+-------------
+.. raw:: html
+   :file: spiro-network.html
+
+Description
+-----------
+spiro-network
+=============
+
+A variety of network utilities.
+
+This is meant to be installed on minions.
+
+Full docs available [online](https://spirostack.com/spiro-net.html).
+
+Installation
+============
+
+On minions, install the `spiro-network` PyPI package.
+
+
+Interface
+=========
+
+A number of things are provided:
+
+Modules
+-------
+
+* `ipaddr.external_four`, `ipaddr.external_six`: Queries external services for
+  your IP, useful if the minion is behind a NAT or other complex network
+
+* `ipaddr.four`, `ipaddr.six`: Collates information about a minion's IP address
+  from several sources. 
+
+    * `network.ipaddrs` / `network.ipaddrs6`
+    * AWS metadata if the [metadata grain](https://docs.saltstack.com/en/latest/ref/grains/all/salt.grains.metadata.html) is available
+    * `ipaddr.external_four` / `ipaddr.external_six` (above)
+
+States
+------
+
+* `hostname.is`: Sets the hostname, takes no arguments. (Note: See hostname(1)
+  for information on FQDNs and other hostname variants.)
+
+
+Configuration
+=============
+
+spiro-network requires no configuration to function.

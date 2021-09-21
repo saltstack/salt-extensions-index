@@ -150,27 +150,11 @@
 <nav class="md-nav md-nav--secondary">
     <label class="md-nav__title" for="__toc">Extensions</label>
   <ul class="md-nav__list" data-md-scrollfix="">
-        <li class="md-nav__item"><a href="#index--page-root" class="md-nav__link">salt-cumin</a><nav class="md-nav">
-              <ul class="md-nav__list">
-        <li class="md-nav__item"><a href="#cumin" class="md-nav__link">Cumin</a>
-        </li></ul>
-            </nav>
-        </li>
-        <li class="md-nav__item"><a href="#installation" class="md-nav__link">Installation</a>
-        </li>
-        <li class="md-nav__item"><a href="#usage" class="md-nav__link">Usage</a>
-        </li>
-        <li class="md-nav__item"><a href="#configuration" class="md-nav__link">Configuration</a>
+        <li class="md-nav__item"><a href="#index--page-root" class="md-nav__link">salt-cumin</a>
         </li>
         <li class="md-nav__item"><a href="#salt-ext-tidx1" class="md-nav__link">salt-ext-tidx1</a>
         </li>
         <li class="md-nav__item"><a href="#salt-sproxy" class="md-nav__link">salt-sproxy</a>
-        </li>
-        <li class="md-nav__item"><a href="#install" class="md-nav__link">Install</a>
-        </li>
-        <li class="md-nav__item"><a href="#documentation" class="md-nav__link">Documentation</a>
-        </li>
-        <li class="md-nav__item"><a href="#id2" class="md-nav__link">Usage</a>
         </li>
         <li class="md-nav__item"><a href="#salt-tidx2-extension" class="md-nav__link">salt-tidx2-extension</a>
         </li>
@@ -178,13 +162,7 @@
         </li>
         <li class="md-nav__item"><a href="#spiro-network" class="md-nav__link">spiro-network</a>
         </li>
-        <li class="md-nav__item"><a href="#modules" class="md-nav__link">Modules</a>
-        </li>
-        <li class="md-nav__item"><a href="#states" class="md-nav__link">States</a>
-        </li>
         <li class="md-nav__item"><a href="#spirofs" class="md-nav__link">spirofs</a>
-        </li>
-        <li class="md-nav__item"><a href="#id3" class="md-nav__link">Installation</a>
         </li>
   </ul>
 </nav>
@@ -195,52 +173,26 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  <section id="salt-cumin">
+  <p>The Salt extensions listed in this index are collected by searching <a class="reference external" href="https://pypi.org/">PyPi</a> for packages
+starting with <code class="docutils literal notranslate"><span class="pre">salt-ext-</span></code>, <code class="docutils literal notranslate"><span class="pre">saltext-</span></code> or <code class="docutils literal notranslate"><span class="pre">saltext.</span></code> in their name, or, preferably,
+by having <code class="docutils literal notranslate"><span class="pre">salt-extension</span></code> in the package’s <a class="reference external" href="https://www.python.org/dev/peps/pep-0314/#keywords-optional">keywords</a> metadata entry:</p>
+<p>An effort is made to automatically test these packages against the latest 3 major releases
+of salt. For this to happen, the package:</p>
+<ul class="simple">
+<li><p>Must use <a class="reference external" href="https://github.com/theacodes/nox">nox</a> to run it’s test suite</p></li>
+<li><p>Must provide a source distribution which includes a <code class="docutils literal notranslate"><span class="pre">noxfile.py</span></code></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">noxfile.py</span></code> must implement a <code class="docutils literal notranslate"><span class="pre">tests-3</span></code> session</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">noxfile.py</span></code> must check the environment for a <code class="docutils literal notranslate"><span class="pre">SALT_REQUIREMENT</span></code> keyword which should be installed into the <a class="reference external" href="https://github.com/theacodes/nox">nox</a> session. (Example <code class="docutils literal notranslate"><span class="pre">SALT_REQUIREMENT=salt==3004.0</span></code>)</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This extensions listing is still in it’s <strong>proof of concept</strong> phase.
+The Salt Project team is evaluating this index and investigating how to improve it in order to better serve the Salt Project Community</p>
+</div>
+<hr class="docutils"/>
+<section id="salt-cumin">
 <h1 id="index--page-root">salt-cumin<a class="headerlink" href="#index--page-root" title="Permalink to this headline">¶</a></h1>
-<section id="cumin">
-<h2 id="cumin">Cumin<a class="headerlink" href="#cumin" title="Permalink to this headline">¶</a></h2>
-<p>Cumin contains a Python library and CLI scripts for accessing a remote
-<a class="reference external" href="https://github.com/saltstack/salt-api">salt-api</a> instance.</p>
-<p><code class="docutils literal notranslate"><span class="pre">cumin</span></code> abstracts the HTTP calls to <code class="docutils literal notranslate"><span class="pre">salt-api</span></code> so existing Python
-projects can easily integrate with a remote Salt installation just by
-instantiating a class.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">cumin</span></code> CLI script allows users to execute Salt commands from computers
-that are external to computers running the <code class="docutils literal notranslate"><span class="pre">salt-master</span></code> or <code class="docutils literal notranslate"><span class="pre">salt-minion</span></code>
-daemons as though they were running Salt locally. The long-term goal is to add
-additional CLI scripts maintain the same interface as Salt’s own CLI scripts
-(<code class="docutils literal notranslate"><span class="pre">salt</span></code>, <code class="docutils literal notranslate"><span class="pre">salt-run</span></code>, <code class="docutils literal notranslate"><span class="pre">salt-key</span></code>, etc).</p>
-</section>
-</section>
-<section id="installation">
-<h1 id="installation">Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install salt-cumin
-</pre></div>
-</div>
-</section>
-<section id="usage">
-<h1 id="usage">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">SALTAPI_USER</span><span class="o">=</span>saltdev <span class="nv">SALTAPI_PASS</span><span class="o">=</span>saltdev <span class="nv">SALTAPI_EAUTH</span><span class="o">=</span>pam
-cumin <span class="s1">'*'</span> test.ping
-cumin <span class="s1">'*'</span> test.kwarg <span class="nv">hello</span><span class="o">=</span>dolly
-</pre></div>
-</div>
-<p>Examples leveraging the runner client.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cumin-run reactor.list
-cumin-run reactor.add <span class="nv">event</span><span class="o">=</span><span class="s1">'test/provision/*'</span> <span class="nv">reactors</span><span class="o">=</span><span class="s1">'/srv/salt/state/reactor/test-provision.sls'</span>
-</pre></div>
-</div>
-</section>
-<section id="configuration">
-<h1 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
-<p>You can configure cumin through the command line, using environment variables
-or in a configuration file <code class="docutils literal notranslate"><span class="pre">$HOME/.pepperrc</span></code> with the following syntax :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">main</span><span class="p">]</span>
-<span class="n">SALTAPI_URL</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8000</span><span class="o">/</span>
-<span class="n">SALTAPI_USER</span><span class="o">=</span><span class="n">saltdev</span>
-<span class="n">SALTAPI_PASS</span><span class="o">=</span><span class="n">saltdev</span>
-<span class="n">SALTAPI_EAUTH</span><span class="o">=</span><span class="n">pam</span>
-</pre></div>
-</div>
+<p>A CLI front-end to a running salt-api system (<a class="reference internal" href="extensions/salt-cumin.html#salt-cumin"><span class="std std-ref">more info</span></a>)</p>
 <table>
 <thead>
 <tr>
@@ -270,21 +222,21 @@ or in a configuration file <code class="docutils literal notranslate"><span clas
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3001.8</td>
@@ -305,21 +257,21 @@ or in a configuration file <code class="docutils literal notranslate"><span clas
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3002.7</td>
@@ -340,21 +292,21 @@ or in a configuration file <code class="docutils literal notranslate"><span clas
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3003.3</td>
@@ -375,29 +327,27 @@ or in a configuration file <code class="docutils literal notranslate"><span clas
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 </tbody>
 </table></section>
 <section id="salt-ext-tidx1">
 <h1 id="salt-ext-tidx1">salt-ext-tidx1<a class="headerlink" href="#salt-ext-tidx1" title="Permalink to this headline">¶</a></h1>
-<p># tidx1
-Test Extension 1</p>
-<p>DO NOT USE IN SALT</p>
+<p>Test Extension 1 - DO NOT USE IN SALT (<a class="reference internal" href="extensions/salt-ext-tidx1.html#salt-ext-tidx1"><span class="std std-ref">more info</span></a>)</p>
 <table>
 <thead>
 <tr>
@@ -427,21 +377,21 @@ Test Extension 1</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">failure</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">failure</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">failure</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">failure</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3001.8</td>
@@ -462,21 +412,21 @@ Test Extension 1</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">failure</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">failure</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">failure</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">failure</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3002.7</td>
@@ -497,21 +447,21 @@ Test Extension 1</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">failure</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">failure</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">failure</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">failure</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3003.3</td>
@@ -532,124 +482,27 @@ Test Extension 1</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">failure</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">failure</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">failure</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">failure</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
 </tr>
 </tbody>
 </table></section>
 <section id="salt-sproxy">
 <h1 id="salt-sproxy">salt-sproxy<a class="headerlink" href="#salt-sproxy" title="Permalink to this headline">¶</a></h1>
-<p>Salt plugin for interacting with network devices, without running Minions.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This is NOT a SaltStack product.</p>
-<p>This package may eventually be integrated in a future version of the
-official Salt releases, in this form or slightly different.</p>
-</div>
-</section>
-<section id="install">
-<h1 id="install">Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h1>
-<p>Install this package where you would like to manage your devices from. In case
-you need a specific Salt version, make sure you install it beforehand,
-otherwise this package will bring the latest Salt version available instead.</p>
-<p>The package is distributed via PyPI, under the name <code class="docutils literal notranslate"><span class="pre">salt-sproxy</span></code>.</p>
-<p>Execute:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install salt-sproxy
-</pre></div>
-</div>
-</section>
-<section id="documentation">
-<h1 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h1>
-<p>The complete documentation is available at
-<a class="reference external" href="https://salt-sproxy.readthedocs.io/en/latest/">https://salt-sproxy.readthedocs.io/en/latest/</a>.</p>
-</section>
-<section id="id2">
-<h1 id="id2">Usage<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
-<p>First off, make sure you have the Salt <a class="reference external" href="https://docs.saltstack.com/en/latest/ref/states/top.html">Pillar Top file</a> correctly defined
-and the <code class="docutils literal notranslate"><span class="pre">proxy</span></code> key is available into the Pillar. For more in-depth
-explanation and examples, check <a class="reference external" href="https://docs.saltstack.com/en/latest/topics/proxyminion/index.html">this</a> tutorial
-from the official SaltStack docs.</p>
-<p>Once you have that, you can start using <code class="docutils literal notranslate"><span class="pre">salt-sproxy</span></code> even without any Proxy
-Minions or Salt Master running. To check, can start by executing:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ salt-sproxy -L a,b,c --preview-target
-- a
-- b
-- c
-</pre></div>
-</div>
-<p>The syntax is very similar to the widely used CLI command <code class="docutils literal notranslate"><span class="pre">salt</span></code>, however the
-way it works is completely different under the hood:</p>
-<p><code class="docutils literal notranslate"><span class="pre">salt-sproxy</span> <span class="pre">&lt;target&gt;</span> <span class="pre">&lt;function&gt;</span> <span class="pre">[&lt;arguments&gt;]</span></code></p>
-<p>Usgae Example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ salt-sproxy cr1.thn.lon test.ping
-cr1.thn.lon:
-    True
-</pre></div>
-</div>
-<p>One of the most important differences between <code class="docutils literal notranslate"><span class="pre">salt</span></code> and <code class="docutils literal notranslate"><span class="pre">salt-sproxy</span></code> is
-that the former is aware of the devices available, thanks to the fact that the
-Minions connect to the Master, therefore <code class="docutils literal notranslate"><span class="pre">salt</span></code> has the list of targets
-already available. <code class="docutils literal notranslate"><span class="pre">salt-sproxy</span></code> does not have this, as it doesn’t require
-the Proxy Minions to be up and connected to the Master. For this reason, you
-will need to provide it a list of devices, or a <a class="reference external" href="https://docs.saltstack.com/en/latest/topics/ssh/roster.html">Roster file</a> that provides
-the list of available devices.</p>
-<p>The following targeting options are available:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-E</span></code>, <code class="docutils literal notranslate"><span class="pre">--pcre</span></code>: Instead of using shell globs to evaluate the target
-servers, use pcre regular expressions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-L</span></code>, <code class="docutils literal notranslate"><span class="pre">--list</span></code>: Instead of using shell globs to evaluate the target
-servers, take a comma or space delimited list of servers.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-G</span></code>, <code class="docutils literal notranslate"><span class="pre">--grain</span></code>: Instead of using shell globs to evaluate the target
-use a grain value to identify targets, the syntax for the target is the grain
-key followed by a globexpression: <code class="docutils literal notranslate"><span class="pre">"os:Arch*"</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-P</span></code>, <code class="docutils literal notranslate"><span class="pre">--grain-pcre</span></code>: Instead of using shell globs to evaluate the target
-use a grain value to identify targets, the syntax for the target is the grain
-key followed by a pcre regular expression: “os:Arch.*”.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-N</span></code>, <code class="docutils literal notranslate"><span class="pre">--nodegroup</span></code>: Instead of using shell globs to evaluate the target
-use one of the predefined nodegroups to identify a list of targets.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-R</span></code>, <code class="docutils literal notranslate"><span class="pre">--range</span></code>: Instead of using shell globs to evaluate the target
-use a range expression to identify targets. Range expressions look like
-%cluster.</p></li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Some of the targeting options above may not be available for some Roster
-modules.</p>
-</div>
-<p>To use a specific Roster, configure the <code class="docutils literal notranslate"><span class="pre">proxy_roster</span></code> option into your
-Master config file, e.g.,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">proxy_roster</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ansible</span>
-</pre></div>
-</div>
-<p>With the configuration above, <code class="docutils literal notranslate"><span class="pre">salt-sproxy</span></code> would try to use the <a class="reference external" href="https://docs.saltstack.com/en/latest/ref/roster/all/salt.roster.ansible.html#module-salt.roster.ansible">ansbile
-Roster module</a>
-to compile the Roster file (typically <code class="docutils literal notranslate"><span class="pre">/etc/salt/roster</span></code>) which is structured
-as a regular Ansible Inventory file. This inventory should only provide the
-list of devices.</p>
-<p>The Roster can also be specified on the fly, using the <code class="docutils literal notranslate"><span class="pre">-R</span></code> or <code class="docutils literal notranslate"><span class="pre">--roster</span></code>
-options, e.g., <code class="docutils literal notranslate"><span class="pre">salt-sproxy</span> <span class="pre">cr1.thn.lon</span> <span class="pre">test.ping</span> <span class="pre">--roster=flat</span></code>. In this
-example, we’d be using the <a class="reference external" href="https://docs.saltstack.com/en/latest/ref/roster/all/salt.roster.flat.html#module-salt.roster.flat">flat Roster module</a>
-to determine the list of devices matched by a specific target.</p>
-<p>When you don’t specify the Roster into the Master config, or from the CLI, you
-can use <code class="docutils literal notranslate"><span class="pre">salt-sproxy</span></code> to target on or more devices using the <code class="docutils literal notranslate"><span class="pre">glob</span></code> or
-<code class="docutils literal notranslate"><span class="pre">list</span></code> target types, e.g., <code class="docutils literal notranslate"><span class="pre">salt-sproxy</span> <span class="pre">cr1.thn.lon</span> <span class="pre">test.ping</span></code> (glob) or
-<code class="docutils literal notranslate"><span class="pre">salt-sproxy</span> <span class="pre">-L</span> <span class="pre">cr1.thn.lon,cr2.thn.lon</span> <span class="pre">test.ping</span></code> (to target a list of
-devices, cr1.thn.lon and cr2.thn.lon, respectively).</p>
-<p>Note that in any case (with or without the Roster), you will need to provide
-a valid list of Minions.</p>
+<p>Salt plugin for managing devices and applications, without running (Proxy) Minions (<a class="reference internal" href="extensions/salt-sproxy.html#salt-sproxy"><span class="std std-ref">more info</span></a>)</p>
 <table>
 <thead>
 <tr>
@@ -679,21 +532,21 @@ a valid list of Minions.</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3001.8</td>
@@ -714,21 +567,21 @@ a valid list of Minions.</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3002.7</td>
@@ -749,21 +602,21 @@ a valid list of Minions.</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3003.3</td>
@@ -784,29 +637,27 @@ a valid list of Minions.</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 </tbody>
 </table></section>
 <section id="salt-tidx2-extension">
 <h1 id="salt-tidx2-extension">salt-tidx2-extension<a class="headerlink" href="#salt-tidx2-extension" title="Permalink to this headline">¶</a></h1>
-<p># tidx2
-Test Extension 2</p>
-<p>DO NOT USE IN SALT</p>
+<p>Test Extension 2 - DO NOT USE IN SALT (<a class="reference internal" href="extensions/salt-tidx2-extension.html#salt-tidx2-extension"><span class="std std-ref">more info</span></a>)</p>
 <table>
 <thead>
 <tr>
@@ -836,21 +687,21 @@ Test Extension 2</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">failure</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">failure</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">failure</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">failure</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3001.8</td>
@@ -871,21 +722,21 @@ Test Extension 2</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">failure</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">failure</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">failure</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">failure</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3002.7</td>
@@ -906,21 +757,21 @@ Test Extension 2</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">failure</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">failure</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">failure</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">failure</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3003.3</td>
@@ -941,34 +792,27 @@ Test Extension 2</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">failure</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">failure</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">failure</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">failure</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">success</a></td>
 </tr>
 </tbody>
 </table></section>
 <section id="spiro-deploy">
 <h1 id="spiro-deploy">spiro-deploy<a class="headerlink" href="#spiro-deploy" title="Permalink to this headline">¶</a></h1>
-<p>A deployment tool for [SpiroFS](<a class="reference external" href="https://spirostack.com/spirofs/">https://spirostack.com/spirofs/</a>).</p>
-<p>[Full documentation](<a class="reference external" href="https://spirostack.com/spirofs/deploy/">https://spirostack.com/spirofs/deploy/</a>)</p>
-<ul class="simple">
-<li><p><cite>pip install spiro-deploy</cite></p></li>
-<li><p>[A container](<a class="reference external" href="https://gitlab.com/spirostack/spiro-deploy/container_registry">https://gitlab.com/spirostack/spiro-deploy/container_registry</a>)</p></li>
-</ul>
-<p><cite>spiro-deploy &lt;project&gt; &lt;deployment&gt;</cite>, with the environment variables <cite>SPIRO_URL</cite>
-and <cite>SPIRO_TOKEN</cite>.</p>
+<p>Deployment script for SpiroFS (<a class="reference internal" href="extensions/spiro-deploy.html#spiro-deploy"><span class="std std-ref">more info</span></a>)</p>
 <table>
 <thead>
 <tr>
@@ -998,21 +842,21 @@ and <cite>SPIRO_TOKEN</cite>.</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3001.8</td>
@@ -1033,21 +877,21 @@ and <cite>SPIRO_TOKEN</cite>.</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3002.7</td>
@@ -1068,21 +912,21 @@ and <cite>SPIRO_TOKEN</cite>.</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3003.3</td>
@@ -1103,56 +947,27 @@ and <cite>SPIRO_TOKEN</cite>.</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 </tbody>
 </table></section>
 <section id="spiro-network">
 <h1 id="spiro-network">spiro-network<a class="headerlink" href="#spiro-network" title="Permalink to this headline">¶</a></h1>
-<p>A variety of network utilities.</p>
-<p>This is meant to be installed on minions.</p>
-<p>Full docs available [online](<a class="reference external" href="https://spirostack.com/spiro-net.html">https://spirostack.com/spiro-net.html</a>).</p>
-<p>On minions, install the <cite>spiro-network</cite> PyPI package.</p>
-<p>A number of things are provided:</p>
-</section>
-<section id="modules">
-<h1 id="modules">Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
-<ul>
-<li><p><cite>ipaddr.external_four</cite>, <cite>ipaddr.external_six</cite>: Queries external services for
-your IP, useful if the minion is behind a NAT or other complex network</p></li>
-<li><p><cite>ipaddr.four</cite>, <cite>ipaddr.six</cite>: Collates information about a minion’s IP address
-from several sources.</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><cite>network.ipaddrs</cite> / <cite>network.ipaddrs6</cite></p></li>
-<li><p>AWS metadata if the [metadata grain](<a class="reference external" href="https://docs.saltstack.com/en/latest/ref/grains/all/salt.grains.metadata.html">https://docs.saltstack.com/en/latest/ref/grains/all/salt.grains.metadata.html</a>) is available</p></li>
-<li><p><cite>ipaddr.external_four</cite> / <cite>ipaddr.external_six</cite> (above)</p></li>
-</ul>
-</div></blockquote>
-</li>
-</ul>
-</section>
-<section id="states">
-<h1 id="states">States<a class="headerlink" href="#states" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p><cite>hostname.is</cite>: Sets the hostname, takes no arguments. (Note: See hostname(1)
-for information on FQDNs and other hostname variants.)</p></li>
-</ul>
-<p>spiro-network requires no configuration to function.</p>
+<p>Salt modules for discovering and exposing minion’s IP addresses (<a class="reference internal" href="extensions/spiro-network.html#spiro-network"><span class="std std-ref">more info</span></a>)</p>
 <table>
 <thead>
 <tr>
@@ -1182,21 +997,21 @@ for information on FQDNs and other hostname variants.)</p></li>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3001.8</td>
@@ -1217,21 +1032,21 @@ for information on FQDNs and other hostname variants.)</p></li>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3002.7</td>
@@ -1252,21 +1067,21 @@ for information on FQDNs and other hostname variants.)</p></li>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3003.3</td>
@@ -1287,43 +1102,27 @@ for information on FQDNs and other hostname variants.)</p></li>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 </tbody>
 </table></section>
 <section id="spirofs">
 <h1 id="spirofs">spirofs<a class="headerlink" href="#spirofs" title="Permalink to this headline">¶</a></h1>
-<p>SpiroFS is a fileserver backend for Salt focusing on deployment and saltenv
-management. It allows automated systems to push deployment bundles to Salt
-without giving them undue permissions. It is dynamic and does not require
-on-going reconfiguration as your technology stack grows and changes.</p>
-<p>Full documentation is <a class="reference external" href="https://saltstack.com/spirofs">https://saltstack.com/spirofs</a></p>
-</section>
-<section id="id3">
-<h1 id="id3">Installation<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h1>
-<ol class="arabic simple" start="0">
-<li><p>Have pip for the Python that salt is installed into</p></li>
-<li><p><cite>pip install spirofs</cite> (Adapt as necessary)</p></li>
-<li><p>Configure the salt master (see [docs](<a class="reference external" href="https://spirostack.com/spirofs/#configuration">https://spirostack.com/spirofs/#configuration</a>))</p></li>
-<li><p>Restart the salt master</p></li>
-</ol>
-<p>Note: libsodium is used, but is pre-packaged in the binary wheels. If these are
-not used on your system for whatever reason, install either <cite>libsodium-dev</cite> (apt)
-or <cite>libsodium-devel</cite> (yum).</p>
+<p>Salt Fileserver handling dynamic saltenvs and discrete deployments from CI/CD. (<a class="reference internal" href="extensions/spirofs.html#spirofs"><span class="std std-ref">more info</span></a>)</p>
 <table>
 <thead>
 <tr>
@@ -1353,21 +1152,21 @@ or <cite>libsodium-devel</cite> (yum).</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3001.8</td>
@@ -1388,21 +1187,21 @@ or <cite>libsodium-devel</cite> (yum).</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3002.7</td>
@@ -1423,21 +1222,21 @@ or <cite>libsodium-devel</cite> (yum).</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 <tr>
 <td rowspan="2">v3003.3</td>
@@ -1458,21 +1257,21 @@ or <cite>libsodium-devel</cite> (yum).</p>
 <td>3.9</td>
 </tr>
 <tr>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
-<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1255961713??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
+<td><a href="https://github.com/saltstack/salt-extensions-index/actions/runs/1257362537??check_suite_focus=true">not-tested</a></td>
 </tr>
 </tbody>
 </table><p>Last Updated on 2021-09-21</p>

@@ -1,0 +1,16 @@
+.. _salt-tidx2-extension:
+
+salt-tidx2-extension
+====================
+
+Compatibility
+-------------
+.. raw:: html
+   :file: salt-tidx2-extension.html
+
+Description
+-----------
+# tidx2
+Test Extension 2
+
+DO NOT USE IN SALT

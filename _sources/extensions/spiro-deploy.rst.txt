@@ -1,0 +1,29 @@
+.. _spiro-deploy:
+
+spiro-deploy
+============
+
+Compatibility
+-------------
+.. raw:: html
+   :file: spiro-deploy.html
+
+Description
+-----------
+spiro-deploy
+============
+
+A deployment tool for [SpiroFS](https://spirostack.com/spirofs/).
+
+[Full documentation](https://spirostack.com/spirofs/deploy/)
+
+Installation
+============
+
+* `pip install spiro-deploy`
+* [A container](https://gitlab.com/spirostack/spiro-deploy/container_registry)
+
+Usage Summary
+=============
+`spiro-deploy <project> <deployment>`, with the environment variables `SPIRO_URL`
+and `SPIRO_TOKEN`.
