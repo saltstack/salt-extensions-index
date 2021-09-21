@@ -43,9 +43,10 @@
 
       {%- raw %}
 
-      - name: Set SALT_REQUIREMENT Environment Variable
+      - name: Set Test Run Environment Variable
         shell: bash
         run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
           if [ "${{ matrix.salt-version }}" == "master" ]; then
             echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
           else
