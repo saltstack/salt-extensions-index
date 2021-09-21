@@ -91,11 +91,9 @@ def main():
     )
 
     with progress:
-        progress.write(
-            "Collected Extension Test Results:\n{}".format(pprint.pformat(results))
-        )
-        progress.write("Collected Extensions:\n{}".format(pprint.pformat(extensions)))
-        contents = ""
+        progress.write(f"Collected Extension Test Results:\n{pprint.pformat(results)}")
+        progress.write(f"Collected Extensions:\n{pprint.pformat(extensions)}")
+        contents = f"{sphinx_index.read_text()}\n"
         for extension in results:
             if extension in ("osnames", "python_versions"):
                 progress.update()
@@ -124,7 +122,7 @@ def main():
             progress.update()
         set_progress_description(progress, "Writing extenstions index")
         contents += ".. |date| date::\n\nLast Updated on |date|"
-        sphinx_index.write_text(contents + "\n")
+        sphinx_index.write_text(f"{contents}\n")
     progress.write("Complete")
 
 
