@@ -28,6 +28,16 @@ if not PACKAGE_INFO_CACHE.is_dir():
     PACKAGE_INFO_CACHE.mkdir(0o755)
 STATE_DIR = REPO_ROOT / ".state"
 
+KNOWN_SALT_EXTENSIONS = {
+    "salt-cumulus",
+    "salt-nornir",
+    "salt-os10",
+    "salt-ttp",
+}
+KNOWN_NOT_SALT_EXTENSIONS = {
+    "salt-extension",
+}
+
 
 print(f"Local Cache Path: {LOCAL_CACHE_PATH}", file=sys.stderr, flush=True)
 
@@ -218,13 +228,16 @@ async def download_package_info(session, package, package_info, limiter, progres
             return
         try:
             salt_extension = False
-            if package.startswith(("salt-ext-", "salt-extension")):
+            if package in KNOWN_SALT_EXTENSIONS:
                 salt_extension = True
-            elif (
-                data["info"]["keywords"]
-                and "salt-extension" in data["info"]["keywords"]
-            ):
-                salt_extension = True
+            elif package not in KNOWN_NOT_SALT_EXTENSIONS:
+                if package.startswith(("salt-ext-", "saltext-", "saltext.")):
+                    salt_extension = True
+                elif (
+                    data["info"]["keywords"]
+                    and "salt-extension" in data["info"]["keywords"]
+                ):
+                    salt_extension = True
             if salt_extension:
                 package_info_cache = PACKAGE_INFO_CACHE / f"{package}.msgpack"
                 package_info_cache.write_bytes(msgpack.packb(data))
