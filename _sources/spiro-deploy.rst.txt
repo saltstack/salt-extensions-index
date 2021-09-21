@@ -1,3 +1,5 @@
+:orphan:
+
 .. _spiro-deploy:
 
 spiro-deploy
@@ -6,7 +8,7 @@ spiro-deploy
 Compatibility
 -------------
 .. raw:: html
-   :file: spiro-deploy.html
+   :file: results/spiro-deploy.html
 
 Description
 -----------

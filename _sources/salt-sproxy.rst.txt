@@ -1,3 +1,5 @@
+:orphan:
+
 .. _salt-sproxy:
 
 salt-sproxy
@@ -6,7 +8,7 @@ salt-sproxy
 Compatibility
 -------------
 .. raw:: html
-   :file: salt-sproxy.html
+   :file: results/salt-sproxy.html
 
 Description
 -----------

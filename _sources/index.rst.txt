@@ -28,56 +28,63 @@ salt-cumin
 A CLI front-end to a running salt-api system (:ref:`more info<salt-cumin>`)
 
 .. raw:: html
-   :file: extensions/salt-cumin.html
+   :file: results/salt-cumin.html
 
+------------
 
 salt-ext-tidx1
 --------------
 Test Extension 1 - DO NOT USE IN SALT (:ref:`more info<salt-ext-tidx1>`)
 
 .. raw:: html
-   :file: extensions/salt-ext-tidx1.html
+   :file: results/salt-ext-tidx1.html
 
+------------
 
 salt-sproxy
 -----------
 Salt plugin for managing devices and applications, without running (Proxy) Minions (:ref:`more info<salt-sproxy>`)
 
 .. raw:: html
-   :file: extensions/salt-sproxy.html
+   :file: results/salt-sproxy.html
 
+------------
 
 salt-tidx2-extension
 --------------------
 Test Extension 2 - DO NOT USE IN SALT (:ref:`more info<salt-tidx2-extension>`)
 
 .. raw:: html
-   :file: extensions/salt-tidx2-extension.html
+   :file: results/salt-tidx2-extension.html
 
+------------
 
 spiro-deploy
 ------------
 Deployment script for SpiroFS (:ref:`more info<spiro-deploy>`)
 
 .. raw:: html
-   :file: extensions/spiro-deploy.html
+   :file: results/spiro-deploy.html
 
+------------
 
 spiro-network
 -------------
 Salt modules for discovering and exposing minion's IP addresses (:ref:`more info<spiro-network>`)
 
 .. raw:: html
-   :file: extensions/spiro-network.html
+   :file: results/spiro-network.html
 
+------------
 
 spirofs
 -------
 Salt Fileserver handling dynamic saltenvs and discrete deployments from CI/CD. (:ref:`more info<spirofs>`)
 
 .. raw:: html
-   :file: extensions/spirofs.html
+   :file: results/spirofs.html
 
+------------
 
 .. |date| date::
 

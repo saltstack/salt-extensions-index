@@ -1,3 +1,5 @@
+:orphan:
+
 .. _salt-cumin:
 
 salt-cumin
@@ -6,7 +8,7 @@ salt-cumin
 Compatibility
 -------------
 .. raw:: html
-   :file: salt-cumin.html
+   :file: results/salt-cumin.html
 
 Description
 -----------
