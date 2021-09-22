@@ -155,7 +155,9 @@ async def download_pypi_simple_index(session, index_info, limiter, progress):
         progress.update()
 
 
-async def collect_packages_information(session, index_info, limiter, progress):
+async def collect_packages_information(
+    session, index_info, limiter, progress, extensions
+):
     processed = 0
     muted_processed_iterations = 1500
     try:
@@ -169,6 +171,7 @@ async def collect_packages_information(session, index_info, limiter, progress):
                         index_info["packages"][package],
                         limiter,
                         progress,
+                        extensions,
                     )
                 if DISABLE_TQDM:
                     processed += 1
@@ -183,10 +186,11 @@ async def collect_packages_information(session, index_info, limiter, progress):
             progress.write(f"Processed {processed} of {len(index_info['packages'])}")
         # Store the known extensions hash into state to trigger a cache hit/miss/update
         # on the Github Actions CI pipeline
-        extensions = {}
-        for path in PACKAGE_INFO_CACHE.glob("*.msgpack"):
-            extension_data = msgpack.unpackb(path.read_bytes())
-            extensions[path.stem] = extension_data
+        for extension in extensions:
+            extension_data = msgpack.unpackb(
+                PACKAGE_INFO_CACHE.joinpath(f"{extension}.msgpack").read_bytes()
+            )
+            extensions[extension].update(extension_data)
         try:
             extensions_hash = functools.reduce(
                 lambda x, y: x ^ y,
@@ -200,7 +204,9 @@ async def collect_packages_information(session, index_info, limiter, progress):
             progress.write(f"Failed to generate the known extensions hash: {exc}")
 
 
-async def download_package_info(session, package, package_info, limiter, progress):
+async def download_package_info(
+    session, package, package_info, limiter, progress, extensions
+):
     try:
         if package_info.get("not-found"):
             return
@@ -255,6 +261,7 @@ async def download_package_info(session, package, package_info, limiter, progres
                         f"{package} was detected as a salt-extension because of it's keywords"
                     )
             if salt_extension:
+                extensions[package] = {}
                 package_info_cache = PACKAGE_INFO_CACHE / f"{package}.msgpack"
                 package_info_cache.write_bytes(msgpack.packb(data))
         except Exception:
@@ -273,8 +280,7 @@ async def main():
         desc=f"{' ' * 60} :",
         disable=DISABLE_TQDM,
     )
-    for path in PACKAGE_INFO_CACHE.glob("*.msgpack"):
-        path.unlink()
+    extensions = {}
     with progress:
         with get_index_info(progress) as index_info:
             concurrency = 1000
@@ -293,13 +299,16 @@ async def main():
                         # We can't reset tqdm if it's disabled
                         progress.reset(total=len(index_info["packages"]))
                     await collect_packages_information(
-                        session, index_info, limiter, progress
+                        session, index_info, limiter, progress, extensions
                     )
         if cancel_scope.cancelled_caught:
             progress.write(f"The script timmed out after {timeout} minutes")
             return 1
         progress.write("Detected Salt Extensions:")
         for path in PACKAGE_INFO_CACHE.glob("*.msgpack"):
+            if path.stem not in extensions:
+                path.unlink()
+                continue
             progress.write(f" * {path.stem}")
         return 0
 
