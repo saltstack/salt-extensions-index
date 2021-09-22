@@ -101,6 +101,9 @@ def main():
         desc=f"{' ' * 60} :",
         disable=DISABLE_TQDM,
     )
+    progress.write("Currently known extensions:")
+    for package in packages:
+        progress.write(f" * {package}")
     try:
         salt_versions = get_lastest_major_releases(progress)
     except Exception as exc:

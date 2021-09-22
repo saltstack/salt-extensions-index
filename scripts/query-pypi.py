@@ -37,6 +37,8 @@ KNOWN_SALT_EXTENSIONS = {
 }
 KNOWN_NOT_SALT_EXTENSIONS = {
     "salt-extension",
+    "salt-ext-tidx1",
+    "salt-tidx2-extension",
 }
 
 
@@ -231,14 +233,21 @@ async def download_package_info(session, package, package_info, limiter, progres
             salt_extension = False
             if package in KNOWN_SALT_EXTENSIONS:
                 salt_extension = True
+                progress.write(f"{package} is a known salt-extension")
             elif package not in KNOWN_NOT_SALT_EXTENSIONS:
                 if package.startswith(("salt-ext-", "saltext-", "saltext.")):
                     salt_extension = True
+                    progress.write(
+                        f"{package} was detected as a salt-extension from it's name"
+                    )
                 elif (
                     data["info"]["keywords"]
                     and "salt-extension" in data["info"]["keywords"]
                 ):
                     salt_extension = True
+                    progress.write(
+                        f"{package} was detected as a salt-extension because of it's keywords"
+                    )
             if salt_extension:
                 package_info_cache = PACKAGE_INFO_CACHE / f"{package}.msgpack"
                 package_info_cache.write_bytes(msgpack.packb(data))
@@ -246,6 +255,9 @@ async def download_package_info(session, package, package_info, limiter, progres
             progress.write(traceback.format_exc())
             progress.write("Data:\n{}".format(pprint.pformat(data)))
     finally:
+        progress.write("Detected Salt Extensions:")
+        for path in PACKAGE_INFO_CACHE.glob("*.msgpack"):
+            progress.write(f" * {path.stem}")
         progress.update()
 
 
