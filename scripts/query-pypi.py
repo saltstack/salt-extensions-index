@@ -255,9 +255,6 @@ async def download_package_info(session, package, package_info, limiter, progres
             progress.write(traceback.format_exc())
             progress.write("Data:\n{}".format(pprint.pformat(data)))
     finally:
-        progress.write("Detected Salt Extensions:")
-        for path in PACKAGE_INFO_CACHE.glob("*.msgpack"):
-            progress.write(f" * {path.stem}")
         progress.update()
 
 
@@ -293,6 +290,9 @@ async def main():
         if cancel_scope.cancelled_caught:
             progress.write(f"The script timmed out after {timeout} minutes")
             return 1
+        progress.write("Detected Salt Extensions:")
+        for path in PACKAGE_INFO_CACHE.glob("*.msgpack"):
+            progress.write(f" * {path.stem}")
         return 0
 
 
