@@ -80,6 +80,8 @@ def collect_extensions_info():
 
         if url is not None:
             packages[package] = url
+        else:
+            packages[package] = "no-sdist"
     return packages
 
 
