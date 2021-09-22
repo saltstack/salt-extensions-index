@@ -187,11 +187,17 @@ async def collect_packages_information(session, index_info, limiter, progress):
         for path in PACKAGE_INFO_CACHE.glob("*.msgpack"):
             extension_data = msgpack.unpackb(path.read_bytes())
             extensions[path.stem] = extension_data
-        extensions_hash = functools.reduce(
-            lambda x, y: x ^ y,
-            [hash((key, repr(value))) for (key, value) in sorted(extensions.items())],
-        )
-        STATE_DIR.joinpath("known-extensions-hash").write_text(f"{extensions_hash}")
+        try:
+            extensions_hash = functools.reduce(
+                lambda x, y: x ^ y,
+                [
+                    hash((key, repr(value)))
+                    for (key, value) in sorted(extensions.items())
+                ],
+            )
+            STATE_DIR.joinpath("known-extensions-hash").write_text(f"{extensions_hash}")
+        except TypeError as exc:
+            progress.write(f"Failed to generate the known extensions hash: {exc}")
 
 
 async def download_package_info(session, package, package_info, limiter, progress):
