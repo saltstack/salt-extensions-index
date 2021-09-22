@@ -33,6 +33,7 @@ KNOWN_SALT_EXTENSIONS = {
     "salt-nornir",
     "salt-os10",
     "salt-ttp",
+    "saltext.vmware",
 }
 KNOWN_NOT_SALT_EXTENSIONS = {
     "salt-extension",
