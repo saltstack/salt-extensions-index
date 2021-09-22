@@ -267,6 +267,8 @@ async def main():
         desc=f"{' ' * 60} :",
         disable=DISABLE_TQDM,
     )
+    for path in PACKAGE_INFO_CACHE.glob("*.msgpack"):
+        path.unlink()
     with progress:
         with get_index_info(progress) as index_info:
             concurrency = 1000
