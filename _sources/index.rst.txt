@@ -32,12 +32,30 @@ A CLI front-end to a running salt-api system (:ref:`more info<salt-cumin>`)
 
 ------------
 
-salt-ext-tidx1
---------------
-Test Extension 1 - DO NOT USE IN SALT (:ref:`more info<salt-ext-tidx1>`)
+salt-cumulus
+------------
+Small salt module providing cumulus.managed, to apply basic config on cumulus switches (:ref:`more info<salt-cumulus>`)
 
 .. raw:: html
-   :file: results/salt-ext-tidx1.html
+   :file: results/salt-cumulus.html
+
+------------
+
+salt-nornir
+-----------
+SALTSTACK Nornir Modules (:ref:`more info<salt-nornir>`)
+
+.. raw:: html
+   :file: results/salt-nornir.html
+
+------------
+
+salt-os10
+---------
+Small salt module providing os10.managed, to apply basic config on dell OS10 switches (:ref:`more info<salt-os10>`)
+
+.. raw:: html
+   :file: results/salt-os10.html
 
 ------------
 
@@ -50,12 +68,21 @@ Salt plugin for managing devices and applications, without running (Proxy) Minio
 
 ------------
 
-salt-tidx2-extension
---------------------
-Test Extension 2 - DO NOT USE IN SALT (:ref:`more info<salt-tidx2-extension>`)
+salt-ttp
+--------
+SALTSTACK TTP Modules (:ref:`more info<salt-ttp>`)
 
 .. raw:: html
-   :file: results/salt-tidx2-extension.html
+   :file: results/salt-ttp.html
+
+------------
+
+saltext.vmware
+--------------
+Salt Extension Modules for VMware (:ref:`more info<saltext.vmware>`)
+
+.. raw:: html
+   :file: results/saltext.vmware.html
 
 ------------
 

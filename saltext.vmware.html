@@ -48,7 +48,7 @@
   
   
   
-    <title>spiro-deploy &#8212; Salt Extensions 2020.11.12 documentation</title>
+    <title>saltext.vmware &#8212; Salt Extensions 2020.11.12 documentation</title>
     <link rel="stylesheet" type="text/css" href="static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="static/material.css" />
     <script data-url_root="./" id="documentation_options" src="static/documentation_options.js"></script>
@@ -76,7 +76,7 @@
   <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
   <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
   <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
-  <a href="#spiro-deploy" tabindex="1" class="md-skip"> Skip to content </a>
+  <a href="#saltext.vmware" tabindex="1" class="md-skip"> Skip to content </a>
   <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
@@ -95,7 +95,7 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           <span class="md-header-nav__topic">Salt Extensions</span>
-          <span class="md-header-nav__topic"> spiro-deploy </span>
+          <span class="md-header-nav__topic"> saltext.vmware </span>
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
@@ -150,19 +150,13 @@
 <nav class="md-nav md-nav--secondary">
     <label class="md-nav__title" for="__toc">Extensions</label>
   <ul class="md-nav__list" data-md-scrollfix="">
-        <li class="md-nav__item"><a href="#spiro-deploy--page-root" class="md-nav__link">spiro-deploy</a><nav class="md-nav">
+        <li class="md-nav__item"><a href="#saltext-vmware--page-root" class="md-nav__link">saltext.vmware</a><nav class="md-nav">
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#compatibility" class="md-nav__link">Compatibility</a>
         </li>
         <li class="md-nav__item"><a href="#description" class="md-nav__link">Description</a>
         </li></ul>
             </nav>
-        </li>
-        <li class="md-nav__item"><a href="#id2" class="md-nav__link">spiro-deploy</a>
-        </li>
-        <li class="md-nav__item"><a href="#installation" class="md-nav__link">Installation</a>
-        </li>
-        <li class="md-nav__item"><a href="#usage-summary" class="md-nav__link">Usage Summary</a>
         </li>
   </ul>
 </nav>
@@ -173,8 +167,8 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  <section id="spiro-deploy">
-<span id="id1"></span><h1 id="spiro-deploy--page-root">spiro-deploy<a class="headerlink" href="#spiro-deploy--page-root" title="Permalink to this headline">¶</a></h1>
+  <section id="saltext-vmware">
+<span id="id1"></span><h1 id="saltext-vmware--page-root">saltext.vmware<a class="headerlink" href="#saltext-vmware--page-root" title="Permalink to this headline">¶</a></h1>
 <section id="compatibility">
 <h2 id="compatibility">Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this headline">¶</a></h2>
 <table>
@@ -331,24 +325,82 @@
 </table></section>
 <section id="description">
 <h2 id="description">Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-</section>
-</section>
-<section id="id2">
-<h1 id="id2">spiro-deploy<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
-<p>A deployment tool for [SpiroFS](<a class="reference external" href="https://spirostack.com/spirofs/">https://spirostack.com/spirofs/</a>).</p>
-<p>[Full documentation](<a class="reference external" href="https://spirostack.com/spirofs/deploy/">https://spirostack.com/spirofs/deploy/</a>)</p>
-</section>
-<section id="installation">
-<h1 id="installation">Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p># Salt Extension Modules for VMware</p>
+<p>This is a collection of Salt-maintained extension modules for use with VMware
+vSphere, vCenter, ESXi, and friends.</p>
+<p>## Security</p>
+<p>If you think you’ve found a security vulnerability, see [Salt’s security guide][security].</p>
+<p>## Contributing</p>
+<p>The salt-ext-modules-vmware project team welcomes contributions from the community. If you wish to contribute code and you have not signed our contributor license agreement (CLA), our bot will update the issue when you open a Pull Request. For any questions about the CLA process, please refer to our [FAQ](<a class="reference external" href="https://cla.vmware.com/faq">https://cla.vmware.com/faq</a>).</p>
+<p>The [Salt Contributing guide][salt-contributing] has a lot of relevant information, but if you’d like to jump right in here’s how to get started:</p>
+<blockquote>
+<div><p># Clone the repo
+git clone –origin salt <a class="reference external" href="mailto:git%40github.com">git<span>@</span>github<span>.</span>com</a>:saltstack/salt-ext-modules-vmware.git</p>
+<p># Change to the repo dir
+cd salt-ext-modules-vmware</p>
+<p># Create a new venv
+python3 -m venv env –prompt vmw-ext
+source env/bin/activate</p>
+<p># On mac, you may need to upgrade pip
+python -m pip install –upgrade pip</p>
+<p># On WSL or some flavors of linux you may need to install the <cite>enchant</cite>
+# library in order to build the docs
+sudo apt-get install -y enchant</p>
+<p># Install extension + test/dev/doc dependencies into your environment
+python -m pip install -e .[tests,dev,docs]</p>
+<p># Run tests!
+python -m nox -e tests-3</p>
+<p># skip requirements install for next time
+export SKIP_REQUIREMENTS_INSTALL=1</p>
+<p># Build the docs, serve, and view in your web browser:
+python -m nox -e docs &amp;&amp; (cd docs/_build/html; python -m webbrowser localhost:8000; python -m http.server; cd -)</p>
+<p># If you want to run tests against an actual vCenter, make
+# a local salt dir
+mkdir -p local/etc/salt</p>
+<p># Create a minion config
+cat &lt;&lt; EOF&gt; local/etc/salt/minion
+user: $(whoami)
+root_dir: $PWD/local/
+file_root: $PWD/local
+master: localhost
+id: saltdev
+master_port: 55506
+EOF</p>
+<p># Create a test config file:
+python tools/test_value_scraper.py -c local/vcenter.conf</p>
+</div></blockquote>
+<p>For code contributions, as part of VMware we require [a signed CLA][cla-faq].
+If you’ve already signed the VMware CLA, you’re probably good to go.</p>
+<p>Of course, writing code isn’t the only way to contribute! We value
+contributions in any of these areas:</p>
 <ul class="simple">
-<li><p><cite>pip install spiro-deploy</cite></p></li>
-<li><p>[A container](<a class="reference external" href="https://gitlab.com/spirostack/spiro-deploy/container_registry">https://gitlab.com/spirostack/spiro-deploy/container_registry</a>)</p></li>
+<li><p>Documentation - especially examples of how to use this module to solve
+specific problems.</p></li>
+<li><p>Triaging [issues][issues] and participating in [discussions][discussions]</p></li>
+<li><p>Reviewing [Pull Requests][PRs] (we really like [Conventional
+Comments][comments]!)</p></li>
 </ul>
+<p>You could also contribute in other ways:</p>
+<ul class="simple">
+<li><p>Writing blog posts</p></li>
+<li><p>Posting on social media about how you used Salt+VMware to solve your
+problems, including videos</p></li>
+<li><p>Giving talks at conferences</p></li>
+<li><p>Publishing videos</p></li>
+<li><p>Asking/answering questions in IRC, Slack, or email groups</p></li>
+</ul>
+<p>Any of these things are super valuable to our community, and we sincerely
+appreciate every contribution!</p>
+<p>For more information, build the docs and head over to <a class="reference external" href="http://localhost:8000/">http://localhost:8000/</a> —
+that’s where you’ll find the rest of the documentation.</p>
+<p>[security]: <a class="reference external" href="https://github.com/saltstack/salt/blob/master/SECURITY.md">https://github.com/saltstack/salt/blob/master/SECURITY.md</a>
+[salt-contributing]: <a class="reference external" href="https://docs.saltproject.io/en/master/topics/development/contributing.html">https://docs.saltproject.io/en/master/topics/development/contributing.html</a>
+[issues]: <a class="reference external" href="https://github.com/saltstack/salt-ext-modules-vmware/issues">https://github.com/saltstack/salt-ext-modules-vmware/issues</a>
+[PRs]: <a class="reference external" href="https://github.com/saltstack/salt-ext-modules-vmware/pulls">https://github.com/saltstack/salt-ext-modules-vmware/pulls</a>
+[discussions]: <a class="reference external" href="https://github.com/saltstack/salt-ext-modules-vmware/discussions">https://github.com/saltstack/salt-ext-modules-vmware/discussions</a>
+[comments]: <a class="reference external" href="https://conventionalcomments.org/">https://conventionalcomments.org/</a>
+[cla-faq]: <a class="reference external" href="https://cla.vmware.com/faq">https://cla.vmware.com/faq</a></p>
 </section>
-<section id="usage-summary">
-<h1 id="usage-summary">Usage Summary<a class="headerlink" href="#usage-summary" title="Permalink to this headline">¶</a></h1>
-<p><cite>spiro-deploy &lt;project&gt; &lt;deployment&gt;</cite>, with the environment variables <cite>SPIRO_URL</cite>
-and <cite>SPIRO_TOKEN</cite>.</p>
 </section>
 
 
