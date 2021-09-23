@@ -10,10 +10,2620 @@ on:
 jobs:
 
 
+  salt-cumin-linux:
+    name: salt-cumin Linux
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    concurrency:
+      group: salt-cumin-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-cumin
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/e8/be/fed3e10ffee7059390256468c4040aa4c149dc8f3c4308ae4ac630c6c7f0/salt-cumin-0.7.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-cumin
+          path: .cache
+
+  salt-cumin-macos:
+    name: salt-cumin macOS
+    runs-on: macOS-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-cumin
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/e8/be/fed3e10ffee7059390256468c4040aa4c149dc8f3c4308ae4ac630c6c7f0/salt-cumin-0.7.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-cumin
+          path: .cache
+
+  salt-cumin-windows:
+    name: salt-cumin Windows
+    runs-on: windows-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        shell: bash
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-cumin
+        id: download-and-extract
+        shell: bash
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/e8/be/fed3e10ffee7059390256468c4040aa4c149dc8f3c4308ae4ac630c6c7f0/salt-cumin-0.7.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        shell: bash
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          EXTRA_REQUIREMENTS_INSTALL: Cython
+        run: |
+          cd pkg
+          if (Test-Path -Path noxfile.py -PathType Leaf) {
+            nox --force-color -e tests-3 -- -vv tests/
+          }
+
+      - name: Store Job Status
+        shell: bash
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: salt-cumin
+          path: .cache
+
+  salt-cumulus-linux:
+    name: salt-cumulus Linux
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    concurrency:
+      group: salt-cumulus-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-cumulus
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/b8/05/6d6c12d107455dafb11785c4a5c711c44d96541b3b6410a009f425967286/salt-cumulus-0.0.3.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-cumulus
+          path: .cache
+
+  salt-cumulus-macos:
+    name: salt-cumulus macOS
+    runs-on: macOS-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-cumulus
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/b8/05/6d6c12d107455dafb11785c4a5c711c44d96541b3b6410a009f425967286/salt-cumulus-0.0.3.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-cumulus
+          path: .cache
+
+  salt-cumulus-windows:
+    name: salt-cumulus Windows
+    runs-on: windows-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        shell: bash
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-cumulus
+        id: download-and-extract
+        shell: bash
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/b8/05/6d6c12d107455dafb11785c4a5c711c44d96541b3b6410a009f425967286/salt-cumulus-0.0.3.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        shell: bash
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          EXTRA_REQUIREMENTS_INSTALL: Cython
+        run: |
+          cd pkg
+          if (Test-Path -Path noxfile.py -PathType Leaf) {
+            nox --force-color -e tests-3 -- -vv tests/
+          }
+
+      - name: Store Job Status
+        shell: bash
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: salt-cumulus
+          path: .cache
+
+  salt-nornir-linux:
+    name: salt-nornir Linux
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    concurrency:
+      group: salt-nornir-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-nornir
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/f5/08/8894bd6b91c918a17991bd29ee7e44a2d00ca420b73c44a05ceb9b4dee58/salt_nornir-0.4.0.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-nornir
+          path: .cache
+
+  salt-nornir-macos:
+    name: salt-nornir macOS
+    runs-on: macOS-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-nornir
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/f5/08/8894bd6b91c918a17991bd29ee7e44a2d00ca420b73c44a05ceb9b4dee58/salt_nornir-0.4.0.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-nornir
+          path: .cache
+
+  salt-nornir-windows:
+    name: salt-nornir Windows
+    runs-on: windows-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        shell: bash
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-nornir
+        id: download-and-extract
+        shell: bash
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/f5/08/8894bd6b91c918a17991bd29ee7e44a2d00ca420b73c44a05ceb9b4dee58/salt_nornir-0.4.0.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        shell: bash
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          EXTRA_REQUIREMENTS_INSTALL: Cython
+        run: |
+          cd pkg
+          if (Test-Path -Path noxfile.py -PathType Leaf) {
+            nox --force-color -e tests-3 -- -vv tests/
+          }
+
+      - name: Store Job Status
+        shell: bash
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: salt-nornir
+          path: .cache
+
+  salt-os10-linux:
+    name: salt-os10 Linux
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    concurrency:
+      group: salt-os10-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-os10
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/d8/52/dc748fe25258fd4fca703e6fe7e50d564c4d74de93e40a15f8b4bfc8ff4d/salt-os10-0.0.2.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-os10
+          path: .cache
+
+  salt-os10-macos:
+    name: salt-os10 macOS
+    runs-on: macOS-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-os10
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/d8/52/dc748fe25258fd4fca703e6fe7e50d564c4d74de93e40a15f8b4bfc8ff4d/salt-os10-0.0.2.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-os10
+          path: .cache
+
+  salt-os10-windows:
+    name: salt-os10 Windows
+    runs-on: windows-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        shell: bash
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-os10
+        id: download-and-extract
+        shell: bash
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/d8/52/dc748fe25258fd4fca703e6fe7e50d564c4d74de93e40a15f8b4bfc8ff4d/salt-os10-0.0.2.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        shell: bash
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          EXTRA_REQUIREMENTS_INSTALL: Cython
+        run: |
+          cd pkg
+          if (Test-Path -Path noxfile.py -PathType Leaf) {
+            nox --force-color -e tests-3 -- -vv tests/
+          }
+
+      - name: Store Job Status
+        shell: bash
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: salt-os10
+          path: .cache
+
+  salt-sproxy-linux:
+    name: salt-sproxy Linux
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    concurrency:
+      group: salt-sproxy-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-sproxy
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/ef/82/a28bebda453fc46ca83b1e7a6806134399b64c235c3c668f8843198ebb64/salt-sproxy-2021.6.1.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-sproxy
+          path: .cache
+
+  salt-sproxy-macos:
+    name: salt-sproxy macOS
+    runs-on: macOS-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-sproxy
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/ef/82/a28bebda453fc46ca83b1e7a6806134399b64c235c3c668f8843198ebb64/salt-sproxy-2021.6.1.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-sproxy
+          path: .cache
+
+  salt-sproxy-windows:
+    name: salt-sproxy Windows
+    runs-on: windows-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        shell: bash
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-sproxy
+        id: download-and-extract
+        shell: bash
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/ef/82/a28bebda453fc46ca83b1e7a6806134399b64c235c3c668f8843198ebb64/salt-sproxy-2021.6.1.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        shell: bash
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          EXTRA_REQUIREMENTS_INSTALL: Cython
+        run: |
+          cd pkg
+          if (Test-Path -Path noxfile.py -PathType Leaf) {
+            nox --force-color -e tests-3 -- -vv tests/
+          }
+
+      - name: Store Job Status
+        shell: bash
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: salt-sproxy
+          path: .cache
+
+  salt-ttp-linux:
+    name: salt-ttp Linux
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    concurrency:
+      group: salt-ttp-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-ttp
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/52/8d/a94880c8b2a7d10aa93bec5cf3d12a5e0092df9400c964aaf26b506be321/salt-ttp-0.1.0.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-ttp
+          path: .cache
+
+  salt-ttp-macos:
+    name: salt-ttp macOS
+    runs-on: macOS-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-ttp
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/52/8d/a94880c8b2a7d10aa93bec5cf3d12a5e0092df9400c964aaf26b506be321/salt-ttp-0.1.0.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: salt-ttp
+          path: .cache
+
+  salt-ttp-windows:
+    name: salt-ttp Windows
+    runs-on: windows-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        shell: bash
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract salt-ttp
+        id: download-and-extract
+        shell: bash
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/52/8d/a94880c8b2a7d10aa93bec5cf3d12a5e0092df9400c964aaf26b506be321/salt-ttp-0.1.0.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        shell: bash
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          EXTRA_REQUIREMENTS_INSTALL: Cython
+        run: |
+          cd pkg
+          if (Test-Path -Path noxfile.py -PathType Leaf) {
+            nox --force-color -e tests-3 -- -vv tests/
+          }
+
+      - name: Store Job Status
+        shell: bash
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: salt-ttp
+          path: .cache
+
+  saltext-vmware-linux:
+    name: saltext.vmware Linux
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    concurrency:
+      group: saltext-vmware-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract saltext.vmware
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls no-sdist | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: saltext.vmware
+          path: .cache
+
+  saltext-vmware-macos:
+    name: saltext.vmware macOS
+    runs-on: macOS-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract saltext.vmware
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls no-sdist | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: saltext.vmware
+          path: .cache
+
+  saltext-vmware-windows:
+    name: saltext.vmware Windows
+    runs-on: windows-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        shell: bash
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract saltext.vmware
+        id: download-and-extract
+        shell: bash
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls no-sdist | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        shell: bash
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          EXTRA_REQUIREMENTS_INSTALL: Cython
+        run: |
+          cd pkg
+          if (Test-Path -Path noxfile.py -PathType Leaf) {
+            nox --force-color -e tests-3 -- -vv tests/
+          }
+
+      - name: Store Job Status
+        shell: bash
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: saltext.vmware
+          path: .cache
+
+  spiro-deploy-linux:
+    name: spiro-deploy Linux
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    concurrency:
+      group: spiro-deploy-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spiro-deploy
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/2e/c6/e3cae1e09029ce603c787b6bfcade070a2327327cb5d8c183ed2a6e574b9/spiro-deploy-0.4.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: spiro-deploy
+          path: .cache
+
+  spiro-deploy-macos:
+    name: spiro-deploy macOS
+    runs-on: macOS-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spiro-deploy
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/2e/c6/e3cae1e09029ce603c787b6bfcade070a2327327cb5d8c183ed2a6e574b9/spiro-deploy-0.4.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: spiro-deploy
+          path: .cache
+
+  spiro-deploy-windows:
+    name: spiro-deploy Windows
+    runs-on: windows-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        shell: bash
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spiro-deploy
+        id: download-and-extract
+        shell: bash
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/2e/c6/e3cae1e09029ce603c787b6bfcade070a2327327cb5d8c183ed2a6e574b9/spiro-deploy-0.4.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        shell: bash
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          EXTRA_REQUIREMENTS_INSTALL: Cython
+        run: |
+          cd pkg
+          if (Test-Path -Path noxfile.py -PathType Leaf) {
+            nox --force-color -e tests-3 -- -vv tests/
+          }
+
+      - name: Store Job Status
+        shell: bash
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: spiro-deploy
+          path: .cache
+
+  spiro-network-linux:
+    name: spiro-network Linux
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    concurrency:
+      group: spiro-network-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spiro-network
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/42/da/f31b11d9ec13562fd633fa7f9e7f8ea3a5dd2aee864ea8526645d3859c6a/spiro-network-0.2.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: spiro-network
+          path: .cache
+
+  spiro-network-macos:
+    name: spiro-network macOS
+    runs-on: macOS-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spiro-network
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/42/da/f31b11d9ec13562fd633fa7f9e7f8ea3a5dd2aee864ea8526645d3859c6a/spiro-network-0.2.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: spiro-network
+          path: .cache
+
+  spiro-network-windows:
+    name: spiro-network Windows
+    runs-on: windows-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        shell: bash
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spiro-network
+        id: download-and-extract
+        shell: bash
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/42/da/f31b11d9ec13562fd633fa7f9e7f8ea3a5dd2aee864ea8526645d3859c6a/spiro-network-0.2.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        shell: bash
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          EXTRA_REQUIREMENTS_INSTALL: Cython
+        run: |
+          cd pkg
+          if (Test-Path -Path noxfile.py -PathType Leaf) {
+            nox --force-color -e tests-3 -- -vv tests/
+          }
+
+      - name: Store Job Status
+        shell: bash
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: spiro-network
+          path: .cache
+
+  spirofs-linux:
+    name: spirofs Linux
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    concurrency:
+      group: spirofs-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spirofs
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/ad/71/cc56e9558f11f0f45e5c167fbf19fe9eed1943df629d9d4da3b417295bb1/spirofs-0.3.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: spirofs
+          path: .cache
+
+  spirofs-macos:
+    name: spirofs macOS
+    runs-on: macOS-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spirofs
+        id: download-and-extract
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/ad/71/cc56e9558f11f0f45e5c167fbf19fe9eed1943df629d9d4da3b417295bb1/spirofs-0.3.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        run: |
+          cd pkg
+          if [ -f noxfile.py ]; then
+            nox --force-color -e tests-3 -- -vv tests/
+          fi
+
+      - name: Store Job Status
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: spirofs
+          path: .cache
+
+  spirofs-windows:
+    name: spirofs Windows
+    runs-on: windows-latest
+    continue-on-error: true
+
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        python-version:
+          - 3.5
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        salt-version:
+          - master
+          - v3003.3
+          - v3002.7
+          - v3001.8
+
+    steps:
+      - name: Define Results Directory
+        shell: bash
+        run: |
+          echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Download And Extract spirofs
+        id: download-and-extract
+        shell: bash
+        run: |
+          mkdir pkg
+          cd pkg
+          curl -Ls https://files.pythonhosted.org/packages/ad/71/cc56e9558f11f0f45e5c167fbf19fe9eed1943df629d9d4da3b417295bb1/spirofs-0.3.tar.gz | tar zxvf - --strip 1
+          ls -lah
+
+      - name: Set Test Run Environment Variable
+        shell: bash
+        run: |
+          echo USE_STATIC_REQUIREMENTS=1 >> $GITHUB_ENV
+          if [ "${{ matrix.salt-version }}" == "master" ]; then
+            echo 'SALT_REQUIREMENT="git+https://github.com/saltstack/salt@master"' >> $GITHUB_ENV
+          else
+            echo 'SALT_REQUIREMENT="salt==${{ matrix.salt-version }}"' >> $GITHUB_ENV
+          fi
+
+      - name: Install Nox
+        id: install-nox
+        run: |
+          python -m pip install --upgrade pip
+          pip install nox
+
+      - name: Test
+        id: run-tests
+        continue-on-error: true
+        env:
+          EXTRA_REQUIREMENTS_INSTALL: Cython
+        run: |
+          cd pkg
+          if (Test-Path -Path noxfile.py -PathType Leaf) {
+            nox --force-color -e tests-3 -- -vv tests/
+          }
+
+      - name: Store Job Status
+        shell: bash
+        if: ${{ always() }}
+        run: |
+          mkdir -p ${{ env.RESULTS_DIR }}
+          echo https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}??check_suite_focus=true > ${{ env.RESULTS_DIR }}/url
+          if [ -f pkg/noxfile.py ]; then
+            echo ${{ steps.run-tests.outcome }} > ${{ env.RESULTS_DIR }}/status
+          else
+            echo "not-tested" > ${{ env.RESULTS_DIR }}/status
+          fi
+          cat ${{ env.RESULTS_DIR }}/url
+          cat ${{ env.RESULTS_DIR }}/status
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: spirofs
+          path: .cache
+
   Generate-Extensions-Index:
     runs-on: ubuntu-latest
     if: ${{ always() }}
     needs:
+      - salt-cumin-linux
+      - salt-cumin-macos
+      - salt-cumin-windows
+      - salt-cumulus-linux
+      - salt-cumulus-macos
+      - salt-cumulus-windows
+      - salt-nornir-linux
+      - salt-nornir-macos
+      - salt-nornir-windows
+      - salt-os10-linux
+      - salt-os10-macos
+      - salt-os10-windows
+      - salt-sproxy-linux
+      - salt-sproxy-macos
+      - salt-sproxy-windows
+      - salt-ttp-linux
+      - salt-ttp-macos
+      - salt-ttp-windows
+      - saltext-vmware-linux
+      - saltext-vmware-macos
+      - saltext-vmware-windows
+      - spiro-deploy-linux
+      - spiro-deploy-macos
+      - spiro-deploy-windows
+      - spiro-network-linux
+      - spiro-network-macos
+      - spiro-network-windows
+      - spirofs-linux
+      - spirofs-macos
+      - spirofs-windows
 
     steps:
       - uses: actions/checkout@v2
