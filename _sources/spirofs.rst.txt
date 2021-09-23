@@ -12,6 +12,7 @@ Compatibility
 
 Description
 -----------
+
 SpiroFS
 =======
 
@@ -24,11 +25,14 @@ Full documentation is https://saltstack.com/spirofs
 
 Installation
 ------------
-0. Have pip for the Python that salt is installed into
-1. `pip install spirofs` (Adapt as necessary)
-2. Configure the salt master (see [docs](https://spirostack.com/spirofs/#configuration))
-3. Restart the salt master
+
+
+#. Have pip for the Python that salt is installed into
+#. ``pip install spirofs`` (Adapt as necessary)
+#. Configure the salt master (see `docs <https://spirostack.com/spirofs/#configuration>`_\ )
+#. Restart the salt master
 
 Note: libsodium is used, but is pre-packaged in the binary wheels. If these are
-not used on your system for whatever reason, install either `libsodium-dev` (apt)
-or `libsodium-devel` (yum).
+not used on your system for whatever reason, install either ``libsodium-dev`` (apt)
+or ``libsodium-devel`` (yum).
+

@@ -20,6 +20,7 @@ of salt. For this to happen, the package:
    The Salt Project team is evaluating this index and investigating how to improve it in order to better serve the Salt Project Community
 ..
   Auto generated content starts here
+  <a href="https://icons8.com/icon/12116/error">Error icon by Icons8</a>
 
 ------------
 
@@ -30,16 +31,12 @@ A CLI front-end to a running salt-api system (:ref:`more info<salt-cumin>`)
 .. raw:: html
    :file: results/salt-cumin.html
 
-------------
-
 salt-cumulus
 ------------
 Small salt module providing cumulus.managed, to apply basic config on cumulus switches (:ref:`more info<salt-cumulus>`)
 
 .. raw:: html
    :file: results/salt-cumulus.html
-
-------------
 
 salt-nornir
 -----------
@@ -48,16 +45,12 @@ SALTSTACK Nornir Modules (:ref:`more info<salt-nornir>`)
 .. raw:: html
    :file: results/salt-nornir.html
 
-------------
-
 salt-os10
 ---------
 Small salt module providing os10.managed, to apply basic config on dell OS10 switches (:ref:`more info<salt-os10>`)
 
 .. raw:: html
    :file: results/salt-os10.html
-
-------------
 
 salt-sproxy
 -----------
@@ -66,16 +59,12 @@ Salt plugin for managing devices and applications, without running (Proxy) Minio
 .. raw:: html
    :file: results/salt-sproxy.html
 
-------------
-
 salt-ttp
 --------
 SALTSTACK TTP Modules (:ref:`more info<salt-ttp>`)
 
 .. raw:: html
    :file: results/salt-ttp.html
-
-------------
 
 saltext.vmware
 --------------
@@ -84,16 +73,12 @@ Salt Extension Modules for VMware (:ref:`more info<saltext.vmware>`)
 .. raw:: html
    :file: results/saltext.vmware.html
 
-------------
-
 spiro-deploy
 ------------
 Deployment script for SpiroFS (:ref:`more info<spiro-deploy>`)
 
 .. raw:: html
    :file: results/spiro-deploy.html
-
-------------
 
 spiro-network
 -------------
@@ -102,16 +87,12 @@ Salt modules for discovering and exposing minion's IP addresses (:ref:`more info
 .. raw:: html
    :file: results/spiro-network.html
 
-------------
-
 spirofs
 -------
 Salt Fileserver handling dynamic saltenvs and discrete deployments from CI/CD. (:ref:`more info<spirofs>`)
 
 .. raw:: html
    :file: results/spirofs.html
-
-------------
 
 .. |date| date::
 

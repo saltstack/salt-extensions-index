@@ -12,20 +12,24 @@ Compatibility
 
 Description
 -----------
+
 spiro-deploy
 ============
 
-A deployment tool for [SpiroFS](https://spirostack.com/spirofs/).
+A deployment tool for `SpiroFS <https://spirostack.com/spirofs/>`_.
 
-[Full documentation](https://spirostack.com/spirofs/deploy/)
+`Full documentation <https://spirostack.com/spirofs/deploy/>`_
 
 Installation
 ============
 
-* `pip install spiro-deploy`
-* [A container](https://gitlab.com/spirostack/spiro-deploy/container_registry)
+
+* ``pip install spiro-deploy``
+* `A container <https://gitlab.com/spirostack/spiro-deploy/container_registry>`_
 
 Usage Summary
 =============
-`spiro-deploy <project> <deployment>`, with the environment variables `SPIRO_URL`
-and `SPIRO_TOKEN`.
+
+``spiro-deploy <project> <deployment>``\ , with the environment variables ``SPIRO_URL``
+and ``SPIRO_TOKEN``.
+
