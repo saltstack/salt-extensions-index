@@ -34,7 +34,6 @@ KNOWN_SALT_EXTENSIONS = {
     "salt-nornir",
     "salt-os10",
     "salt-ttp",
-    "saltext.vmware",
 }
 KNOWN_NOT_SALT_EXTENSIONS = {
     "salt-extension",
@@ -194,9 +193,7 @@ async def download_pypi_simple_index(session, index_info, limiter, progress):
         progress.update()
 
 
-async def collect_packages_information(
-    session, index_info, limiter, progress, extensions
-):
+async def collect_packages_information(session, index_info, limiter, progress):
     try:
         async with trio.open_nursery() as nursery:
             for package in index_info["packages"]:
@@ -208,16 +205,16 @@ async def collect_packages_information(
                         index_info["packages"][package],
                         limiter,
                         progress,
-                        extensions,
                     )
     finally:
         # Store the known extensions hash into state to trigger a cache hit/miss/update
         # on the Github Actions CI pipeline
-        for extension in extensions:
+        extensions = {}
+        for path in PACKAGE_INFO_CACHE.glob("*.msgpack"):
             extension_data = msgpack.unpackb(
-                PACKAGE_INFO_CACHE.joinpath(f"{extension}.msgpack").read_bytes()
+                PACKAGE_INFO_CACHE.joinpath(f"{path.stem}.msgpack").read_bytes()
             )
-            extensions[extension].update(extension_data)
+            extensions[path.stem] = extension_data
         try:
             extensions_hash = functools.reduce(
                 lambda x, y: x ^ y,
@@ -231,16 +228,15 @@ async def collect_packages_information(
             progress.write(f"Failed to generate the known extensions hash: {exc}")
 
 
-async def download_package_info(
-    session, package, package_info, limiter, progress, extensions
-):
+async def download_package_info(session, package, package_info, limiter, progress):
     try:
+        package_info_cache = PACKAGE_INFO_CACHE / f"{package}.msgpack"
         if package_info.get("not-found"):
             message = f"Skipping {package} know to throw 404"
-            if DISABLE_TQDM:
-                progress.write(message)
-            else:
+            if not DISABLE_TQDM:
                 set_progress_description(progress, message)
+            if package_info_cache.exists():
+                package_info_cache.unlink()
             return
         url = f"https://pypi.org/pypi/{package}/json"
         headers = {}
@@ -265,6 +261,8 @@ async def download_package_info(
             progress.write(
                 f"Failed to query info for {package}. Status code: {req.status_code}"
             )
+            if package_info_cache.exists():
+                package_info_cache.unlink()
             return
 
         data = req.json()
@@ -272,6 +270,8 @@ async def download_package_info(
             progress.write(
                 "Failed to get JSON data back. Got:\n>>>>>>\n{req.text}\n<<<<<<"
             )
+            if package_info_cache.exists():
+                package_info_cache.unlink()
             return
         try:
             salt_extension = False
@@ -293,9 +293,10 @@ async def download_package_info(
                         f"{package} was detected as a salt-extension because of it's keywords"
                     )
             if salt_extension:
-                extensions[package] = {}
-                package_info_cache = PACKAGE_INFO_CACHE / f"{package}.msgpack"
                 package_info_cache.write_bytes(msgpack.packb(data))
+            else:
+                if package_info_cache.exists():
+                    package_info_cache.unlink()
         except Exception:
             progress.write(traceback.format_exc())
             progress.write("Data:\n{}".format(pprint.pformat(data)))
@@ -312,7 +313,6 @@ async def main():
         desc=f"{' ' * 60} :",
         disable=DISABLE_TQDM,
     )
-    extensions = {}
     with progress:
         with get_index_info(progress) as index_info:
             concurrency = 1500
@@ -331,16 +331,13 @@ async def main():
                         # We can't reset tqdm if it's disabled
                         progress.reset(total=len(index_info["packages"]))
                     await collect_packages_information(
-                        session, index_info, limiter, progress, extensions
+                        session, index_info, limiter, progress
                     )
         if cancel_scope.cancelled_caught:
             progress.write(f"The script timmed out after {timeout} minutes")
             return 1
         progress.write("Detected Salt Extensions:")
-        for path in PACKAGE_INFO_CACHE.glob("*.msgpack"):
-            if path.stem not in extensions:
-                path.unlink()
-                continue
+        for path in sorted(PACKAGE_INFO_CACHE.glob("*.msgpack")):
             progress.write(f" * {path.stem}")
         return 0
 
