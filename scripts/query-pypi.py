@@ -3,6 +3,7 @@ import functools
 import os
 import pathlib
 import pprint
+import subprocess
 import sys
 import tempfile
 import traceback
@@ -58,13 +59,51 @@ def get_index_info(progress):
     set_progress_description(progress, "Loading cache")
     if local_pypi_index_info.exists():
         index_info = msgpack.unpackb(local_pypi_index_info.read_bytes())
+        ret = subprocess.run(
+            ["sha256sum", __file__],
+            check=False,
+            shell=False,
+            stdout=subprocess.PIPE,
+            universal_newlines=True,
+        )
+        if ret.returncode != 0:
+            progress.write(
+                f"Failed to get the sha256sum of {__file__}. Invalidating the packages ETAG cache."
+            )
+            for data in index_info["packages"].values():
+                data.pop("etag", None)
+        else:
+            sha256sum = ret.stdout.split()[0].strip()
+            stored_sha256sum = index_info.get("sha256sum")
+            if sha256sum != stored_sha256sum:
+                progress.write(
+                    f"This script's sha256sum({sha256sum}) does not match {stored_sha256sum}. "
+                    "Invalidating the packages ETAG cache."
+                )
+                for data in index_info["packages"].values():
+                    data.pop("etag", None)
     else:
         index_info = {"packages": {}}
+
     progress.update()
     try:
         yield index_info
     finally:
         set_progress_description(progress, "Saving cache")
+        ret = subprocess.run(
+            ["sha256sum", __file__],
+            check=False,
+            shell=False,
+            stdout=subprocess.PIPE,
+            universal_newlines=True,
+        )
+        if ret.returncode != 0:
+            progress.write(
+                f"Failed to get the sha256sum of {__file__}. Invalidating the pypi cache."
+            )
+        else:
+            sha256sum = ret.stdout.split()[0].strip()
+            index_info["sha256sum"] = sha256sum
         local_pypi_index_info.write_bytes(msgpack.packb(index_info))
         progress.update()
 
@@ -158,8 +197,6 @@ async def download_pypi_simple_index(session, index_info, limiter, progress):
 async def collect_packages_information(
     session, index_info, limiter, progress, extensions
 ):
-    processed = 0
-    muted_processed_iterations = 1500
     try:
         async with trio.open_nursery() as nursery:
             for package in index_info["packages"]:
@@ -173,17 +210,7 @@ async def collect_packages_information(
                         progress,
                         extensions,
                     )
-                if DISABLE_TQDM:
-                    processed += 1
-                    muted_processed_iterations -= 1
-                    if not muted_processed_iterations:
-                        muted_processed_iterations = 1500
-                        progress.write(
-                            f"Processed {processed} of {len(index_info['packages'])}"
-                        )
     finally:
-        if DISABLE_TQDM:
-            progress.write(f"Processed {processed} of {len(index_info['packages'])}")
         # Store the known extensions hash into state to trigger a cache hit/miss/update
         # on the Github Actions CI pipeline
         for extension in extensions:
@@ -209,6 +236,11 @@ async def download_package_info(
 ):
     try:
         if package_info.get("not-found"):
+            message = f"Skipping {package} know to throw 404"
+            if DISABLE_TQDM:
+                progress.write(message)
+            else:
+                set_progress_description(progress, message)
             return
         url = f"https://pypi.org/pypi/{package}/json"
         headers = {}
@@ -283,7 +315,7 @@ async def main():
     extensions = {}
     with progress:
         with get_index_info(progress) as index_info:
-            concurrency = 1000
+            concurrency = 1500
             limiter = trio.CapacityLimiter(concurrency)
             with trio.move_on_after(timeout) as cancel_scope:
                 limits = httpx.Limits(
