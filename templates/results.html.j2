@@ -1,29 +1,41 @@
-<table>
-  <thead>
-    <tr>
-      <th>Salt Version</th>
-      {%- for osname in osnames %}
-      <th colspan="{{ python_versions|length }}">{{ osname }}</th>
-      {%- endfor %}
-    </tr>
-  </thead>
-  <tbody>
-  {%- for salt_version in results %}
-    <tr>
-      <td rowspan="2">{{ salt_version }}</td>
-    {%- for os in results[salt_version] %}
-      {%- for python_version in results[salt_version][os] %}
-      <td>{{ python_version }}</td>
-      {%- endfor %}
-    {%- endfor %}
-    </tr>
-    <tr>
+<div class="table-wrapper">
+  <table class="docutils align-center">
+    <thead>
+      <tr>
+        <th class="head">Salt Version</th>
+        {%- for osname in osnames %}
+        <th colspan="{{ python_versions|length }}">{{ osname }}</th>
+        {%- endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    {%- for salt_version in results %}
+      <tr>
+        <td rowspan="2">{{ salt_version }}</td>
       {%- for os in results[salt_version] %}
-        {%- for python_version, info in results[salt_version][os].items() %}
-      <td><a href="{{ info.url }}">{{ info.status }}</a></td>
+        {%- for python_version in results[salt_version][os] %}
+        <td class="results">{{ python_version }}</td>
         {%- endfor %}
       {%- endfor %}
-    </tr>
-  {%- endfor %}
-  </tbody>
-</table>
+      </tr>
+      <tr>
+        {%- for os in results[salt_version] %}
+          {%- for python_version, info in results[salt_version][os].items() %}
+        <td class="results">
+          <a alt="{{ info.status }}" href="{{ info.url }}">
+            {%- if info.status == "not-tested" %}
+            <img src="https://img.icons8.com/officel/64/000000/error.png"/>
+            {%- elif info.status == "failure" %}
+            <img src="https://img.icons8.com/color/64/000000/error--v1.png"/>
+            {%- elif info.status == "sucess" %}
+            <img src="https://img.icons8.com/color/64/000000/ok--v1.png"/>
+            {%- endif %}
+          </a>
+        </td>
+          {%- endfor %}
+        {%- endfor %}
+      </tr>
+    {%- endfor %}
+    </tbody>
+  </table>
+</div>

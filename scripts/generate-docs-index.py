@@ -128,7 +128,6 @@ def main():
                 f"{title}\n{header}\n{summary} (:ref:`more info<{extension}>`)\n\n"
             )
             contents += f".. raw:: html\n   :file: {html_table_rel_path}\n\n"
-            contents += "------------\n\n"
             extension_contents = (
                 ":orphan:\n\n"
                 f".. _{extension}:\n\n{title}\n{header.replace('-', '=')}\n\n"

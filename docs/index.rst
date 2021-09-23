@@ -20,5 +20,6 @@ of salt. For this to happen, the package:
    The Salt Project team is evaluating this index and investigating how to improve it in order to better serve the Salt Project Community
 ..
   Auto generated content starts here
+  <a href="https://icons8.com/icon/12116/error">Error icon by Icons8</a>
 
 ------------
