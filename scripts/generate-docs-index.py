@@ -5,6 +5,7 @@ import pprint
 import sys
 import traceback
 
+import m2r
 import msgpack
 from jinja2 import Template
 from tqdm import tqdm
@@ -42,6 +43,8 @@ def collect_extensions_info():
         extension_data = msgpack.unpackb(path.read_bytes())
         extension = extension_data["info"]["name"]
         description = extension_data["info"]["description"].rstrip()
+        if "markdown" in extension_data["info"]["description_content_type"]:
+            description = m2r.convert(description)
         summary = extension_data["info"]["summary"].strip()
         extensions[extension] = {
             "summary": summary,

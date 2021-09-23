@@ -2,3 +2,4 @@ furo
 sphinx
 sphinx-prompt
 sphinxcontrib-spelling
+m2r
