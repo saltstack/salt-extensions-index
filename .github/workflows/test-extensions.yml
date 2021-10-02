@@ -27,9 +27,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     concurrency:
       group: salt-cumin-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
@@ -113,9 +113,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -196,9 +196,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -285,9 +285,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     concurrency:
       group: salt-cumulus-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
@@ -371,9 +371,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -454,9 +454,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -543,9 +543,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     concurrency:
       group: salt-nornir-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
@@ -629,9 +629,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -712,9 +712,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -801,9 +801,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     concurrency:
       group: salt-os10-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
@@ -887,9 +887,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -970,9 +970,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -1059,9 +1059,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     concurrency:
       group: salt-sproxy-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
@@ -1145,9 +1145,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -1228,9 +1228,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -1317,9 +1317,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     concurrency:
       group: salt-ttp-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
@@ -1403,9 +1403,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -1486,9 +1486,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -1575,9 +1575,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     concurrency:
       group: saltext-vmware-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
@@ -1661,9 +1661,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -1744,9 +1744,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -1833,9 +1833,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     concurrency:
       group: spiro-deploy-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
@@ -1919,9 +1919,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -2002,9 +2002,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -2091,9 +2091,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     concurrency:
       group: spiro-network-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
@@ -2177,9 +2177,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -2260,9 +2260,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -2349,9 +2349,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     concurrency:
       group: spirofs-linux-${{ matrix.python-version }}-${{ matrix.salt-version }}
@@ -2435,9 +2435,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
@@ -2518,9 +2518,9 @@ jobs:
           - 3.9
         salt-version:
           - master
+          - v3004rc1
           - v3003.3
           - v3002.7
-          - v3001.8
 
     steps:
       - name: Define Results Directory
