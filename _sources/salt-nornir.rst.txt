@@ -13,10 +13,32 @@ Compatibility
 Description
 -----------
 
-SALTSTACK Nornir
-================
 
-Repository to store Nornir based SALTSTACK modules:
+.. image:: https://pepy.tech/badge/salt-nornir
+   :target: https://pepy.tech/project/salt-nornir
+   :alt: Downloads
+
+
+.. image:: https://img.shields.io/pypi/pyversions/salt-nornir.svg
+   :target: https://pypi.python.org/pypi/salt-nornir/
+   :alt: PyPI versions
+
+
+.. image:: https://readthedocs.org/projects/salt-nornir/badge/?version=latest
+   :target: http://salt-nornir.readthedocs.io/?badge=latest
+   :alt: Documentation status
+
+
+
+.. image:: docs/source/_images/SaltNornirLogo.png
+   :target: docs/source/_images/SaltNornirLogo.png
+   :alt: logo
+
+
+Salt Nornir
+===========
+
+Repository to store Nornir based SaltStack modules:
 
 
 * salt-nornir proxy minion module 
@@ -24,14 +46,23 @@ Repository to store Nornir based SALTSTACK modules:
 * salt-nornir state module
 * salt-nornir runner module
 
-Nornir proxy minion helps to interact with network (and not so) devices at scale, 
-reference `documentation <https://salt-nornir.readthedocs.io/en/latest/index.html>`_ 
+Nornir Proxy Minion helps to manage network devices at scale, reference 
+`documentation <https://salt-nornir.readthedocs.io/en/latest/index.html>`_ 
 for details.
+
+Architecture
+============
+
+Python and Plugins
+
+
+.. image:: docs/source/_images/Nornir_proxy_minion_architecture_v2.png
+   :target: docs/source/_images/Nornir_proxy_minion_architecture_v2.png
+   :alt: architecture
+
 
 Contributing
 ============
 
 Issues, bug reports and feature requests are welcomed.
-
-`buy <https://paypal.me/dmulyalin>`_ Author a coffee
 
