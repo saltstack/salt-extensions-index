@@ -565,7 +565,7 @@ jobs:
         run: |
           mkdir pkg
           cd pkg
-          curl -Ls https://files.pythonhosted.org/packages/ce/23/8cdb026b9fe57c657d16fa9fd267c5b4c97db98432023da9e8cb2900dccf/salt_nornir-0.6.0.tar.gz | tar zxvf - --strip 1
+          curl -Ls https://files.pythonhosted.org/packages/76/d9/6f3d05a14cd14b280a9c1615befef414b5e82ef23696dbb0480f70a575d0/salt_nornir-0.6.1.tar.gz | tar zxvf - --strip 1
           ls -lah
 
       - name: Set Test Run Environment Variable
@@ -648,7 +648,7 @@ jobs:
         run: |
           mkdir pkg
           cd pkg
-          curl -Ls https://files.pythonhosted.org/packages/ce/23/8cdb026b9fe57c657d16fa9fd267c5b4c97db98432023da9e8cb2900dccf/salt_nornir-0.6.0.tar.gz | tar zxvf - --strip 1
+          curl -Ls https://files.pythonhosted.org/packages/76/d9/6f3d05a14cd14b280a9c1615befef414b5e82ef23696dbb0480f70a575d0/salt_nornir-0.6.1.tar.gz | tar zxvf - --strip 1
           ls -lah
 
       - name: Set Test Run Environment Variable
@@ -733,7 +733,7 @@ jobs:
         run: |
           mkdir pkg
           cd pkg
-          curl -Ls https://files.pythonhosted.org/packages/ce/23/8cdb026b9fe57c657d16fa9fd267c5b4c97db98432023da9e8cb2900dccf/salt_nornir-0.6.0.tar.gz | tar zxvf - --strip 1
+          curl -Ls https://files.pythonhosted.org/packages/76/d9/6f3d05a14cd14b280a9c1615befef414b5e82ef23696dbb0480f70a575d0/salt_nornir-0.6.1.tar.gz | tar zxvf - --strip 1
           ls -lah
 
       - name: Set Test Run Environment Variable
