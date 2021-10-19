@@ -27,7 +27,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -113,7 +113,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -196,7 +196,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -285,7 +285,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -371,7 +371,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -454,7 +454,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -543,7 +543,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -629,7 +629,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -712,7 +712,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -801,7 +801,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -887,7 +887,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -970,7 +970,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -1059,7 +1059,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -1145,7 +1145,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -1228,7 +1228,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -1317,7 +1317,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -1403,7 +1403,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -1486,7 +1486,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -1575,7 +1575,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -1661,7 +1661,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -1744,7 +1744,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -1833,7 +1833,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -1919,7 +1919,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -2002,7 +2002,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -2091,7 +2091,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -2177,7 +2177,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -2260,7 +2260,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -2349,7 +2349,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -2435,7 +2435,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
@@ -2518,7 +2518,7 @@ jobs:
           - 3.9
         salt-version:
           - master
-          - v3004rc1
+          - v3004
           - v3003.3
           - v3002.7
 
