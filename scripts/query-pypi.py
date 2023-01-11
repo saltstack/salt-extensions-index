@@ -299,13 +299,13 @@ async def download_package_info(session, package, package_info, limiter, progres
                     package_info_cache.unlink()
         except Exception:
             progress.write(traceback.format_exc())
-            progress.write("Data:\n{}".format(pprint.pformat(data)))
+            progress.write(f"Data:\n{pprint.pformat(data)}")
     finally:
         progress.update()
 
 
 async def main():
-    timeout = 120 * 60  # move on after 2 hours
+    timeout = 240 * 60  # move on after 4 hours
     progress = tqdm(
         total=sys.maxsize,
         unit="pkg",
