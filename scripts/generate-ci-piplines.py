@@ -45,7 +45,10 @@ def get_lastest_major_releases(progress, count=3):
     for tag in repo.get_tags():
         if len(releases) == count:
             break
-        version = packaging.version.parse(tag.name)
+        try:
+            version = packaging.version.parse(tag.name)
+        except packaging.version.InvalidVersion:
+            continue
         try:
             if version.major < 3000:
                 # Don't test versions of salt older than 3000
@@ -113,7 +116,7 @@ def main():
         return 1
     common_context = {
         "salt_versions": salt_versions,
-        "python_versions": ["3.5", "3.6", "3.7", "3.8", "3.9"],
+        "python_versions": ["3.6", "3.7", "3.8", "3.9", "3.10"],
     }
     with progress:
         needs = []
