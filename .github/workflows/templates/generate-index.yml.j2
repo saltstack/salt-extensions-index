@@ -11,10 +11,10 @@
 {%- raw %}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.7
 
@@ -63,7 +63,7 @@
           cp -Rp _build/html extensions-index
 
       - name: Upload Generated HTML Index
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: extensions-index-html
           path: docs/_build/html
@@ -74,7 +74,7 @@
       - Generate-Extensions-Index
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: gh-pages
           persist-credentials: false

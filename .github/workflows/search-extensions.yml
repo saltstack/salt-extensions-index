@@ -17,13 +17,13 @@ jobs:
       cancel-in-progress: true
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.7
 
@@ -31,7 +31,7 @@ jobs:
         run: echo "PY=$(python --version --version | sha256sum | cut -d' ' -f1)" >> $GITHUB_ENV
 
       - name: Restore PIP cache
-        uses: pat-s/always-upload-cache@v2.1.3
+        uses: pat-s/always-upload-cache@v3
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}|pip-builds|${{ env.PY }}|${{ hashFiles('requirements/*.txt') }}
@@ -71,14 +71,14 @@ jobs:
 
       - name: Upload Cache Artifact
         if: ${{ always() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: salt-extensions-cache
           path: .cache
 
       - name: Commit Extension Tests Workflow Changes
         if: github.repository == 'saltstack/salt-extensions-index'
-        uses: actions-js/push@v1.2
+        uses: actions-js/push@v1.4
         with:
           branch: ${{ github.ref }}
           message: Update Extensions Test Workflow

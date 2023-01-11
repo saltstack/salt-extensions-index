@@ -29,7 +29,7 @@
           echo "RESULTS_DIR=.cache/${{ matrix.salt-version }}/${{ runner.os }}/${{ matrix.python-version }}" >> $GITHUB_ENV
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
       {%- endraw %}
@@ -86,7 +86,7 @@
         {%- raw %}
         if: ${{ always() }}
         {%- endraw %}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: {{ package }}
           path: .cache
