@@ -11,6 +11,7 @@ on:
 jobs:
   Search-PyPi:
     runs-on: ubuntu-latest
+    timeout-minutes: 240
 
     concurrency:
       group: search-pypi-${{ github.base_ref || 'main' }}
