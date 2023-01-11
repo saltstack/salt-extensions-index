@@ -11,7 +11,7 @@
       matrix:
         python-version:
           {%- for python_version in python_versions %}
-          - {{ python_version}}
+          - "{{ python_version}}"
           {%- endfor %}
         salt-version:
           - master
