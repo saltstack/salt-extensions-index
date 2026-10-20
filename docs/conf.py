@@ -59,13 +59,15 @@ rst_prolog = """
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    "furo",
+    "myst_parser",
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
     "sphinx.ext.coverage",
     "sphinxcontrib.spelling",
 ]
+
+source_suffix = {".rst": "restructuredtext", ".md": "markdown"}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = [os.path.join(docs_basepath, "_templates")]
@@ -75,6 +77,7 @@ templates_path = [os.path.join(docs_basepath, "_templates")]
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = [
     "_build",
+    "extensions/**/docs/ref/**",
     "Thumbs.db",
     ".DS_Store",
     ".vscode",
@@ -85,7 +88,7 @@ exclude_patterns = [
     "sitevars.rst",
 ]
 
-autosummary_generate = True
+autosummary_generate = False
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -99,6 +102,7 @@ html_title = project
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
+html_js_files = ["extension-index.js"]
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.

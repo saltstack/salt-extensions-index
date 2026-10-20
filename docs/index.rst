@@ -1,25 +1,348 @@
-The Salt extensions listed in this index are collected by searching `PyPi`_ for packages
-starting with ``salt-ext-``, ``saltext-`` or ``saltext.`` in their name, or, preferably,
-by having ``salt-extension`` in the package's `keywords`_ metadata entry:
+Salt Extensions
+===============
 
-An effort is made to automatically test these packages against the latest 3 major releases
-of salt. For this to happen, the package:
+A catalog of public Salt extension repositories. Documentation is collected nightly from each repository's latest release. If a repository has no published GitHub release, its highest version tag is used. Repositories without tags are listed without imported documentation. The collected source files are rendered with this site's Sphinx configuration; extension-specific configuration code is not executed.
 
-* Must use `nox`_ to run it's test suite
-* Must provide a source distribution which includes a ``noxfile.py``
-* The ``noxfile.py`` must implement a ``tests-3`` session
-* The ``noxfile.py`` must check the environment for a ``SALT_REQUIREMENT`` keyword which should be installed into the `nox`_ session. (Example ``SALT_REQUIREMENT=salt==3004.0``)
+Last generated: 2026-10-20 13:27 UTC
 
-.. _PyPi: https://pypi.org/
-.. _keywords: https://www.python.org/dev/peps/pep-0314/#keywords-optional
-.. _nox: https://github.com/theacodes/nox
+.. raw:: html
 
-.. warning::
+   <label for="extension-filter">Filter extensions</label>
+   <input id="extension-filter" type="search" placeholder="Name or description" autocomplete="off">
+   <span id="extension-count" aria-live="polite"></span>
 
-   This extensions listing is still in it's **proof of concept** phase.
-   The Salt Project team is evaluating this index and investigating how to improve it in order to better serve the Salt Project Community
-..
-  Auto generated content starts here
-  <a href="https://icons8.com/icon/12116/error">Error icon by Icons8</a>
+.. list-table::
+   :class: extension-index
+   :header-rows: 1
+   :widths: 18 40 15 14 15
 
-------------
+   * - Extension
+     - Description
+     - Latest release
+     - Released
+     - Documentation
+   * - `salt-describe <https://github.com/salt-extensions/salt-describe>`_
+     - Salt Describe is a Salt Extension used to automate the generation of infrastructure as code files using Salt to query target machines.
+     - No release tag
+     - —
+     - No published documentation
+   * - `saltext-acme <https://github.com/salt-extensions/saltext-acme>`_
+     - Salt Extension for interacting with Certbot
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-acme/tree/v1.0.0>`_
+     - 2024-09-28
+     - :doc:`Browse docs <extensions/saltext-acme/index>`
+   * - `saltext-alpine <https://github.com/salt-extensions/saltext-alpine>`_
+     - First class support for Alpine Linux
+     - `v1.0.3 <https://github.com/salt-extensions/saltext-alpine/tree/v1.0.3>`_
+     - 2026-10-05
+     - :doc:`Browse docs <extensions/saltext-alpine/index>`
+   * - `saltext-apache <https://github.com/salt-extensions/saltext-apache>`_
+     - Salt Extension for interacting with Apache
+     - `v1.0.1 <https://github.com/salt-extensions/saltext-apache/tree/v1.0.1>`_
+     - 2025-12-08
+     - :doc:`Browse docs <extensions/saltext-apache/index>`
+   * - `saltext-apcups <https://github.com/salt-extensions/saltext-apcups>`_
+     - Salt Extension for interacting with APC UPS (apcupsd)
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-apcups/tree/v1.0.0>`_
+     - 2024-09-28
+     - :doc:`Browse docs <extensions/saltext-apcups/index>`
+   * - `saltext-azurerm <https://github.com/salt-extensions/saltext-azurerm>`_
+     - Salt Extension Modules for Azure Resource Manager
+     - `v4.4.1 <https://github.com/salt-extensions/saltext-azurerm/tree/v4.4.1>`_
+     - 2026-07-02
+     - :doc:`Browse docs <extensions/saltext-azurerm/index>`
+   * - `saltext-bmc <https://github.com/salt-extensions/saltext-bmc>`_
+     - Salt extension for out-of-band server management via Redfish (with IPMI fallback): power, boot-device override, inventory, and sensors.
+     - `v0.0.1 <https://github.com/salt-extensions/saltext-bmc/tree/v0.0.1>`_
+     - 2026-06-09
+     - :doc:`Browse docs <extensions/saltext-bmc/index>`
+   * - `saltext-boto3 <https://github.com/salt-extensions/saltext-boto3>`_
+     - No description provided.
+     - `v1.2.0 <https://github.com/salt-extensions/saltext-boto3/tree/v1.2.0>`_
+     - 2026-09-29
+     - :doc:`Browse docs <extensions/saltext-boto3/index>`
+   * - `saltext-btrfs <https://github.com/salt-extensions/saltext-btrfs>`_
+     - No description provided.
+     - `v0.1.0 <https://github.com/salt-extensions/saltext-btrfs/tree/v0.1.0>`_
+     - 2026-02-04
+     - :doc:`Browse docs <extensions/saltext-btrfs/index>`
+   * - `saltext-cassandra <https://github.com/salt-extensions/saltext-cassandra>`_
+     - No description provided.
+     - `v0.0.1 <https://github.com/salt-extensions/saltext-cassandra/tree/v0.0.1>`_
+     - 2024-12-13
+     - :doc:`Browse docs <extensions/saltext-cassandra/index>`
+   * - `saltext-cloud <https://github.com/salt-extensions/saltext-cloud>`_
+     - No description provided.
+     - No release tag
+     - —
+     - No published documentation
+   * - `saltext-consul <https://github.com/salt-extensions/saltext-consul>`_
+     - Salt Extension for interacting with HashiCorp Consul
+     - `v1.1.0 <https://github.com/salt-extensions/saltext-consul/tree/v1.1.0>`_
+     - 2024-02-15
+     - :doc:`Browse docs <extensions/saltext-consul/index>`
+   * - `saltext-convert <https://github.com/salt-extensions/saltext-convert>`_
+     - Salt extension runner to convert configuration management from other tools to Salt states
+     - No release tag
+     - —
+     - No published documentation
+   * - `saltext-dell <https://github.com/salt-extensions/saltext-dell>`_
+     - No description provided.
+     - No release tag
+     - —
+     - No published documentation
+   * - `saltext-dockermod <https://github.com/salt-extensions/saltext-dockermod>`_
+     - No description provided.
+     - `v0.1.3 <https://github.com/salt-extensions/saltext-dockermod/tree/v0.1.3>`_
+     - 2026-09-21
+     - :doc:`Browse docs <extensions/saltext-dockermod/index>`
+   * - `saltext-elasticsearch <https://github.com/salt-extensions/saltext-elasticsearch>`_
+     - Salt Extension for interacting with Elasticsearch
+     - `v1.2.3 <https://github.com/salt-extensions/saltext-elasticsearch/tree/v1.2.3>`_
+     - 2026-02-16
+     - :doc:`Browse docs <extensions/saltext-elasticsearch/index>`
+   * - `saltext-freebsd <https://github.com/salt-extensions/saltext-freebsd>`_
+     - Salt Extension for FreeBSD-specific commands
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-freebsd/tree/v1.0.0>`_
+     - 2026-09-02
+     - :doc:`Browse docs <extensions/saltext-freebsd/index>`
+   * - `saltext-freezer <https://github.com/salt-extensions/saltext-freezer>`_
+     - No description provided.
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-freezer/tree/v1.0.0>`_
+     - 2024-01-15
+     - :doc:`Browse docs <extensions/saltext-freezer/index>`
+   * - `saltext-gentoo <https://github.com/salt-extensions/saltext-gentoo>`_
+     - No description provided.
+     - No release tag
+     - —
+     - No published documentation
+   * - `saltext-github <https://github.com/salt-extensions/saltext-github>`_
+     - Salt Extension for interacting with GitHub
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-github/tree/v1.0.0>`_
+     - 2024-08-13
+     - :doc:`Browse docs <extensions/saltext-github/index>`
+   * - `saltext-grafana <https://github.com/salt-extensions/saltext-grafana>`_
+     - Salt Extension for interacting with Grafana
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-grafana/tree/v1.0.0>`_
+     - 2024-08-19
+     - :doc:`Browse docs <extensions/saltext-grafana/index>`
+   * - `saltext-haproxy <https://github.com/salt-extensions/saltext-haproxy>`_
+     - Salt Extension for interacting with HAProxy
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-haproxy/tree/v1.0.0>`_
+     - 2024-08-13
+     - :doc:`Browse docs <extensions/saltext-haproxy/index>`
+   * - `saltext-helm <https://github.com/salt-extensions/saltext-helm>`_
+     - Salt Extension for interacting with Helm
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-helm/tree/v1.0.0>`_
+     - 2024-08-13
+     - :doc:`Browse docs <extensions/saltext-helm/index>`
+   * - `saltext-incus <https://github.com/salt-extensions/saltext-incus>`_
+     - Manage your Incus deployments through Salt
+     - `v1.0.1 <https://github.com/salt-extensions/saltext-incus/tree/v1.0.1>`_
+     - 2026-06-20
+     - :doc:`Browse docs <extensions/saltext-incus/index>`
+   * - `saltext-influxdb <https://github.com/salt-extensions/saltext-influxdb>`_
+     - Salt Extension for interacting with InfluxDB
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-influxdb/tree/v1.0.0>`_
+     - 2024-09-28
+     - :doc:`Browse docs <extensions/saltext-influxdb/index>`
+   * - `saltext-kubernetes <https://github.com/salt-extensions/saltext-kubernetes>`_
+     - Salt Extension for interacting with Kubernetes
+     - `v3.0.0 <https://github.com/salt-extensions/saltext-kubernetes/tree/v3.0.0>`_
+     - 2026-09-15
+     - :doc:`Browse docs <extensions/saltext-kubernetes/index>`
+   * - `saltext-ldap <https://github.com/salt-extensions/saltext-ldap>`_
+     - Salt extension for ldap
+     - `v0.1.0 <https://github.com/salt-extensions/saltext-ldap/tree/v0.1.0>`_
+     - 2026-05-18
+     - :doc:`Browse docs <extensions/saltext-ldap/index>`
+   * - `saltext-libvirt-events <https://github.com/salt-extensions/saltext-libvirt-events>`_
+     - No description provided.
+     - `v0.1.0 <https://github.com/salt-extensions/saltext-libvirt-events/tree/v0.1.0>`_
+     - 2026-03-05
+     - :doc:`Browse docs <extensions/saltext-libvirt-events/index>`
+   * - `saltext-mattermost <https://github.com/salt-extensions/saltext-mattermost>`_
+     - Salt Extension for interacting with Mattermost
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-mattermost/tree/v1.0.0>`_
+     - 2024-09-26
+     - :doc:`Browse docs <extensions/saltext-mattermost/index>`
+   * - `saltext-mongodb <https://github.com/salt-extensions/saltext-mongodb>`_
+     - Salt Extension for interacting with MongoDB
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-mongodb/tree/v1.0.0>`_
+     - 2024-08-13
+     - :doc:`Browse docs <extensions/saltext-mongodb/index>`
+   * - `saltext-moosefs <https://github.com/salt-extensions/saltext-moosefs>`_
+     - Module for gathering and managing information about MooseFS
+     - No release tag
+     - —
+     - No published documentation
+   * - `saltext-mysql <https://github.com/salt-extensions/saltext-mysql>`_
+     - Salt Extension for interacting with MySQL
+     - `v1.1.0 <https://github.com/salt-extensions/saltext-mysql/tree/v1.1.0>`_
+     - 2025-02-07
+     - :doc:`Browse docs <extensions/saltext-mysql/index>`
+   * - `saltext-namecheap <https://github.com/salt-extensions/saltext-namecheap>`_
+     - Salt Extension for interacting with Namecheap
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-namecheap/tree/v1.0.0>`_
+     - 2024-08-19
+     - :doc:`Browse docs <extensions/saltext-namecheap/index>`
+   * - `saltext-nebula <https://github.com/salt-extensions/saltext-nebula>`_
+     - A SaltStack extension module that allows you to fully manage the lifecycle of your nebula mesh infrastructure.
+     - `v1.2.0 <https://github.com/salt-extensions/saltext-nebula/tree/v1.2.0>`_
+     - 2026-09-08
+     - :doc:`Browse docs <extensions/saltext-nebula/index>`
+   * - `saltext-netbox <https://github.com/salt-extensions/saltext-netbox>`_
+     - No description provided.
+     - No release tag
+     - —
+     - No published documentation
+   * - `saltext-nix <https://github.com/salt-extensions/saltext-nix>`_
+     - Salt Extension for interacting with Nix
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-nix/tree/v1.0.0>`_
+     - 2024-09-28
+     - :doc:`Browse docs <extensions/saltext-nix/index>`
+   * - `saltext-openrc <https://github.com/salt-extensions/saltext-openrc>`_
+     - Salt Extension for interacting with the OpenRC init system
+     - `v0.2.0 <https://github.com/salt-extensions/saltext-openrc/tree/v0.2.0>`_
+     - 2026-10-05
+     - :doc:`Browse docs <extensions/saltext-openrc/index>`
+   * - `saltext-openscap <https://github.com/salt-extensions/saltext-openscap>`_
+     - No description provided.
+     - `v0.1.0 <https://github.com/salt-extensions/saltext-openscap/tree/v0.1.0>`_
+     - 2026-03-05
+     - :doc:`Browse docs <extensions/saltext-openscap/index>`
+   * - `saltext-pagerduty <https://github.com/salt-extensions/saltext-pagerduty>`_
+     - Salt Extension for interacting with PagerDuty
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-pagerduty/tree/v1.0.0>`_
+     - 2024-08-19
+     - :doc:`Browse docs <extensions/saltext-pagerduty/index>`
+   * - `saltext-prometheus <https://github.com/salt-extensions/saltext-prometheus>`_
+     - Salt Extension Modules for Prometheus
+     - `v2.2.0 <https://github.com/salt-extensions/saltext-prometheus/tree/v2.2.0>`_
+     - 2026-01-25
+     - :doc:`Browse docs <extensions/saltext-prometheus/index>`
+   * - `saltext-proxmox <https://github.com/salt-extensions/saltext-proxmox>`_
+     - Salt Extension modules for Proxmox VE
+     - `v2.0.1 <https://github.com/salt-extensions/saltext-proxmox/tree/v2.0.1>`_
+     - 2024-11-07
+     - :doc:`Browse docs <extensions/saltext-proxmox/index>`
+   * - `saltext-pushover <https://github.com/salt-extensions/saltext-pushover>`_
+     - Salt Extension for interacting with Pushover
+     - `v2.0.0 <https://github.com/salt-extensions/saltext-pushover/tree/v2.0.0>`_
+     - 2026-03-17
+     - :doc:`Browse docs <extensions/saltext-pushover/index>`
+   * - `saltext-rebootmgr <https://github.com/salt-extensions/saltext-rebootmgr>`_
+     - No description provided.
+     - `v0.1.0 <https://github.com/salt-extensions/saltext-rebootmgr/tree/v0.1.0>`_
+     - 2026-03-05
+     - :doc:`Browse docs <extensions/saltext-rebootmgr/index>`
+   * - `saltext-redis <https://github.com/salt-extensions/saltext-redis>`_
+     - Salt Extension for interacting with Redis
+     - `v1.0.2 <https://github.com/salt-extensions/saltext-redis/tree/v1.0.2>`_
+     - 2025-02-14
+     - :doc:`Browse docs <extensions/saltext-redis/index>`
+   * - `saltext-restconf <https://github.com/salt-extensions/saltext-restconf>`_
+     - Salt Extension for interacting with Restconf
+     - No release tag
+     - —
+     - No published documentation
+   * - `saltext-rsync <https://github.com/salt-extensions/saltext-rsync>`_
+     - No description provided.
+     - No release tag
+     - —
+     - No published documentation
+   * - `saltext-s3fs <https://github.com/salt-extensions/saltext-s3fs>`_
+     - Salt extension for S3FS
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-s3fs/tree/v1.0.0>`_
+     - 2025-09-18
+     - :doc:`Browse docs <extensions/saltext-s3fs/index>`
+   * - `saltext-servicenow <https://github.com/salt-extensions/saltext-servicenow>`_
+     - Salt Extension for interacting with ServiceNow
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-servicenow/tree/v1.0.0>`_
+     - 2024-08-19
+     - :doc:`Browse docs <extensions/saltext-servicenow/index>`
+   * - `saltext-snap <https://github.com/salt-extensions/saltext-snap>`_
+     - Salt Extension for interacting with Snap
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-snap/tree/v1.0.0>`_
+     - 2024-09-26
+     - :doc:`Browse docs <extensions/saltext-snap/index>`
+   * - `saltext-snapper-state <https://github.com/salt-extensions/saltext-snapper-state>`_
+     - No description provided.
+     - `v0.1.0 <https://github.com/salt-extensions/saltext-snapper-state/tree/v0.1.0>`_
+     - 2026-03-05
+     - :doc:`Browse docs <extensions/saltext-snapper-state/index>`
+   * - `saltext-splunk <https://github.com/salt-extensions/saltext-splunk>`_
+     - Salt Extension for interacting with Splunk
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-splunk/tree/v1.0.0>`_
+     - 2024-09-26
+     - :doc:`Browse docs <extensions/saltext-splunk/index>`
+   * - `saltext-sqs-events <https://github.com/salt-extensions/saltext-sqs-events>`_
+     - No description provided.
+     - `v1.0.4 <https://github.com/salt-extensions/saltext-sqs-events/tree/v1.0.4>`_
+     - 2026-03-02
+     - :doc:`Browse docs <extensions/saltext-sqs-events/index>`
+   * - `saltext-stalekey <https://github.com/salt-extensions/saltext-stalekey>`_
+     - Salt engine that detects inactive minions and removes their keys
+     - `v1.0.2 <https://github.com/salt-extensions/saltext-stalekey/tree/v1.0.2>`_
+     - 2024-08-13
+     - :doc:`Browse docs <extensions/saltext-stalekey/index>`
+   * - `saltext-suse-ip <https://github.com/salt-extensions/saltext-suse-ip>`_
+     - No description provided.
+     - `v0.1.0 <https://github.com/salt-extensions/saltext-suse-ip/tree/v0.1.0>`_
+     - 2026-03-05
+     - :doc:`Browse docs <extensions/saltext-suse-ip/index>`
+   * - `saltext-telegram <https://github.com/salt-extensions/saltext-telegram>`_
+     - Salt Extension for interacting with Telegram
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-telegram/tree/v1.0.0>`_
+     - 2024-10-05
+     - :doc:`Browse docs <extensions/saltext-telegram/index>`
+   * - `saltext-transactional-update <https://github.com/salt-extensions/saltext-transactional-update>`_
+     - No description provided.
+     - `v0.1.0 <https://github.com/salt-extensions/saltext-transactional-update/tree/v0.1.0>`_
+     - 2026-03-06
+     - :doc:`Browse docs <extensions/saltext-transactional-update/index>`
+   * - `saltext-tsl <https://github.com/salt-extensions/saltext-tsl>`_
+     - No description provided.
+     - No release tag
+     - —
+     - No published documentation
+   * - `saltext-vault <https://github.com/salt-extensions/saltext-vault>`_
+     - Salt Extension for interacting with HashiCorp Vault (or OpenBao)
+     - `v1.8.0 <https://github.com/salt-extensions/saltext-vault/tree/v1.8.0>`_
+     - 2026-08-09
+     - :doc:`Browse docs <extensions/saltext-vault/index>`
+   * - `saltext-vcf <https://github.com/salt-extensions/saltext-vcf>`_
+     - Salt Extension For VCF
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-vcf/tree/v1.0.0>`_
+     - 2026-06-07
+     - :doc:`Browse docs <extensions/saltext-vcf/index>`
+   * - `saltext-vector <https://github.com/salt-extensions/saltext-vector>`_
+     - No description provided.
+     - No release tag
+     - —
+     - No published documentation
+   * - `saltext-virt <https://github.com/salt-extensions/saltext-virt>`_
+     - No description provided.
+     - `v0.1.0 <https://github.com/salt-extensions/saltext-virt/tree/v0.1.0>`_
+     - 2026-03-06
+     - :doc:`Browse docs <extensions/saltext-virt/index>`
+   * - `saltext-winshell <https://github.com/salt-extensions/saltext-winshell>`_
+     - No description provided.
+     - `v1.0.1 <https://github.com/salt-extensions/saltext-winshell/tree/v1.0.1>`_
+     - 2026-10-16
+     - :doc:`Browse docs <extensions/saltext-winshell/index>`
+   * - `saltext-zabbix <https://github.com/salt-extensions/saltext-zabbix>`_
+     - Salt Extension for interacting with Zabbix
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-zabbix/tree/v1.0.0>`_
+     - 2024-08-19
+     - :doc:`Browse docs <extensions/saltext-zabbix/index>`
+   * - `saltext-zfs <https://github.com/salt-extensions/saltext-zfs>`_
+     - Salt Extension for interacting with ZFS
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-zfs/tree/v1.0.0>`_
+     - 2024-09-28
+     - :doc:`Browse docs <extensions/saltext-zfs/index>`
+   * - `saltext-zookeeper <https://github.com/salt-extensions/saltext-zookeeper>`_
+     - Salt Extension for interacting with Apache Zookeeper
+     - `v1.0.0 <https://github.com/salt-extensions/saltext-zookeeper/tree/v1.0.0>`_
+     - 2024-09-26
+     - :doc:`Browse docs <extensions/saltext-zookeeper/index>`
