@@ -1,0 +1,44 @@
+name: Build and publish extension documentation
+
+on:
+  schedule:
+    - cron: "30 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nightly-extension-docs
+  cancel-in-progress: true
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install spelling checker system dependency
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes libenchant-2-2
+      - name: Install documentation dependencies
+        run: python -m pip install -r requirements/base.txt -r requirements/docs.txt
+      - name: Collect latest release documentation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/generate-extension-docs.py
+      - name: Build site
+        run: sphinx-build -b html docs docs/_build/html
+      - name: Add custom domain
+        run: echo extensions.saltproject.io > docs/_build/html/CNAME
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: docs/_build/html
+          force_orphan: false

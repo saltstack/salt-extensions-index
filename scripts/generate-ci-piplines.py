@@ -90,9 +90,7 @@ def collect_extensions_info():
 
 def main():
     workflow = REPO_ROOT / ".github" / "workflows" / "test-extensions.yml"
-    content = (
-        REPO_ROOT / ".github" / "workflows" / "templates" / "generate-index-base.yml"
-    ).read_text()
+    content = ""
     platform_templates = (
         REPO_ROOT / ".github" / "workflows" / "templates" / "linux.yml.j2",
         REPO_ROOT / ".github" / "workflows" / "templates" / "macos.yml.j2",
@@ -119,7 +117,6 @@ def main():
         "python_versions": ["3.6", "3.7", "3.8", "3.9", "3.10"],
     }
     with progress:
-        needs = []
         for package, url in packages.items():
             set_progress_description(progress, f"Processing {package}")
             context = common_context.copy()
@@ -129,14 +126,8 @@ def main():
             context["package_url"] = url
             for template_path in platform_templates:
                 content += Template(template_path.read_text()).render(**context)
-            for platform in ("linux", "macos", "windows"):
-                needs.append(f"{slug}-{platform}")
             progress.update()
-        generate_extensions_index = (
-            REPO_ROOT / ".github" / "workflows" / "templates" / "generate-index.yml.j2"
-        )
         set_progress_description(progress, "Writing workflow")
-        content += Template(generate_extensions_index.read_text()).render(needs=needs)
         workflow.write_text(content.rstrip() + "\n")
     progress.write("Complete")
     return 0
