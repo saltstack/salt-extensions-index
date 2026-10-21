@@ -1,0 +1,19 @@
+saltext-dockermod
+=================
+
+Salt extension documentation
+
+Release: ``v0.1.3``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/installation
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-dockermod/ref/modules/index.html>`_
+* `State modules <https://salt-extensions.github.io/saltext-dockermod/ref/states/index.html>`_

@@ -1,0 +1,736 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../../genindex.html"><link rel="search" title="Search" href="../../../../search.html">
+        <link rel="prefetch" href="../../../../_static/SaltProject_altlogo_teal.png" as="image">
+
+    <link rel="shortcut icon" href="../../../../_static/SaltProject_Logomark_teal.png"><!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
+        <title>Pillar Configuration - Salt Extensions</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../index.html"><div class="brand">Salt Extensions</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../../_static/SaltProject_altlogo_teal.png" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="pillar-configuration">
+<h1>Pillar Configuration<a class="headerlink" href="#pillar-configuration" title="Link to this heading">¶</a></h1>
+<p>Nebula network topology and per-host settings are defined in Salt pillar data. This allows centralized management of your mesh network configuration while keeping sensitive data (like IP assignments and firewall rules) separate from states.</p>
+<section id="pillar-structure-overview">
+<h2>Pillar Structure Overview<a class="headerlink" href="#pillar-structure-overview" title="Link to this heading">¶</a></h2>
+<p>The pillar configuration has two main components:</p>
+<ol class="arabic simple">
+<li><p><strong>Common settings</strong> - Network-wide configuration (lighthouses, DNS, default firewall rules)</p></li>
+<li><p><strong>Host settings</strong> - Per-minion configuration (IP address, groups, custom firewall rules)</p></li>
+</ol>
+</section>
+<section id="common-configuration">
+<h2>Common Configuration<a class="headerlink" href="#common-configuration" title="Link to this heading">¶</a></h2>
+<p>Create <code class="docutils literal notranslate"><span class="pre">/srv/pillar/nebula/common.sls</span></code> for network-wide settings:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nebula</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># Global network settings</span>
+<span class="w">  </span><span class="nt">lighthouse_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4242</span><span class="w">          </span><span class="c1"># UDP port for lighthouse communication</span>
+<span class="w">  </span><span class="nt">listen_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w">                 </span><span class="c1"># 0 = random port (recommended for non-lighthouses)</span>
+<span class="w">  </span><span class="nt">network_cidr</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.0/24"</span><span class="w">  </span><span class="c1"># Your Nebula network CIDR</span>
+<span class="w">  </span><span class="nt">dns_name</span><span class="p">:</span><span class="w"> </span><span class="s">"nebula"</span><span class="w">             </span><span class="c1"># DNS suffix for certificate names</span>
+
+<span class="w">  </span><span class="c1"># Remote allow list - which external networks can reach this node</span>
+<span class="w">  </span><span class="nt">remote_allow_list</span><span class="p">:</span>
+<span class="w">    </span><span class="s">'0.0.0.0/0'</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">            </span><span class="c1"># Allow IPv4 from anywhere</span>
+<span class="w">    </span><span class="s">'::/0'</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                </span><span class="c1"># Disable IPv6 advertisement</span>
+<span class="w">    </span><span class="s">'169.254.0.0/16'</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">      </span><span class="c1"># Block link-local addresses</span>
+
+<span class="w">  </span><span class="c1"># Lighthouse definitions - your network's coordination points</span>
+<span class="w">  </span><span class="nt">lighthouses</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">lighthouse01</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">nebula_ip</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.1"</span>
+<span class="w">      </span><span class="nt">public_ip</span><span class="p">:</span><span class="w"> </span><span class="s">"203.0.113.10"</span><span class="w">  </span><span class="c1"># Public IP or hostname</span>
+<span class="w">    </span><span class="nt">lighthouse02</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">nebula_ip</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.2"</span>
+<span class="w">      </span><span class="nt">public_ip</span><span class="p">:</span><span class="w"> </span><span class="s">"lighthouse02.example.com"</span>
+
+<span class="w">  </span><span class="c1"># Default firewall rules (can be overridden per-host)</span>
+<span class="w">  </span><span class="nt">firewall</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">outbound</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+<span class="w">        </span><span class="nt">proto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+<span class="w">        </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"Allow</span><span class="nv"> </span><span class="s">all</span><span class="nv"> </span><span class="s">outbound</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">default"</span>
+
+<span class="w">    </span><span class="nt">inbound</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+<span class="w">        </span><span class="nt">proto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">icmp</span>
+<span class="w">        </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"Allow</span><span class="nv"> </span><span class="s">ICMP</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">any</span><span class="nv"> </span><span class="s">host"</span>
+</pre></div>
+</div>
+<section id="lighthouse-overlay-and-public-addresses">
+<h3>Lighthouse overlay and public addresses<a class="headerlink" href="#lighthouse-overlay-and-public-addresses" title="Link to this heading">¶</a></h3>
+<p>Each entry under <code class="docutils literal notranslate"><span class="pre">lighthouses</span></code> describes how mesh nodes reach a lighthouse. The
+module expands these values into Nebula <code class="docutils literal notranslate"><span class="pre">static_host_map</span></code> (overlay address →
+list of <code class="docutils literal notranslate"><span class="pre">public:lighthouse_port</span></code> strings) and, on non-lighthouse hosts, into
+<code class="docutils literal notranslate"><span class="pre">lighthouse.hosts</span></code> and <code class="docutils literal notranslate"><span class="pre">relay.relays</span></code>.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">nebula_ip</span></code> and <code class="docutils literal notranslate"><span class="pre">public_ip</span></code></strong> — Each is a string: one address, or several
+<strong>comma-separated</strong> addresses. Extra overlay segments add <code class="docutils literal notranslate"><span class="pre">static_host_map</span></code> keys
+and <code class="docutils literal notranslate"><span class="pre">lighthouse.hosts</span></code> / <code class="docutils literal notranslate"><span class="pre">relay.relays</span></code> entries; extra public segments add more
+<code class="docutils literal notranslate"><span class="pre">addr:lighthouse_port</span></code> values. Every overlay key from <code class="docutils literal notranslate"><span class="pre">nebula_ip</span></code> shares the same
+public endpoint list built from <code class="docutils literal notranslate"><span class="pre">public_ip</span></code>.</p>
+<p><strong>IPv6</strong> — Write IPv6 literals in brackets (for example <code class="docutils literal notranslate"><span class="pre">[2001:db8::1]</span></code>) so the
+address parses correctly when combined with the UDP port.</p>
+<p>Example with dual-stack overlay and public endpoints (comma-separated):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">lighthouses</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">lighthouse01</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">nebula_ip</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.1,[fd00::1]"</span>
+<span class="w">      </span><span class="nt">public_ip</span><span class="p">:</span><span class="w"> </span><span class="s">"203.0.113.10,[2001:db8::cafe]"</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="host-configuration">
+<h2>Host Configuration<a class="headerlink" href="#host-configuration" title="Link to this heading">¶</a></h2>
+<p>Create a pillar file for each host that needs Nebula configuration. For example, <code class="docutils literal notranslate"><span class="pre">/srv/pillar/nebula/web01.sls</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nebula</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">web01</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.123/24"</span><span class="w">      </span><span class="c1"># Nebula IP with CIDR notation</span>
+<span class="w">      </span><span class="nt">groups</span><span class="p">:</span><span class="w">                     </span><span class="c1"># Security groups for firewall rules</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"web"</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"production"</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"monitoring-target"</span>
+<span class="w">      </span><span class="nt">duration</span><span class="p">:</span><span class="w"> </span><span class="s">"17532h"</span><span class="w">          </span><span class="c1"># Certificate validity (2 years)</span>
+
+<span class="w">      </span><span class="c1"># Local allow list - which local interfaces to use</span>
+<span class="w">      </span><span class="nt">local_allow_list</span><span class="p">:</span>
+<span class="w">        </span><span class="s">'0.0.0.0/0'</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="w">      </span><span class="c1"># Host-specific firewall rules (replaces common defaults)</span>
+<span class="w">      </span><span class="nt">firewall</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">inbound</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">22</span>
+<span class="w">            </span><span class="nt">proto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp</span>
+<span class="w">            </span><span class="nt">groups</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"admin"</span><span class="p p-Indicator">]</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"SSH</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">admin</span><span class="nv"> </span><span class="s">group"</span>
+
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+<span class="w">            </span><span class="nt">proto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp</span>
+<span class="w">            </span><span class="nt">groups</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"load-balancer"</span><span class="p p-Indicator">]</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"HTTP</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">load</span><span class="nv"> </span><span class="s">balancers"</span>
+
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span>
+<span class="w">            </span><span class="nt">proto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp</span>
+<span class="w">            </span><span class="nt">groups</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"load-balancer"</span><span class="p p-Indicator">]</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"HTTPS</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">load</span><span class="nv"> </span><span class="s">balancers"</span>
+
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
+<span class="w">            </span><span class="nt">proto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp</span>
+<span class="w">            </span><span class="nt">groups</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"monitoring"</span><span class="p p-Indicator">]</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"Zabbix</span><span class="nv"> </span><span class="s">agent"</span>
+
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+<span class="w">            </span><span class="nt">proto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">icmp</span>
+<span class="w">            </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"ICMP</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">anywhere"</span>
+
+<span class="w">        </span><span class="nt">outbound</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+<span class="w">            </span><span class="nt">proto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+<span class="w">            </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"Allow</span><span class="nv"> </span><span class="s">all</span><span class="nv"> </span><span class="s">outbound"</span>
+</pre></div>
+</div>
+</section>
+<section id="lighthouse-configuration">
+<h2>Lighthouse Configuration<a class="headerlink" href="#lighthouse-configuration" title="Link to this heading">¶</a></h2>
+<p>Lighthouses require special configuration. Create <code class="docutils literal notranslate"><span class="pre">/srv/pillar/nebula/lighthouse01.sls</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nebula</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">lighthouse01</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.1/24"</span>
+<span class="w">      </span><span class="nt">is_lighthouse</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">         </span><span class="c1"># This node is a lighthouse</span>
+<span class="w">      </span><span class="nt">groups</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"lighthouse"</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"infrastructure"</span>
+<span class="w">      </span><span class="nt">duration</span><span class="p">:</span><span class="w"> </span><span class="s">"43800h"</span><span class="w">          </span><span class="c1"># Longer validity for infrastructure</span>
+
+<span class="w">      </span><span class="c1"># Lighthouses listen on a fixed port automatically: when is_lighthouse</span>
+<span class="w">      </span><span class="c1"># is true, listen.port is pinned to lighthouse_port. Set a per-host</span>
+<span class="w">      </span><span class="c1"># listen_port here only to override that (rarely needed).</span>
+<span class="w">      </span><span class="c1"># listen_port: 4242</span>
+
+<span class="w">      </span><span class="nt">firewall</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">inbound</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4242</span>
+<span class="w">            </span><span class="nt">proto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">udp</span>
+<span class="w">            </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"Nebula</span><span class="nv"> </span><span class="s">lighthouse</span><span class="nv"> </span><span class="s">port"</span>
+
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">22</span>
+<span class="w">            </span><span class="nt">proto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp</span>
+<span class="w">            </span><span class="nt">groups</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"admin"</span><span class="p p-Indicator">]</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"SSH</span><span class="nv"> </span><span class="s">access"</span>
+
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+<span class="w">            </span><span class="nt">proto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">icmp</span>
+<span class="w">            </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"ICMP"</span>
+
+<span class="w">        </span><span class="nt">outbound</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+<span class="w">            </span><span class="nt">proto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+<span class="w">            </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+</pre></div>
+</div>
+</section>
+<section id="pillar-top-file">
+<h2>Pillar Top File<a class="headerlink" href="#pillar-top-file" title="Link to this heading">¶</a></h2>
+<p>Add the pillar definitions to <code class="docutils literal notranslate"><span class="pre">/srv/pillar/top.sls</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">base</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># Common settings for all minions</span>
+<span class="w">  </span><span class="s">'*'</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nebula.common</span>
+
+<span class="w">  </span><span class="c1"># Host-specific configurations</span>
+<span class="w">  </span><span class="s">'web01'</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nebula.web01</span>
+
+<span class="w">  </span><span class="s">'web02'</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nebula.web02</span>
+
+<span class="w">  </span><span class="s">'lighthouse01'</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nebula.lighthouse01</span>
+
+<span class="w">  </span><span class="c1"># Or use glob patterns</span>
+<span class="w">  </span><span class="s">'web*'</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nebula.webservers</span>
+
+<span class="w">  </span><span class="s">'db*'</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nebula.databases</span>
+</pre></div>
+</div>
+</section>
+<section id="lighthouse-dns">
+<h2>Lighthouse DNS<a class="headerlink" href="#lighthouse-dns" title="Link to this heading">¶</a></h2>
+<p>Lighthouses can serve DNS for the Nebula network, allowing hosts to resolve
+each other by name. Configure <code class="docutils literal notranslate"><span class="pre">serve_dns</span></code> and the <code class="docutils literal notranslate"><span class="pre">dns</span></code> bind address under
+the host entry:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nebula</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">lighthouse01</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.1/24"</span>
+<span class="w">      </span><span class="nt">is_lighthouse</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">serve_dns</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">dns</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">"0.0.0.0"</span><span class="w">   </span><span class="c1"># bind to all interfaces; use nebula IP to restrict to overlay only</span>
+<span class="w">        </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">53</span><span class="w">           </span><span class="c1"># use a non-privileged port like 5353 if not running as root</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">serve_dns</span></code> is silently ignored for non-lighthouse hosts. Remember to open
+the chosen port in the host’s inbound firewall rules and in your OS-level
+firewall (iptables, nftables, ufw, etc.).</p>
+</section>
+<section id="nebula-ssh-server">
+<h2>Nebula SSH Server<a class="headerlink" href="#nebula-ssh-server" title="Link to this heading">¶</a></h2>
+<p>Nebula includes a built-in SSH server for management access that operates
+independently of the OS SSH daemon. It is disabled by default and only emitted
+in the generated config when <code class="docutils literal notranslate"><span class="pre">enabled:</span> <span class="pre">true</span></code> is set:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nebula</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">myhost</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.50/24"</span>
+<span class="w">      </span><span class="nt">sshd</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">listen</span><span class="p">:</span><span class="w"> </span><span class="s">"127.0.0.1:22"</span><span class="w">    </span><span class="c1"># address:port for the nebula sshd to bind</span>
+<span class="w">        </span><span class="nt">host_key</span><span class="p">:</span><span class="w"> </span><span class="s">"/etc/nebula/ssh_host_ed25519_key"</span><span class="w">  </span><span class="c1"># omit to use this default</span>
+<span class="w">        </span><span class="nt">authorized_users</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">alice</span>
+<span class="w">            </span><span class="nt">keys</span><span class="p">:</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'ssh-ed25519</span><span class="nv"> </span><span class="s">AAAA...'</span>
+<span class="w">        </span><span class="c1"># Optional: also accept nebula CA-signed SSH certificates</span>
+<span class="w">        </span><span class="nt">authorized_nebula_certificate_authorities</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'ssh-ed25519</span><span class="nv"> </span><span class="s">AAAA...'</span>
+</pre></div>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">host_key</span></code> is omitted it defaults to <code class="docutils literal notranslate"><span class="pre">&lt;config_dir&gt;/ssh_host_ed25519_key</span></code>.
+The key file must be generated separately (e.g. <code class="docutils literal notranslate"><span class="pre">ssh-keygen</span> <span class="pre">-t</span> <span class="pre">ed25519</span> <span class="pre">-f</span> <span class="pre">/etc/nebula/ssh_host_ed25519_key</span> <span class="pre">-N</span> <span class="pre">&quot;&quot;</span></code>).</p>
+</section>
+<section id="advanced-configuration-options">
+<h2>Advanced Configuration Options<a class="headerlink" href="#advanced-configuration-options" title="Link to this heading">¶</a></h2>
+<section id="static-host-map-overrides">
+<h3>Static Host Map Overrides<a class="headerlink" href="#static-host-map-overrides" title="Link to this heading">¶</a></h3>
+<p>The lighthouse <code class="docutils literal notranslate"><span class="pre">static_host_map</span></code> is normally derived for every node from the
+<code class="docutils literal notranslate"><span class="pre">lighthouses</span></code> definitions (overlay IP -&gt; <code class="docutils literal notranslate"><span class="pre">public_ip:lighthouse_port</span></code>). A host
+can override or extend it, which is useful when a node should reach a lighthouse
+over a different path than the global public endpoint (for example a container
+co-located with a lighthouse reaching it on the host bridge instead of hairpinning
+the WAN):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nebula</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">salt-master</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.10/24"</span>
+<span class="w">      </span><span class="nt">static_host_map</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># reach lighthouse 10.10.10.1 directly on the local bridge; this</span>
+<span class="w">        </span><span class="c1"># replaces the derived public endpoint for that overlay IP</span>
+<span class="w">        </span><span class="s">"10.10.10.1"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"192.0.2.17:4242"</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>An entry for an overlay IP that is already derived replaces its endpoint list;
+an entry for a new overlay IP is added. A common-level <code class="docutils literal notranslate"><span class="pre">static_host_map</span></code> may be
+used to pin entries for every node.</p>
+</section>
+<section id="unsafe-routes">
+<h3>Unsafe Routes<a class="headerlink" href="#unsafe-routes" title="Link to this heading">¶</a></h3>
+<p>Route traffic for external networks through Nebula nodes:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nebula</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">gateway01</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.50/24"</span>
+<span class="w">      </span><span class="nt">groups</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"gateway"</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">unsafe_routes</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">route</span><span class="p">:</span><span class="w"> </span><span class="s">"192.168.1.0/24"</span>
+<span class="w">          </span><span class="nt">via</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.50"</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">route</span><span class="p">:</span><span class="w"> </span><span class="s">"172.16.0.0/12"</span>
+<span class="w">          </span><span class="nt">via</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.50"</span>
+</pre></div>
+</div>
+</section>
+<section id="subnets">
+<h3>Subnets<a class="headerlink" href="#subnets" title="Link to this heading">¶</a></h3>
+<p>Assign additional subnet routing to a host:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nebula</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">router01</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.100/24"</span>
+<span class="w">      </span><span class="nt">subnets</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"192.168.100.0/24"</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"192.168.200.0/24"</span>
+</pre></div>
+</div>
+</section>
+<section id="advertise-addresses">
+<h3>Advertise Addresses<a class="headerlink" href="#advertise-addresses" title="Link to this heading">¶</a></h3>
+<p>For hosts behind NAT or with multiple interfaces:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nebula</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">nat-host</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.75/24"</span>
+<span class="w">      </span><span class="nt">advertise_addrs</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"203.0.113.50:4242"</span>
+</pre></div>
+</div>
+</section>
+<section id="relay-control">
+<h3>Relay Control<a class="headerlink" href="#relay-control" title="Link to this heading">¶</a></h3>
+<p>By default a lighthouse also acts as a relay (<code class="docutils literal notranslate"><span class="pre">am_relay:</span> <span class="pre">true</span></code>) and every
+non-lighthouse uses all lighthouses as its relays. That is a poor fit when a
+lighthouse sits behind NAT: it becomes an unreliable relay for the whole mesh.
+Three independent controls are available.</p>
+<p>Stop a lighthouse from acting as a relay (it still serves discovery), and drop
+it from the relay list other nodes build, by marking its <code class="docutils literal notranslate"><span class="pre">lighthouses</span></code> entry:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nebula</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">lighthouses</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">lighthouse-nat</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">nebula_ip</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.1"</span>
+<span class="w">      </span><span class="nt">public_ip</span><span class="p">:</span><span class="w"> </span><span class="s">"203.0.113.10"</span>
+<span class="w">      </span><span class="nt">relay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">        </span><span class="c1"># discovery only, never used as a relay</span>
+</pre></div>
+</div>
+<p>Override <code class="docutils literal notranslate"><span class="pre">am_relay</span></code> for a single host regardless of its lighthouse status:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nebula</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">lighthouse-nat</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.1/24"</span>
+<span class="w">      </span><span class="nt">is_lighthouse</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">is_relay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">      </span><span class="c1"># this lighthouse will not relay for others</span>
+</pre></div>
+</div>
+<p>Replace the derived relay list for a host (or, in common, for all hosts) with
+an explicit set:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nebula</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">web01</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.123/24"</span>
+<span class="w">      </span><span class="nt">relays</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"10.10.10.2"</span><span class="w">     </span><span class="c1"># use only this lighthouse as a relay</span>
+</pre></div>
+</div>
+</section>
+<section id="calculated-remotes">
+<h3>Calculated Remotes<a class="headerlink" href="#calculated-remotes" title="Link to this heading">¶</a></h3>
+<p>For dynamic IP resolution:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nebula</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">dynamic-host</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.80/24"</span>
+<span class="w">      </span><span class="nt">calculated_remotes</span><span class="p">:</span>
+<span class="w">        </span><span class="s">'10.10.10.1'</span><span class="p p-Indicator">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">mask</span><span class="p">:</span><span class="w"> </span><span class="s">'0.0.0.0/0'</span>
+<span class="w">            </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4242</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="overriding-built-in-config-sections">
+<h2>Overriding Built-in Config Sections<a class="headerlink" href="#overriding-built-in-config-sections" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">tun</span></code>, <code class="docutils literal notranslate"><span class="pre">punchy</span></code>, <code class="docutils literal notranslate"><span class="pre">logging</span></code> and <code class="docutils literal notranslate"><span class="pre">conntrack</span></code> sections have sensible
+defaults but can be overridden from pillar, at the common level (all nodes) or
+per host. Overrides are deep-merged onto the defaults, so you only specify the
+keys you want to change:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nebula</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># common: applies to every node</span>
+<span class="w">  </span><span class="nt">tun</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">mtu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1280</span><span class="w">            </span><span class="c1"># e.g. lower MTU for a WireGuard underlay</span>
+<span class="w">  </span><span class="nt">logging</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug</span>
+<span class="w">  </span><span class="nt">conntrack</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">tcp_timeout</span><span class="p">:</span><span class="w"> </span><span class="s">"30m"</span>
+
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">web01</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="s">"10.10.10.123/24"</span>
+<span class="w">      </span><span class="nt">punchy</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">delay</span><span class="p">:</span><span class="w"> </span><span class="s">"2s"</span><span class="w">      </span><span class="c1"># per-host override, merged over common + defaults</span>
+</pre></div>
+</div>
+<p>An optional network-wide cipher may be set (it MUST be identical on every node;
+do not change it on a live network):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nebula</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">cipher</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aes</span><span class="w">            </span><span class="c1"># or chachapoly</span>
+</pre></div>
+</div>
+</section>
+<section id="refreshing-pillar-data">
+<h2>Refreshing Pillar Data<a class="headerlink" href="#refreshing-pillar-data" title="Link to this heading">¶</a></h2>
+<p>After modifying pillar files, refresh the pillar data:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Refresh pillar for all minions</span>
+salt<span class="w"> </span><span class="s1">'*'</span><span class="w"> </span>saltutil.refresh_pillar
+
+<span class="c1"># Refresh for specific minions</span>
+salt<span class="w"> </span><span class="s1">'web01'</span><span class="w"> </span>saltutil.refresh_pillar
+
+<span class="c1"># Verify pillar data</span>
+salt<span class="w"> </span><span class="s1">'web01'</span><span class="w"> </span>pillar.get<span class="w"> </span>nebula
+</pre></div>
+</div>
+</section>
+<section id="pillar-data-validation">
+<h2>Pillar Data Validation<a class="headerlink" href="#pillar-data-validation" title="Link to this heading">¶</a></h2>
+<p>Test pillar access from the master:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check what pillar data a minion receives</span>
+salt-run<span class="w"> </span>nebula.test_pillar_access<span class="w"> </span><span class="nv">minion_id</span><span class="o">=</span>web01
+</pre></div>
+</div>
+<p>This is useful for debugging certificate generation issues.</p>
+</section>
+<section id="previewing-a-host-s-generated-config">
+<h2>Previewing a Host’s Generated Config<a class="headerlink" href="#previewing-a-host-s-generated-config" title="Link to this heading">¶</a></h2>
+<p>To see the exact Nebula configuration a minion would receive, rendered from
+pillar on the master without contacting the minion:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pretty-print for inspection or diffing</span>
+salt-run<span class="w"> </span>nebula.show_config<span class="w"> </span><span class="nv">minion_id</span><span class="o">=</span>web01<span class="w"> </span>--out<span class="o">=</span>yaml
+</pre></div>
+</div>
+<p>This is the master-side counterpart to <code class="docutils literal notranslate"><span class="pre">salt</span> <span class="pre">'web01'</span> <span class="pre">nebula.build_config</span></code> and
+produces identical output. The PKI file paths use the standard layout under
+<code class="docutils literal notranslate"><span class="pre">/etc/nebula</span></code> (override with <code class="docutils literal notranslate"><span class="pre">config_dir=/path</span></code>).</p>
+<p>It is also convenient when a single Salt master manages its own Nebula config:
+you can render and write the master’s config locally without standing up a
+second master to highstate it. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">MID</span><span class="o">=</span><span class="k">$(</span>salt-call<span class="w"> </span>--local<span class="w"> </span>grains.get<span class="w"> </span>id<span class="w"> </span>--out<span class="o">=</span>newline_values_only<span class="k">)</span>
+salt-run<span class="w"> </span>nebula.show_config<span class="w"> </span><span class="nv">minion_id</span><span class="o">=</span><span class="s2">"</span><span class="nv">$MID</span><span class="s2">"</span><span class="w"> </span>--out<span class="o">=</span>yaml<span class="w"> </span>&gt;<span class="w"> </span>/etc/nebula/nebula.yml
+</pre></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2020 - 2026, VMware, Inc.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Pillar Configuration</a><ul>
+<li><a class="reference internal" href="#pillar-structure-overview">Pillar Structure Overview</a></li>
+<li><a class="reference internal" href="#common-configuration">Common Configuration</a><ul>
+<li><a class="reference internal" href="#lighthouse-overlay-and-public-addresses">Lighthouse overlay and public addresses</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#host-configuration">Host Configuration</a></li>
+<li><a class="reference internal" href="#lighthouse-configuration">Lighthouse Configuration</a></li>
+<li><a class="reference internal" href="#pillar-top-file">Pillar Top File</a></li>
+<li><a class="reference internal" href="#lighthouse-dns">Lighthouse DNS</a></li>
+<li><a class="reference internal" href="#nebula-ssh-server">Nebula SSH Server</a></li>
+<li><a class="reference internal" href="#advanced-configuration-options">Advanced Configuration Options</a><ul>
+<li><a class="reference internal" href="#static-host-map-overrides">Static Host Map Overrides</a></li>
+<li><a class="reference internal" href="#unsafe-routes">Unsafe Routes</a></li>
+<li><a class="reference internal" href="#subnets">Subnets</a></li>
+<li><a class="reference internal" href="#advertise-addresses">Advertise Addresses</a></li>
+<li><a class="reference internal" href="#relay-control">Relay Control</a></li>
+<li><a class="reference internal" href="#calculated-remotes">Calculated Remotes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#overriding-built-in-config-sections">Overriding Built-in Config Sections</a></li>
+<li><a class="reference internal" href="#refreshing-pillar-data">Refreshing Pillar Data</a></li>
+<li><a class="reference internal" href="#pillar-data-validation">Pillar Data Validation</a></li>
+<li><a class="reference internal" href="#previewing-a-host-s-generated-config">Previewing a Host’s Generated Config</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../../_static/documentation_options.js?v=d587a469"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../../../_static/extension-index.js?v=435383a2"></script>
+    </body>
+</html>

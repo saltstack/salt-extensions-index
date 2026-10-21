@@ -1,0 +1,20 @@
+saltext-azurerm
+===============
+
+Salt Extension Modules for Azure Resource Manager
+
+Release: ``v4.4.1``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/authentication
+   docs/topics/installation
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-azurerm/ref/modules/index.html>`_
+* `State modules <https://salt-extensions.github.io/saltext-azurerm/ref/states/index.html>`_

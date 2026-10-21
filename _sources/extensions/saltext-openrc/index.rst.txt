@@ -1,0 +1,18 @@
+saltext-openrc
+==============
+
+Salt Extension for interacting with the OpenRC init system
+
+Release: ``v0.2.0``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/installation
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-openrc/ref/modules/index.html>`_

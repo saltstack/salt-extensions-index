@@ -1,0 +1,19 @@
+saltext-telegram
+================
+
+Salt Extension for interacting with Telegram
+
+Release: ``v1.0.0``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/configuration
+   docs/topics/installation
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-telegram/ref/modules/index.html>`_

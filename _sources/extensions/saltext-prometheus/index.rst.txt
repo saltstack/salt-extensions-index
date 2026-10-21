@@ -1,0 +1,19 @@
+saltext-prometheus
+==================
+
+Salt Extension Modules for Prometheus
+
+Release: ``v2.2.0``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/installation
+   docs/topics/quick_start
+   docs/topics/user_documentation
+
+Provided Modules
+----------------
+

@@ -1,0 +1,17 @@
+saltext-stalekey
+================
+
+Salt engine that detects inactive minions and removes their keys
+
+Release: ``v1.0.2``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/installation
+
+Provided Modules
+----------------
+

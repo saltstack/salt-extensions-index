@@ -1,0 +1,18 @@
+saltext-snapper-state
+=====================
+
+Salt extension documentation
+
+Release: ``v0.1.0``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/installation
+
+Provided Modules
+----------------
+
+* `State modules <https://salt-extensions.github.io/saltext-snapper-state/ref/states/index.html>`_

@@ -1,0 +1,18 @@
+saltext-haproxy
+===============
+
+Salt Extension for interacting with HAProxy
+
+Release: ``v1.0.0``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/installation
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-haproxy/ref/modules/index.html>`_

@@ -1,0 +1,19 @@
+saltext-elasticsearch
+=====================
+
+Salt Extension for interacting with Elasticsearch
+
+Release: ``v1.2.3``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/installation
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-elasticsearch/ref/modules/index.html>`_
+* `State modules <https://salt-extensions.github.io/saltext-elasticsearch/ref/states/index.html>`_

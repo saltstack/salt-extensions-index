@@ -1,0 +1,440 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html">
+        <link rel="prefetch" href="../../../_static/SaltProject_altlogo_teal.png" as="image">
+
+    <link rel="shortcut icon" href="../../../_static/SaltProject_Logomark_teal.png"><!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
+        <title>Changelog - Salt Extensions</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">Salt Extensions</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/SaltProject_altlogo_teal.png" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">¶</a></h1>
+<p>The changelog format is based on <a class="reference external" href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>.</p>
+<p>This project uses <a class="reference external" href="https://semver.org/">Semantic Versioning</a> - MAJOR.MINOR.PATCH</p>
+<section id="id1">
+<h2>3.0.0 (2026-09-15)<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<section id="breaking-changes">
+<h3>Breaking changes<a class="headerlink" href="#breaking-changes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>The Kubernetes pod-exec function is now named <code class="docutils literal notranslate"><span class="pre">kubernetes.exec</span></code> instead of <code class="docutils literal notranslate"><span class="pre">kubernetes.exec_</span></code>. If you call <code class="docutils literal notranslate"><span class="pre">salt</span> <span class="pre">'*'</span> <span class="pre">kubernetes.exec_</span> <span class="pre">...</span></code>, use <code class="docutils literal notranslate"><span class="pre">__salt__['kubernetes.exec_']</span></code>, or reference <code class="docutils literal notranslate"><span class="pre">kubernetes.exec_</span></code> in states or the <code class="docutils literal notranslate"><span class="pre">kuberesource_cmd</span></code> companion module, update those call sites to <code class="docutils literal notranslate"><span class="pre">kubernetes.exec</span></code> (without the trailing underscore) — the old name no longer exists. This has always been the name documented in the module’s docstrings and CLI examples; the rename brings the actual function in line with that documentation.</p></li>
+</ul>
+</section>
+<section id="removed">
+<h3>Removed<a class="headerlink" href="#removed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>The legacy <code class="docutils literal notranslate"><span class="pre">k8s</span></code> execution module (<code class="docutils literal notranslate"><span class="pre">saltext.kubernetes.modules.k8s</span></code>), deprecated since 2.1.0, has been removed. Use the <code class="docutils literal notranslate"><span class="pre">kubernetes</span></code> execution module (<code class="docutils literal notranslate"><span class="pre">kubernetesmod</span></code>) instead, which is built on the official Kubernetes Python client and supports most current resource types. <a class="reference external" href="https://github.com/salt-extensions/saltext-kubernetes/issues/44">#44</a></p></li>
+</ul>
+</section>
+<section id="changed">
+<h3>Changed<a class="headerlink" href="#changed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Added Gateway API support for GatewayClass, Gateway, HTTPRoute, and ReferenceGrant resources. The resources are available through typed Kubernetes execution functions and present/absent states, with resource discovery and cert-manager-backed TLS Secret reference coverage. Gateway controller reconciliation and data-plane traffic remain outside the module’s scope.</p></li>
+</ul>
+</section>
+<section id="fixed">
+<h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Update autodocs to use module names instead of virtual names to help with documentation clarity. <a class="reference external" href="https://github.com/salt-extensions/saltext-kubernetes/issues/43">#43</a></p></li>
+<li><p>Fixed spec resolution when creating or updating spec-based resources (such as <code class="docutils literal notranslate"><span class="pre">Ingress</span></code>, <code class="docutils literal notranslate"><span class="pre">HorizontalPodAutoscaler</span></code>, <code class="docutils literal notranslate"><span class="pre">PodDisruptionBudget</span></code>, <code class="docutils literal notranslate"><span class="pre">NetworkPolicy</span></code>, <code class="docutils literal notranslate"><span class="pre">ResourceQuota</span></code>, <code class="docutils literal notranslate"><span class="pre">LimitRange</span></code>, <code class="docutils literal notranslate"><span class="pre">CustomResourceDefinition</span></code>, <code class="docutils literal notranslate"><span class="pre">PersistentVolume</span></code>, and <code class="docutils literal notranslate"><span class="pre">PersistentVolumeClaim</span></code>) from <code class="docutils literal notranslate"><span class="pre">source</span></code> manifest files. Previously, the manifest’s top-level <code class="docutils literal notranslate"><span class="pre">spec</span></code> dictionary was passed intact rather than extracting its inner specification fields. <a class="reference external" href="https://github.com/salt-extensions/saltext-kubernetes/issues/46">#46</a></p></li>
+<li><p>Accept Kubernetes-style camelCase fields, such as <code class="docutils literal notranslate"><span class="pre">revisionHistoryLimit</span></code>, in Deployment specifications.</p></li>
+<li><p>Allow <code class="docutils literal notranslate"><span class="pre">namespace_present</span></code> to create and reconcile namespace labels and annotations from metadata or source manifests.</p></li>
+<li><p>Fix Service port conversions so Kubernetes camelCase fields such as <code class="docutils literal notranslate"><span class="pre">targetPort</span></code> and <code class="docutils literal notranslate"><span class="pre">nodePort</span></code> are preserved when creating or updating Services. This avoids silent defaulting to the service <code class="docutils literal notranslate"><span class="pre">port</span></code> value and prevents steady-state drift from repeated re-submissions.</p></li>
+<li><p>Fixed kube-bench cache collection errors being masked by lock handling. Collection failures now propagate correctly while the cache lock is released.</p></li>
+<li><p>Make <code class="docutils literal notranslate"><span class="pre">manifest_present</span></code> report no changes for manifests that already match the live Kubernetes resources.</p></li>
+<li><p>Preserve Kubernetes-style camelCase fields, including acronym-bearing fields such as <code class="docutils literal notranslate"><span class="pre">clusterIP</span></code>, when creating or updating Services.</p></li>
+<li><p>Preserve Secret types from source manifests, explicit arguments, and existing Secrets during replacement.</p></li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h2>2.1.0 (2026-05-22)<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="deprecated">
+<h3>Deprecated<a class="headerlink" href="#deprecated" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>The legacy <code class="docutils literal notranslate"><span class="pre">k8s</span></code> execution module (<code class="docutils literal notranslate"><span class="pre">saltext.kubernetes.modules.k8s</span></code>) is deprecated and emits a <code class="docutils literal notranslate"><span class="pre">DeprecationWarning</span></code> at import time. It will be removed in saltext-kubernetes 3.0.0. Use the modern <code class="docutils literal notranslate"><span class="pre">kubernetes</span></code> execution module (<code class="docutils literal notranslate"><span class="pre">kubernetesmod</span></code>) instead, which is built on the official Kubernetes Python client and supports all current resource types.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>Changed<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Internal plumbing for the upcoming generic-apply path. New <code class="docutils literal notranslate"><span class="pre">saltext.kubernetes.utils._dynamic</span></code> module wraps <code class="docutils literal notranslate"><span class="pre">kubernetes.dynamic.DynamicClient</span></code> with a per-Configuration cache, an in-process resource-discovery cache (so repeated apply calls against the same kind don’t re-query OpenAPI), and helpers <code class="docutils literal notranslate"><span class="pre">apply_manifest</span></code>, <code class="docutils literal notranslate"><span class="pre">get_object</span></code>, <code class="docutils literal notranslate"><span class="pre">list_resource</span></code>, <code class="docutils literal notranslate"><span class="pre">delete_object</span></code> that surface clear <code class="docutils literal notranslate"><span class="pre">CommandExecutionError</span></code> messages for missing GVKs, missing <code class="docutils literal notranslate"><span class="pre">metadata.namespace</span></code> on namespaced kinds, and missing <code class="docutils literal notranslate"><span class="pre">metadata.name</span></code>. The <code class="docutils literal notranslate"><span class="pre">kubernetes</span></code> runtime dependency floor is bumped to <code class="docutils literal notranslate"><span class="pre">&gt;=24.2.0</span></code> (required for reliable <code class="docutils literal notranslate"><span class="pre">Resource.server_side_apply</span></code> semantics). The user-visible <code class="docutils literal notranslate"><span class="pre">kubernetes.apply</span></code> execution-module function and <code class="docutils literal notranslate"><span class="pre">manifest_present</span></code>/<code class="docutils literal notranslate"><span class="pre">manifest_absent</span></code> states that build on these primitives ship in a follow-up.</p></li>
+<li><p>Internal refactor: the per-kind metadata used by the resource-wait subsystem (<code class="docutils literal notranslate"><span class="pre">_wait_for_resource_status</span></code>) is now centralised in <code class="docutils literal notranslate"><span class="pre">saltext.kubernetes.utils._kinds._KIND_REGISTRY</span></code>. The <code class="docutils literal notranslate"><span class="pre">kubernetesmod._wait_for_resource_status</span></code> function dispatches through this registry instead of carrying duplicated <code class="docutils literal notranslate"><span class="pre">resource_type</span> <span class="pre">→</span> <span class="pre">method_name</span></code> literal dicts. Adding a new typed kind now requires one registry entry rather than two parallel dict updates. Public signature, kwargs, and return semantics of <code class="docutils literal notranslate"><span class="pre">_wait_for_resource_status</span></code> are unchanged.</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>Fixed<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Improved Kubernetes resource wait handling by making compound resource name resolution more consistent and normalizing configmap wait references. <a class="reference external" href="https://github.com/salt-extensions/saltext-kubernetes/issues/25">#25</a></p></li>
+<li><p>Compatibility with both <code class="docutils literal notranslate"><span class="pre">kubernetes-client</span></code> 24-35 and 36+. The 36.0.0 release updated the OpenAPI generator and renamed several attributes / kwargs we depend on. The extension now detects which spelling the installed client exposes and routes through whichever is present, so a single saltext-kubernetes release works against any client <code class="docutils literal notranslate"><span class="pre">&gt;=24.2.0</span></code> (our floor). Surfaces handled: <code class="docutils literal notranslate"><span class="pre">V1PolicyRule.non_resource_ur_ls</span></code> ↔ <code class="docutils literal notranslate"><span class="pre">non_resource_urls</span></code>; <code class="docutils literal notranslate"><span class="pre">ApiClient.call_api(response_type=)</span></code> ↔ <code class="docutils literal notranslate"><span class="pre">response_types_map=</span></code>; the exec-auth refresh hook now writes both legacy (<code class="docutils literal notranslate"><span class="pre">api_key[&quot;authorization&quot;]</span></code>) and modern (<code class="docutils literal notranslate"><span class="pre">api_key[&quot;BearerToken&quot;]</span></code> + <code class="docutils literal notranslate"><span class="pre">api_key_prefix[&quot;BearerToken&quot;]=&quot;Bearer&quot;</span></code>) shapes so kubeconfig-<code class="docutils literal notranslate"><span class="pre">exec</span></code>-style auth (EKS / GKE) keeps working on both client versions. 11 new unit tests pin the shim contract on both spellings.</p></li>
+</ul>
+</section>
+<section id="added">
+<h3>Added<a class="headerlink" href="#added" title="Link to this heading">¶</a></h3>
+<ul>
+<li><p>Added support to manage statefulset resources in kubernetes clusters. <a class="reference external" href="https://github.com/salt-extensions/saltext-kubernetes/issues/23">#23</a></p></li>
+<li><p>Added support to manage replicaset resources in kubernetes clusters. <a class="reference external" href="https://github.com/salt-extensions/saltext-kubernetes/issues/25">#25</a></p></li>
+<li><p>Added support to manage daemonset resources in kubernetes clusters. <a class="reference external" href="https://github.com/salt-extensions/saltext-kubernetes/issues/27">#27</a></p></li>
+<li><p>Added support to manage storageclass resources in kubernetes clusters. <a class="reference external" href="https://github.com/salt-extensions/saltext-kubernetes/issues/30">#30</a></p></li>
+<li><p>Added node lifecycle operations: <code class="docutils literal notranslate"><span class="pre">kubernetes.cordon</span></code> / <code class="docutils literal notranslate"><span class="pre">kubernetes.uncordon</span></code> (mark a node un/schedulable), <code class="docutils literal notranslate"><span class="pre">kubernetes.taint</span></code> / <code class="docutils literal notranslate"><span class="pre">kubernetes.untaint</span></code> (manage node taints with <code class="docutils literal notranslate"><span class="pre">(key,</span> <span class="pre">effect)</span></code> identity), and <code class="docutils literal notranslate"><span class="pre">kubernetes.drain</span></code> (cordon + evict managed pods via the eviction API, respecting PodDisruption Budgets). Drain skips DaemonSet-owned pods by default (<code class="docutils literal notranslate"><span class="pre">ignore_daemonsets=True</span></code>), refuses pods with <code class="docutils literal notranslate"><span class="pre">emptyDir</span></code> volumes unless <code class="docutils literal notranslate"><span class="pre">delete_emptydir_data=True</span></code> or <code class="docutils literal notranslate"><span class="pre">force=True</span></code>, refuses bare (uncontrolled) pods unless <code class="docutils literal notranslate"><span class="pre">force=True</span></code>, and supports <code class="docutils literal notranslate"><span class="pre">disable_eviction=True</span></code> to fall back to direct DELETE bypassing PDBs. Returns a structured report with <code class="docutils literal notranslate"><span class="pre">evicted</span></code> / <code class="docutils literal notranslate"><span class="pre">skipped</span></code> / <code class="docutils literal notranslate"><span class="pre">errors</span></code> lists. Companion idempotent state functions: <code class="docutils literal notranslate"><span class="pre">kubernetes.node_cordoned</span></code>, <code class="docutils literal notranslate"><span class="pre">kubernetes.node_uncordoned</span></code>, <code class="docutils literal notranslate"><span class="pre">kubernetes.node_tainted</span></code>, <code class="docutils literal notranslate"><span class="pre">kubernetes.node_untainted</span></code>. Drain itself is intentionally not exposed as a state — it’s an imperative operation, not a desired-state declaration.</p></li>
+<li><p>Added pod operations modules: <code class="docutils literal notranslate"><span class="pre">kubernetes.exec</span></code> (run commands inside a Pod and capture stdout/stderr/retcode), <code class="docutils literal notranslate"><span class="pre">kubernetes.logs</span></code> (fetch logs with <code class="docutils literal notranslate"><span class="pre">container</span></code>, <code class="docutils literal notranslate"><span class="pre">previous</span></code>, <code class="docutils literal notranslate"><span class="pre">since_seconds</span></code>, <code class="docutils literal notranslate"><span class="pre">tail_lines</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamps</span></code> filters), <code class="docutils literal notranslate"><span class="pre">kubernetes.cp_to</span></code> and <code class="docutils literal notranslate"><span class="pre">kubernetes.cp_from</span></code> (copy files into and out of a Pod via tar pipe through the exec subresource). All four are namespace-aware and honour <code class="docutils literal notranslate"><span class="pre">container</span></code> for multi-container Pods. The exec subresource websocket has no portable way to signal stdin EOF, so commands that wait for EOF (<code class="docutils literal notranslate"><span class="pre">cat</span></code>, <code class="docutils literal notranslate"><span class="pre">tee</span></code>) are bounded by a wall-clock <code class="docutils literal notranslate"><span class="pre">timeout</span></code> and surface <code class="docutils literal notranslate"><span class="pre">retcode=-1</span></code> if exceeded; the recommended idiom for stdin-bearing exec is a byte-bounded reader like <code class="docutils literal notranslate"><span class="pre">head</span> <span class="pre">-c</span> <span class="pre">N</span></code>. Linux-only; Windows is unsupported because the cp path depends on POSIX tar semantics.</p></li>
+<li><p>Added rich authentication modes to the <code class="docutils literal notranslate"><span class="pre">kubernetes</span></code> execution module: in-cluster ServiceAccount (auto-detected when running in a pod), bearer token (<code class="docutils literal notranslate"><span class="pre">kubernetes.api_key</span></code>), basic auth (<code class="docutils literal notranslate"><span class="pre">kubernetes.username</span></code> / <code class="docutils literal notranslate"><span class="pre">kubernetes.password</span></code>), and explicit client certificate (<code class="docutils literal notranslate"><span class="pre">kubernetes.client_cert</span></code> / <code class="docutils literal notranslate"><span class="pre">kubernetes.client_key</span></code> / <code class="docutils literal notranslate"><span class="pre">kubernetes.ca_cert</span></code>). Proxy support added via <code class="docutils literal notranslate"><span class="pre">kubernetes.proxy</span></code>, <code class="docutils literal notranslate"><span class="pre">kubernetes.no_proxy</span></code>, <code class="docutils literal notranslate"><span class="pre">kubernetes.proxy_headers</span></code>. TLS verification toggled with <code class="docutils literal notranslate"><span class="pre">kubernetes.verify_ssl</span></code>. All options can also be provided via <code class="docutils literal notranslate"><span class="pre">K8S_AUTH_*</span></code> environment variables (matching Ansible’s <code class="docutils literal notranslate"><span class="pre">kubernetes.core</span></code> collection) or as per-call kwargs. The legacy kubeconfig path is unchanged and remains the default. See the auth guide (<code class="docutils literal notranslate"><span class="pre">docs/topics/auth.md</span></code>) for details.</p></li>
+<li><p>Added six <code class="docutils literal notranslate"><span class="pre">kuberesource_*</span></code> companion execution modules that ride on Salt’s resources subsystem to dispatch operations against individual Kubernetes resources by their bare ID. <code class="docutils literal notranslate"><span class="pre">kuberesource_cmd</span></code> (run, run_all, run_stdout — Pod-only), <code class="docutils literal notranslate"><span class="pre">kuberesource_logs</span></code> (fetch, tail — Pod-only), <code class="docutils literal notranslate"><span class="pre">kuberesource_cp</span></code> (to_pod, from_pod — Pod-only), <code class="docutils literal notranslate"><span class="pre">kuberesource_node</span></code> (cordon, uncordon, drain, taint, untaint — Node-only), <code class="docutils literal notranslate"><span class="pre">kuberesource_workload</span></code> (scale, restart, rollback — Deployment/StatefulSet/ReplicaSet/DaemonSet), and <code class="docutils literal notranslate"><span class="pre">kuberesource_state</span></code> (apply with the active resource’s identity exposed to the manifest’s Jinja template context). All six are dormant on stock Salt — <code class="docutils literal notranslate"><span class="pre">__virtual__</span></code> returns False unless <code class="docutils literal notranslate"><span class="pre">salt.utils.resources</span></code> is importable. They light up automatically on a Salt build that includes the resources branch, at which point dispatches like <code class="docutils literal notranslate"><span class="pre">salt</span> <span class="pre">'pod:default/nginx-abc'</span> <span class="pre">kuberesource_cmd.run</span> <span class="pre">&quot;echo</span> <span class="pre">hi&quot;</span></code> route to the correct typed <code class="docutils literal notranslate"><span class="pre">kubernetes.*</span></code> execution.</p></li>
+<li><p>Added support for RBAC resources: Role, RoleBinding, ClusterRole, ClusterRoleBinding, and ServiceAccount. Each gets the standard six-verb execution-module surface (<code class="docutils literal notranslate"><span class="pre">list_*</span></code>, <code class="docutils literal notranslate"><span class="pre">show_*</span></code>, <code class="docutils literal notranslate"><span class="pre">create_*</span></code>, <code class="docutils literal notranslate"><span class="pre">replace_*</span></code>, <code class="docutils literal notranslate"><span class="pre">patch_*</span></code>, <code class="docutils literal notranslate"><span class="pre">delete_*</span></code>) and matching state functions (<code class="docutils literal notranslate"><span class="pre">*_present</span></code>, <code class="docutils literal notranslate"><span class="pre">*_absent</span></code>). Specs accept either snake_case or camelCase keys; <code class="docutils literal notranslate"><span class="pre">roleRef.apiGroup</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">rbac.authorization.k8s.io</span></code>. Replace and patch surface a clear error when the operation would change a binding’s immutable <code class="docutils literal notranslate"><span class="pre">roleRef</span></code>, matching kubectl behaviour. ClusterRole supports <code class="docutils literal notranslate"><span class="pre">aggregationRule</span></code> for aggregated roles. ServiceAccount supports <code class="docutils literal notranslate"><span class="pre">automountServiceAccountToken</span></code>, <code class="docutils literal notranslate"><span class="pre">imagePullSecrets</span></code>, and <code class="docutils literal notranslate"><span class="pre">secrets</span></code>.</p></li>
+<li><p>Added the Kubernetes resource type for Salt’s in-flight <code class="docutils literal notranslate"><span class="pre">resources</span></code> subsystem (<code class="docutils literal notranslate"><span class="pre">saltext.kubernetes.resource.kubernetes</span></code>). The module ships dormant on stock Salt — its <code class="docutils literal notranslate"><span class="pre">__virtual__</span></code> returns False when <code class="docutils literal notranslate"><span class="pre">salt.utils.resources</span></code> isn’t importable — and “lights up” automatically once a Salt build that includes the resources branch is in use. Implements the full lifecycle contract: <code class="docutils literal notranslate"><span class="pre">init</span></code>, <code class="docutils literal notranslate"><span class="pre">initialized</span></code>, <code class="docutils literal notranslate"><span class="pre">discover</span></code>, <code class="docutils literal notranslate"><span class="pre">grains</span></code>, <code class="docutils literal notranslate"><span class="pre">grains_refresh</span></code>, <code class="docutils literal notranslate"><span class="pre">shutdown</span></code>. On enabled clusters, declaring a <code class="docutils literal notranslate"><span class="pre">resources.kubernetes</span></code> block in pillar publishes pods/deployments/nodes/etc. into the master’s resource registry, where they become first-class targets for grain-based and bare-ID targeting (e.g. <code class="docutils literal notranslate"><span class="pre">salt</span> <span class="pre">-G</span> <span class="pre">'app:nginx'</span> <span class="pre">kubernetes.show_pod</span></code>).</p></li>
+<li><p>Added the user-visible generic-apply surface: <code class="docutils literal notranslate"><span class="pre">kubernetes.apply</span></code> (server-side apply one or more manifests; accepts a dict, list of dicts, YAML string, or salt:// <code class="docutils literal notranslate"><span class="pre">source</span></code> path; supports Jinja templating, multi-document YAML, fieldManager, force_conflicts, dry_run, and per-namespace defaulting), and <code class="docutils literal notranslate"><span class="pre">kubernetes.delete_manifest</span></code> (the symmetric deletion path). Companion idempotent state functions: <code class="docutils literal notranslate"><span class="pre">kubernetes.manifest_present</span></code> and <code class="docutils literal notranslate"><span class="pre">kubernetes.manifest_absent</span></code>. The state functions honour Salt’s <code class="docutils literal notranslate"><span class="pre">test=True</span></code> mode by issuing a server-side dry-run apply through the API server’s own validation — admission webhook rejections surface during <code class="docutils literal notranslate"><span class="pre">state.apply</span> <span class="pre">test=True</span></code> rather than at commit time. Unlike the typed CRUD path which silently scopes namespaced resources to <code class="docutils literal notranslate"><span class="pre">&quot;default&quot;</span></code>, the apply path requires an explicit namespace (either in <code class="docutils literal notranslate"><span class="pre">metadata.namespace</span></code> or via the <code class="docutils literal notranslate"><span class="pre">namespace</span></code> parameter) and fails loudly otherwise.</p></li>
+<li><p>Added typed support for <code class="docutils literal notranslate"><span class="pre">PersistentVolume</span></code> (cluster-scoped) and <code class="docutils literal notranslate"><span class="pre">PersistentVolumeClaim</span></code> (namespaced): 12 module functions and 4 state functions. Spec helpers validate the required <code class="docutils literal notranslate"><span class="pre">accessModes</span></code> and (for PV) <code class="docutils literal notranslate"><span class="pre">capacity</span></code> / (for PVC) <code class="docutils literal notranslate"><span class="pre">resources</span></code>. Replace and patch surface immutability errors clearly — most PV fields are immutable after binding, and PVC <code class="docutils literal notranslate"><span class="pre">accessModes</span></code>, <code class="docutils literal notranslate"><span class="pre">selector</span></code>, <code class="docutils literal notranslate"><span class="pre">volumeName</span></code>, and <code class="docutils literal notranslate"><span class="pre">storageClassName</span></code> are immutable after binding. Spec helpers now do generic camelCase→snake_case translation for unmapped keys, so volume-backend fields like <code class="docutils literal notranslate"><span class="pre">hostPath</span></code>, <code class="docutils literal notranslate"><span class="pre">nfs</span></code>, <code class="docutils literal notranslate"><span class="pre">csi</span></code>, <code class="docutils literal notranslate"><span class="pre">awsElasticBlockStore</span></code> work without per-field map entries.</p>
+<p>Four additional kinds (<code class="docutils literal notranslate"><span class="pre">NetworkPolicy</span></code>, <code class="docutils literal notranslate"><span class="pre">ResourceQuota</span></code>, <code class="docutils literal notranslate"><span class="pre">LimitRange</span></code>, <code class="docutils literal notranslate"><span class="pre">PriorityClass</span></code>) get registry entries — so the wait subsystem and <code class="docutils literal notranslate"><span class="pre">_dynamic.get_object</span></code> recognise them — but no typed CRUD wrappers. The recommended path for these is <code class="docutils literal notranslate"><span class="pre">kubernetes.apply</span></code> / <code class="docutils literal notranslate"><span class="pre">kubernetes.manifest_present</span></code>. See the new “Apply-only kinds” docs page.</p>
+</li>
+<li><p>Added typed support for the batch kinds: <code class="docutils literal notranslate"><span class="pre">kubernetes.{jobs,</span> <span class="pre">show_job,</span> <span class="pre">create_job,</span> <span class="pre">replace_job,</span> <span class="pre">patch_job,</span> <span class="pre">delete_job}</span></code> and the matching <code class="docutils literal notranslate"><span class="pre">cron_job</span></code> set, plus the <code class="docutils literal notranslate"><span class="pre">kubernetes.{job,cron_job}_{present,absent}</span></code> states. <code class="docutils literal notranslate"><span class="pre">create_job</span></code> accepts <code class="docutils literal notranslate"><span class="pre">wait_for_completion=True</span></code> to block until <code class="docutils literal notranslate"><span class="pre">status.conditions</span></code> reports <code class="docutils literal notranslate"><span class="pre">Complete=True</span></code> (or fail on <code class="docutils literal notranslate"><span class="pre">Failed=True</span></code> / wall-clock <code class="docutils literal notranslate"><span class="pre">timeout</span></code> elapsed). CronJob spec validates <code class="docutils literal notranslate"><span class="pre">concurrencyPolicy</span></code> (Allow / Forbid / Replace) and requires <code class="docutils literal notranslate"><span class="pre">schedule</span></code>. Job pod templates default <code class="docutils literal notranslate"><span class="pre">restartPolicy</span></code> to <code class="docutils literal notranslate"><span class="pre">Never</span></code> and reject <code class="docutils literal notranslate"><span class="pre">Always</span></code> (matching kubectl-create-job). Patch on these kinds passes the body through verbatim — unlike RBAC where the patch helper flattens <code class="docutils literal notranslate"><span class="pre">spec:</span></code> because those kinds have no real <code class="docutils literal notranslate"><span class="pre">.spec</span></code>, batch kinds have a genuine nested <code class="docutils literal notranslate"><span class="pre">.spec</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">spec.suspend</span></code>, <code class="docutils literal notranslate"><span class="pre">spec.schedule</span></code>) that must be preserved.</p></li>
+<li><p>Added typed support for three more kinds: <code class="docutils literal notranslate"><span class="pre">Ingress</span></code> (NetworkingV1Api), <code class="docutils literal notranslate"><span class="pre">HorizontalPodAutoscaler</span></code> (autoscaling/v2 — modern), and <code class="docutils literal notranslate"><span class="pre">PodDisruptionBudget</span></code> (PolicyV1Api). 18 module functions and 6 state functions follow the same pattern as the other typed kinds. PDB validates that exactly one of <code class="docutils literal notranslate"><span class="pre">minAvailable</span></code> / <code class="docutils literal notranslate"><span class="pre">maxUnavailable</span></code> is set (matching kubectl) and requires a <code class="docutils literal notranslate"><span class="pre">selector</span></code>. HPA spec validates the required <code class="docutils literal notranslate"><span class="pre">scaleTargetRef</span></code> and <code class="docutils literal notranslate"><span class="pre">maxReplicas</span></code>. Spec helpers translate top-level camelCase keys (<code class="docutils literal notranslate"><span class="pre">ingressClassName</span></code>, <code class="docutils literal notranslate"><span class="pre">scaleTargetRef</span></code>, <code class="docutils literal notranslate"><span class="pre">minReplicas</span></code>, <code class="docutils literal notranslate"><span class="pre">minAvailable</span></code>, etc.) to the snake_case kwargs the V1*Spec constructors expect; nested fields in user-supplied dicts (e.g. <code class="docutils literal notranslate"><span class="pre">pathType</span></code> inside ingress rules, <code class="docutils literal notranslate"><span class="pre">averageUtilization</span></code> inside HPA targets) must use the wire camelCase names.</p></li>
+<li><p>Added workload + cluster operations: <code class="docutils literal notranslate"><span class="pre">kubernetes.scale</span></code> (set replica counts on Deployment / StatefulSet / ReplicaSet via the <code class="docutils literal notranslate"><span class="pre">/scale</span></code> subresource), <code class="docutils literal notranslate"><span class="pre">kubernetes.restart</span></code> (rolling restart of Deployment / StatefulSet / DaemonSet / ReplicaSet via the <code class="docutils literal notranslate"><span class="pre">kubectl.kubernetes.io/restartedAt</span></code> pod-template annotation), <code class="docutils literal notranslate"><span class="pre">kubernetes.rollback</span></code> (revert a Deployment to a previous revision by patching the pod template from the target ReplicaSet — works on all current K8s versions, doesn’t depend on the deprecated <code class="docutils literal notranslate"><span class="pre">/rollback</span></code> subresource), and <code class="docutils literal notranslate"><span class="pre">kubernetes.cluster_info</span></code> (server version, healthz, and available API groups). Scale uses PATCH rather than read-modify-write to avoid 409 conflicts from concurrent reconciliation by the deployment controller.</p></li>
+<li><p>New docs page <code class="docutils literal notranslate"><span class="pre">topics/examples-terraform-equivalents.md</span></code> translates the common Kubernetes orchestration patterns from HashiCorp’s Terraform Kubernetes provider into equivalent Salt SLS states: app deploy (Namespace+ConfigMap+Secret+Deployment+Service), RBAC (Role+RoleBinding+ServiceAccount), Ingress with cert-manager TLS, StatefulSet with PVC and StorageClass, multi-tenant namespace template (Quota+LimitRange+NetworkPolicy+RBAC), HPA+PDB, and CRD+custom resource. Each example includes the Terraform original side-by-side with the Salt equivalent and a note on what differs in the two models.</p></li>
+<li><p>Resources subsystem now supports declarative pillar-only inventory. Requires Salt &gt;= 3008.0 (the resources subsystem under <code class="docutils literal notranslate"><span class="pre">salt.utils.resources</span></code> ships in 3008; the plug-in stays dormant on 3006/3007). The <code class="docutils literal notranslate"><span class="pre">kubernetes</span></code> resource type accepts a <code class="docutils literal notranslate"><span class="pre">resources:</span></code> list in its pillar block (e.g. <code class="docutils literal notranslate"><span class="pre">[{kind:</span> <span class="pre">deployment,</span> <span class="pre">namespace:</span> <span class="pre">prod,</span> <span class="pre">name:</span> <span class="pre">web},</span> <span class="pre">...]</span></code>) which is returned verbatim from <code class="docutils literal notranslate"><span class="pre">discover()</span></code> — no API call is made. Useful for air-gapped clusters, strict-RBAC scenarios where the discovery user lacks <code class="docutils literal notranslate"><span class="pre">list</span></code> permission, bootstrap workflows that declare resources before they exist, and avoiding discovery cost on busy clusters. Pillar key <code class="docutils literal notranslate"><span class="pre">mode:</span></code> (one of <code class="docutils literal notranslate"><span class="pre">discover</span></code>, <code class="docutils literal notranslate"><span class="pre">pillar</span></code>, <code class="docutils literal notranslate"><span class="pre">merge</span></code>) makes the precedence explicit; when omitted, <code class="docutils literal notranslate"><span class="pre">pillar</span></code> is inferred from the presence of <code class="docutils literal notranslate"><span class="pre">resources:</span></code>, otherwise <code class="docutils literal notranslate"><span class="pre">discover</span></code>. In <code class="docutils literal notranslate"><span class="pre">merge</span></code> mode the declared list is unioned with API-discovered IDs. Also adds the previously-missing <code class="docutils literal notranslate"><span class="pre">node</span></code> and <code class="docutils literal notranslate"><span class="pre">custom_resource_definition</span></code> kinds to the registry, fixes typos in <code class="docutils literal notranslate"><span class="pre">_DEFAULT_KINDS</span></code> (<code class="docutils literal notranslate"><span class="pre">stateful_set</span></code>→<code class="docutils literal notranslate"><span class="pre">statefulset</span></code>, <code class="docutils literal notranslate"><span class="pre">daemon_set</span></code>→<code class="docutils literal notranslate"><span class="pre">daemonset</span></code>) that silently disabled discovery for those kinds, and expands <code class="docutils literal notranslate"><span class="pre">_DEFAULT_KINDS</span></code> to cover the typed first-class kind set so users get useful out-of-box discovery without explicit pillar opt-in.</p></li>
+</ul>
+</section>
+</section>
+<section id="id5">
+<h2>2.0.0 (2026-04-20)<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<section id="id6">
+<h3>Breaking changes<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Dropped legacy connection setup. Either <code class="docutils literal notranslate"><span class="pre">kubeconfig</span></code> or <code class="docutils literal notranslate"><span class="pre">kubeconfig-data</span></code> and (always) <code class="docutils literal notranslate"><span class="pre">context</span></code> configuration is required now. This change affects backwards compatibility and may not work on very old versions of kubernetes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kubernetes.create_configmap</span></code> with <code class="docutils literal notranslate"><span class="pre">source</span></code> parameter now expects to receive a properly formatted spec with the configmap data in the <code class="docutils literal notranslate"><span class="pre">data</span></code> key. Previously, the loaded data was used as the data directly.</p></li>
+</ul>
+</section>
+<section id="id7">
+<h3>Changed<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>API responses now return <code class="docutils literal notranslate"><span class="pre">camelCase</span></code> keys matching Kubernetes YAML manifests instead of <code class="docutils literal notranslate"><span class="pre">snake_case</span></code>, and <code class="docutils literal notranslate"><span class="pre">_present</span></code> state functions use <code class="docutils literal notranslate"><span class="pre">patch</span></code> instead of delete-and-recreate (the <code class="docutils literal notranslate"><span class="pre">replace</span></code> parameter has been removed). <a class="reference external" href="https://github.com/salt-extensions/saltext-kubernetes/issues/16">#16</a></p></li>
+</ul>
+</section>
+<section id="id8">
+<h3>Fixed<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Added Kubernetes patch functionality to the execution module for applying patch operations to cluster resources during runtime. Also fixed general idempotency issues in absent functions by checking resource existence before modifications. <a class="reference external" href="https://github.com/salt-extensions/saltext-kubernetes/issues/16">#16</a></p></li>
+</ul>
+</section>
+<section id="id9">
+<h3>Added<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Added enhanced functionality including Jinja2 templating via <code class="docutils literal notranslate"><span class="pre">template_context</span></code> parameter, <code class="docutils literal notranslate"><span class="pre">wait</span></code> and <code class="docutils literal notranslate"><span class="pre">timeout</span></code> parameters for resource operations, <code class="docutils literal notranslate"><span class="pre">secret_type</span></code> and <code class="docutils literal notranslate"><span class="pre">metadata</span></code> parameters for secrets, and improved parameter validation across resource types. <a class="reference external" href="https://github.com/salt-extensions/saltext-kubernetes/issues/10">#10</a></p></li>
+<li><p>Added Kubernetes patch functionality to the execution module for applying patch operations to cluster resources during runtime. <a class="reference external" href="https://github.com/salt-extensions/saltext-kubernetes/issues/16">#16</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id10">
+<h2>1.1.0 (2025-01-14)<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h2>
+<section id="id11">
+<h3>Changed<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">kubernetesmod</span></code> to work with newer versions of the Kubernetes Python client. <a class="reference external" href="https://github.com/salt-extensions/saltext-kubernetes/pull/1">#1</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id12">
+<h2>1.0.1 (2023-12-29)<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h2>
+<p>Initial release of <code class="docutils literal notranslate"><span class="pre">saltext-kubernetes</span></code>. This release tracks the functionality in the core Salt code base at this point.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2020 - 2026, VMware, Inc.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Changelog</a><ul>
+<li><a class="reference internal" href="#id1">3.0.0 (2026-09-15)</a><ul>
+<li><a class="reference internal" href="#breaking-changes">Breaking changes</a></li>
+<li><a class="reference internal" href="#removed">Removed</a></li>
+<li><a class="reference internal" href="#changed">Changed</a></li>
+<li><a class="reference internal" href="#fixed">Fixed</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">2.1.0 (2026-05-22)</a><ul>
+<li><a class="reference internal" href="#deprecated">Deprecated</a></li>
+<li><a class="reference internal" href="#id3">Changed</a></li>
+<li><a class="reference internal" href="#id4">Fixed</a></li>
+<li><a class="reference internal" href="#added">Added</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">2.0.0 (2026-04-20)</a><ul>
+<li><a class="reference internal" href="#id6">Breaking changes</a></li>
+<li><a class="reference internal" href="#id7">Changed</a></li>
+<li><a class="reference internal" href="#id8">Fixed</a></li>
+<li><a class="reference internal" href="#id9">Added</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id10">1.1.0 (2025-01-14)</a><ul>
+<li><a class="reference internal" href="#id11">Changed</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id12">1.0.1 (2023-12-29)</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=d587a469"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../../_static/extension-index.js?v=435383a2"></script>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+saltext-mattermost
+==================
+
+Salt Extension for interacting with Mattermost
+
+Release: ``v1.0.0``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/configuration
+   docs/topics/installation
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-mattermost/ref/modules/index.html>`_

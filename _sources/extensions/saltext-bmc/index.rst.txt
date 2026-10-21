@@ -1,0 +1,19 @@
+saltext-bmc
+===========
+
+Salt extension for out-of-band server management via Redfish (with IPMI fallback): power, boot-device override, inventory, and sensors.
+
+Release: ``v0.0.1``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/installation
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-bmc/ref/modules/index.html>`_
+* `State modules <https://salt-extensions.github.io/saltext-bmc/ref/states/index.html>`_

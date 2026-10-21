@@ -1,0 +1,18 @@
+saltext-proxmox
+===============
+
+Salt Extension modules for Proxmox VE
+
+Release: ``v2.0.1``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/configuration
+   docs/topics/installation
+
+Provided Modules
+----------------
+

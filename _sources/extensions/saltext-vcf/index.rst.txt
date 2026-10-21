@@ -1,0 +1,32 @@
+saltext-vcf
+===========
+
+Salt Extension For VCF
+
+Release: ``v1.0.0``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/examples/nsx
+   docs/examples/sddc-manager
+   docs/examples/states-declarative
+   docs/examples/vcenter
+   docs/examples/vcf-operations
+   docs/examples/vcf-vm-resource
+   docs/examples/vks
+   docs/topics/configuration
+   docs/topics/installation
+   docs/topics/resources-framework
+   docs/topics/vcfa-integration
+   docs/topics/vks-bridge
+   docs/topics/vmsp-mediated
+   docs/topics/vsan-soap
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-vcf/ref/modules/index.html>`_
+* `State modules <https://salt-extensions.github.io/saltext-vcf/ref/states/index.html>`_

@@ -1,0 +1,23 @@
+saltext-kubernetes
+==================
+
+Salt Extension for interacting with Kubernetes
+
+Release: ``v3.0.0``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/apply-only-kinds
+   docs/topics/auth
+   docs/topics/examples-terraform-equivalents
+   docs/topics/installation
+   docs/topics/resources
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-kubernetes/ref/modules/index.html>`_
+* `State modules <https://salt-extensions.github.io/saltext-kubernetes/ref/states/index.html>`_

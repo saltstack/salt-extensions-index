@@ -1,0 +1,19 @@
+saltext-apache
+==============
+
+Salt Extension for interacting with Apache
+
+Release: ``v1.0.1``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/installation
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-apache/ref/modules/index.html>`_
+* `State modules <https://salt-extensions.github.io/saltext-apache/ref/states/index.html>`_

@@ -1,0 +1,859 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../../genindex.html"><link rel="search" title="Search" href="../../../../search.html">
+        <link rel="prefetch" href="../../../../_static/SaltProject_altlogo_teal.png" as="image">
+
+    <link rel="shortcut icon" href="../../../../_static/SaltProject_Logomark_teal.png"><!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
+        <title>Quickstart - Salt Extensions</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../index.html"><div class="brand">Salt Extensions</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../../_static/SaltProject_altlogo_teal.png" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="quickstart">
+<span id="vault-setup"></span><h1>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">¶</a></h1>
+<p>For authenticating on a Vault server, each node needs credentials.
+Currently supported authentication methods are <a class="reference external" href="https://developer.hashicorp.com/vault/docs/auth/approle">AppRoles</a> and <a class="reference external" href="https://developer.hashicorp.com/vault/docs/concepts/tokens">tokens</a>.</p>
+<p>To ease the management overhead, this extension allows the Salt master to
+distribute configuration and credentials to minions on demand.
+Thus, you only need to configure the master for the general case.</p>
+<p>Issued credentials can either be tokens or AppRoles again.</p>
+<p>:::{note}
+It’s generally recommended to authenticate with and distribute AppRoles because
+this is more secure and allows for advanced behavior. For simplicity, this
+extension currently defaults to token authentication/issuance though.</p>
+<p>For background information, see the <a class="reference internal" href="auth_faq.html#auth-faq-target"><span class="std std-ref">auth FAQ</span></a>,
+specifically the sections on <a class="reference internal" href="auth_faq.html#auth-tradeoff-target"><span class="std std-ref">static auth methods</span></a> and
+<a class="reference internal" href="auth_faq.html#issuance-tradeoff-target"><span class="std std-ref">credential issuance</span></a>.
+:::</p>
+<p>:::{hint}
+You can explicitly choose to configure each minion manually instead of relying on
+the master (). From here on, this guide assumes you are
+setting up a Salt master for credential orchestration.
+:::</p>
+<section id="security">
+<h2>Security<a class="headerlink" href="#security" title="Link to this heading">¶</a></h2>
+<p>It is highly recommended that you have a general understanding of the Vault
+authentication and authorization mechanisms that you intend to use with this
+extension and how this usage fits into your security model.</p>
+<p>The following is a non-exhaustive list of points to consider:</p>
+<ul class="simple">
+<li><p>Using <a class="reference internal" href="templating.html#vault-templating"><span class="std std-ref">templating</span></a> with grains might allow minions to access Vault policies
+they are not supposed to since they control the content themselves. Consider using
+pillars or hard coding policies instead.</p></li>
+<li><p>In general, minions should never be allowed to mutate their own pillar, otherwise
+the pillar’s trustworthiness degrades to the level of grains. Specifically, if you
+employ the Vault pillar module, a minion must not have write access to its pillar’s
+source path.</p></li>
+<li><p>Distributing AppRoles allows the Salt Master to create roles with arbitrary
+policies. A compromised Salt Master can thus escalate its privileges within the
+Vault namespace. In the present, this <a class="reference external" href="https://github.com/hashicorp/vault/issues/8789#issuecomment-1321983227">cannot be worked around with parameter constraints</a>
+in a sensible way. This may not be a problem if the Salt Master manages the Vault
+server already or if it is dedicated to Salt.</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
+<p>:::{important}
+This list shows basic examples of how to create the necessary resources to get you
+rolling quickly. It does not necessarily represent recommended practices, specifically
+regarding token/SecretID validity.
+:::</p>
+<p>:::{tab} Token</p>
+<ol class="arabic">
+<li><p>A Vault server (cluster).</p></li>
+<li><p>A <a class="reference internal" href="#token-role-target"><span class="std std-ref">Token Role</span></a>. This is not strictly required, but if
+omitted, issued minion tokens are bound to the Salt master’s token
+validity and able to inherit all its policies.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vault<span class="w"> </span>write<span class="w"> </span>auth/token/roles/salt-master<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">orphan</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">allowed_policies</span><span class="o">=</span>salt_minion<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">allowed_policies_glob</span><span class="o">=</span><span class="s1">'salt_minion_*,salt_role_*'</span><span class="w">  </span><span class="c1"># Note: the (legacy) default policies need saltstack/*</span>
+</pre></div>
+</div>
+</li>
+<li><p>A policy allowing the Salt master access to token issuance endpoints:</p>
+<div class="highlight-vaultpolicy notranslate"><div class="highlight"><pre><span></span># This is the required Salt master policy for issuing Tokens.
+
+# Issue tokens
+path "auth/token/create" {
+  capabilities = ["create", "read", "update"]
+}
+
+# Issue tokens with Token Roles
+# Substitute `salt-master` with the role name the master is configured with
+path "auth/token/create/salt-master" {
+  capabilities = ["create", "read", "update"]
+}
+</pre></div>
+</div>
+<p>You can write it to a file (e.g. <code class="docutils literal notranslate"><span class="pre">salt-master.hcl</span></code>) and create the policy like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vault<span class="w"> </span>policy<span class="w"> </span>write<span class="w"> </span>salt-master<span class="w"> </span>salt-master.hcl
+</pre></div>
+</div>
+</li>
+<li><p>Authentication credentials for the Salt master:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vault<span class="w"> </span>auth<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>-path<span class="o">=</span>approle<span class="w"> </span>approle
+vault<span class="w"> </span>write<span class="w"> </span>auth/approle/role/salt-master<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">token_policies</span><span class="o">=</span>salt-master<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">secret_id_num_uses</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">secret_id_ttl</span><span class="o">=</span>720h<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">token_ttl</span><span class="o">=</span>30m<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">token_max_ttl</span><span class="o">=</span><span class="m">0</span>
+<span class="c1"># Show RoleID</span>
+vault<span class="w"> </span><span class="nb">read</span><span class="w"> </span>auth/approle/role/salt-master/role-id
+<span class="c1"># Generate new SecretID</span>
+vault<span class="w"> </span>write<span class="w"> </span>-f<span class="w"> </span>auth/approle/role/salt-master/secret-id
+</pre></div>
+</div>
+</li>
+<li><p>Policies for minions as needed.
+:::</p></li>
+</ol>
+<p>:::{tab} AppRole</p>
+<ol class="arabic">
+<li><p>A Vault server (cluster).</p></li>
+<li><p>A separate (unused) mount of the AppRole auth backend, called <code class="docutils literal notranslate"><span class="pre">salt-minions</span></code> by default:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vault<span class="w"> </span>auth<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>-path<span class="o">=</span>salt-minions<span class="w"> </span>approle
+<span class="c1"># You will need the mount accessor to replace the placeholder</span>
+<span class="c1"># in the policy below, so look it up now:</span>
+vault<span class="w"> </span><span class="nb">read</span><span class="w"> </span>-format<span class="w"> </span>json<span class="w"> </span>sys/auth/salt-minions<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">'.data.accessor'</span>
+</pre></div>
+</div>
+</li>
+<li><p>A policy allowing the Salt master access to AppRole issuance endpoints:</p>
+<div class="highlight-vaultpolicy notranslate"><div class="highlight"><pre><span></span># This is the required Salt master policy for issuing AppRoles.
+# Note that credentials should be issued from a distinct mount,
+# not the one the Salt master AppRole is configured at.
+# This separate mount is called `salt-minions` by default.
+
+# List existing AppRoles
+path "auth/salt-minions/role" {
+  capabilities = ["list"]
+}
+
+# Manage AppRoles
+# This enables the Salt Master to create roles with arbitrary policies.
+# If you need to restrict the assignable policies, issue tokens instead.
+path "auth/salt-minions/role/*" {
+  capabilities = ["read", "create", "update", "delete"]
+}
+
+# Lookup mount accessor
+path "sys/auth/salt-minions" {
+  capabilities = ["read", "sudo"]
+}
+
+# Lookup entities by alias name (role-id) and alias mount accessor
+path "identity/lookup/entity" {
+  capabilities = ["create", "update"]
+  allowed_parameters = {
+    "alias_name" = []
+    # Replace `auth_approle_0a1b2c3d` with the output of the previous step
+    "alias_mount_accessor" = ["auth_approle_0a1b2c3d"]
+  }
+}
+
+# Manage entities with name prefix salt_minion_
+path "identity/entity/name/salt_minion_*" {
+  capabilities = ["read", "create", "update", "delete"]
+}
+
+# Create entity aliases – you can restrict the mount_accessor.
+# This might allow privilege escalation in case the Salt master
+# is compromised and the attacker knows the entity ID of an
+# entity with relevant policies attached - although you might
+# have other problems at that point.
+path "identity/entity-alias" {
+  capabilities = ["create", "update"]
+  allowed_parameters = {
+    "id" = []
+    "canonical_id" = []
+    # Replace `auth_approle_0a1b2c3d` with the output of the previous step
+    "mount_accessor" = ["auth_approle_0a1b2c3d"]
+    "name" = []
+  }
+}
+</pre></div>
+</div>
+</li>
+<li><p>Authentication credentials for the Salt master.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vault<span class="w"> </span>auth<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>-path<span class="o">=</span>approle<span class="w"> </span>approle
+vault<span class="w"> </span>write<span class="w"> </span>auth/approle/role/salt-master<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">token_policies</span><span class="o">=</span>salt-master<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">secret_id_num_uses</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">secret_id_ttl</span><span class="o">=</span>720h<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">token_ttl</span><span class="o">=</span>30m<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">token_max_ttl</span><span class="o">=</span><span class="m">0</span>
+<span class="c1"># Show RoleID</span>
+vault<span class="w"> </span><span class="nb">read</span><span class="w"> </span>auth/approle/role/salt-master/role-id
+<span class="c1"># Generate new SecretID</span>
+vault<span class="w"> </span>write<span class="w"> </span>-f<span class="w"> </span>auth/approle/role/salt-master/secret-id
+</pre></div>
+</div>
+</li>
+<li><p>Policies for minions as needed.
+:::</p></li>
+</ol>
+</section>
+<section id="salt-master-configuration">
+<h2>Salt master configuration<a class="headerlink" href="#salt-master-configuration" title="Link to this heading">¶</a></h2>
+<section id="credential-orchestration">
+<h3>Credential orchestration<a class="headerlink" href="#credential-orchestration" title="Link to this heading">¶</a></h3>
+<p>To allow minions to pull configuration and credentials from the Salt master,
+add this segment to the master configuration, e.g. in <code class="docutils literal notranslate"><span class="pre">/etc/salt/master.d/peer_run.conf</span></code>:</p>
+<p>:::{tab} Token</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">peer_run</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">.*</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vault.get_config</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vault.generate_new_token</span>
+</pre></div>
+</div>
+<p>:::</p>
+<p>:::{tab} AppRole</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">peer_run</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">.*</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vault.get_config</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vault.generate_secret_id</span>
+</pre></div>
+</div>
+<p>:::</p>
+</section>
+<section id="required-parameters">
+<h3>Required parameters<a class="headerlink" href="#required-parameters" title="Link to this heading">¶</a></h3>
+<p>All parameters for this extension should be put under the <code class="docutils literal notranslate"><span class="pre">vault</span></code> key inside the
+configuration, e.g. in <code class="docutils literal notranslate"><span class="pre">/etc/salt/master.d/vault.conf</span></code>.</p>
+<section id="master-authentication">
+<h4>Master authentication<a class="headerlink" href="#master-authentication" title="Link to this heading">¶</a></h4>
+<p>:::{tab} AppRole auth</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vault</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">auth</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">approle</span>
+<span class="w">    </span><span class="nt">role_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-salt-master-role-id&gt;</span>
+<span class="w">    </span><span class="nt">secret_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-salt-master-secret-id&gt;</span>
+<span class="w">  </span><span class="nt">server</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://vault.example.org:8200</span>
+</pre></div>
+</div>
+<p>:::</p>
+<p>:::{tab} Token auth</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vault</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">auth</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-auth-token&gt;</span>
+<span class="w">  </span><span class="nt">server</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://vault.example.org:8200</span>
+</pre></div>
+</div>
+<p>:::</p>
+</section>
+<section id="credential-issuance">
+<span id="token-role-target"></span><h4>Credential issuance<a class="headerlink" href="#credential-issuance" title="Link to this heading">¶</a></h4>
+<p>:::{tab} Token
+By default, token issuance endpoints restrict assignment to only a subset
+of the requester’s policies and tie the child token’s validity to the parent token.
+This configuration requires the Salt master to possess all policies it assigns
+to minions. Additionally, it allows minions to potentially inherit token issuance
+authorizations.</p>
+<p>To overcome these restrictions without relying on <code class="docutils literal notranslate"><span class="pre">sudo</span></code> capabilities, it is highly
+recommended to configure a Token Role. This allows for specifying assignable
+policies without these constraints and optionally enables the “orphaning” of child tokens,
+allowing them to remain valid beyond the Salt master token’s expiration.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vault</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">issue</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">token</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">role_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-token-role&gt;</span>
+</pre></div>
+</div>
+<p>:::</p>
+<p>:::{tab} AppRole</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vault</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">issue</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">approle</span>
+</pre></div>
+</div>
+<p>:::</p>
+</section>
+</section>
+<section id="common-customizations">
+<h3>Common customizations<a class="headerlink" href="#common-customizations" title="Link to this heading">¶</a></h3>
+<p>A couple of configuration values are not required, but commonly customized.</p>
+<section id="cache">
+<h4>Cache<a class="headerlink" href="#cache" title="Link to this heading">¶</a></h4>
+<p>For historical reasons, this extension currently defaults to not employing a persistent cache.
+This is a very inefficient setup and does not work with long-lived leases, so you should
+configure a persistent :</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vault</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">cache</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">disk</span><span class="w">  </span><span class="c1"># synonyms: file, localfs</span>
+</pre></div>
+</div>
+</section>
+<section id="credential-validity">
+<h4>Credential validity<a class="headerlink" href="#credential-validity" title="Link to this heading">¶</a></h4>
+<p>Depending on your usage of Vault, the validity defaults for issued credentials might have
+to be customized.</p>
+<p>:::{tab} Token
+Again for historical reasons, token issuance has very inefficient defaults.
+For each request to Vault, the minion requests a new token by default.
+It is generally recommended to raise the defaults:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vault</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">issue</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">token</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">params</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">explicit_max_ttl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w">  </span><span class="c1"># Tokens are valid for 30s</span>
+<span class="w">        </span><span class="nt">num_uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">          </span><span class="c1"># Tokens are limited to 10 uses</span>
+</pre></div>
+</div>
+<p>:::</p>
+<p>:::{tab} AppRole
+The defaults are sane for light usage.
+:::</p>
+</section>
+<section id="policies">
+<h4>Policies<a class="headerlink" href="#policies" title="Link to this heading">¶</a></h4>
+<p>Authenticated clients need associated authorizations to be useful. Policies describe the
+operations a client is allowed to perform.</p>
+<p>By default, minions receive the following named policies:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">saltstack/minions</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">saltstack/&lt;minion_id&gt;</span></code></p></li>
+</ul>
+<p>:::{important}
+You need to create these policies yourself. Missing policies do not cause errors, but minions
+are left with the default permissions only if none of the assigned policies exist.
+:::</p>
+<p>You can customize which policies are assigned to minions. They can be <a class="reference internal" href="templating.html#vault-templating"><span class="std std-ref">templated</span></a>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vault</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">policies</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">assign</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">salt_minion</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">salt_minion_{minion}</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">salt_role_{pillar[roles]}</span>
+<span class="w">      </span><span class="c1"># While it's theoretically possible to use {grains[roles]} here</span>
+<span class="w">      </span><span class="c1"># for backwards-compatibility reasons, it's HIGHLY discouraged.</span>
+<span class="w">      </span><span class="c1"># The minion reports grains itself, so a compromised minion would</span>
+<span class="w">      </span><span class="c1"># be able to assign arbitrary roles to itself.</span>
+</pre></div>
+</div>
+<p>:::{note}
+AppRole policies and entity metadata are generally not updated
+automatically. After a change, you need to synchronize
+them by running <a class="reference internal" href="#saltext.vault.runners.vault.sync_approles"><span class="xref myst">vault.sync_approles</span></a>
+or <a class="reference internal" href="#saltext.vault.runners.vault.sync_entities"><span class="xref myst">vault.sync_entities</span></a> respectively.
+:::</p>
+</section>
+<section id="entity-metadata">
+<h4>Entity metadata<a class="headerlink" href="#entity-metadata" title="Link to this heading">¶</a></h4>
+<p>You can customize the  that is written to Vault
+when creating <a class="reference external" href="https://developer.hashicorp.com/vault/docs/concepts/identity">Entities</a>. <a class="reference internal" href="templating.html"><span class="doc std std-doc">Templating</span></a> is supported. This metadata can then
+be used in a templated Vault policy, reducing the need for boilerplate policies a lot:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vault</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">entity</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">minion-id</span><span class="p">:</span><span class="w"> </span><span class="s">'{minion}'</span>
+<span class="w">      </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="s">'{pillar[role]}'</span>
+</pre></div>
+</div>
+<p>This allows you to create a single policy like:</p>
+<div class="highlight-vaultpolicy notranslate"><div class="highlight"><pre><span></span>  path "salt/data/minions/{{identity.entity.metadata.minion-id}}" {
+      capabilities = ["create", "read", "update", "delete", "patch"]
+  }
+
+  path "salt/data/roles/{{identity.entity.metadata.role}}" {
+      capabilities = ["read"]
+  }
+</pre></div>
+</div>
+<p>:::{important}
+Entities are only created when issuing AppRoles, not tokens.
+:::</p>
+</section>
+</section>
+<section id="complete-examples">
+<span id="example-config-target"></span><h3>Complete examples<a class="headerlink" href="#complete-examples" title="Link to this heading">¶</a></h3>
+<p>:::{tab} Token</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vault</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">auth</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># This master authenticates with an AppRole, but</span>
+<span class="w">    </span><span class="c1"># issues tokens</span>
+<span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">approle</span>
+<span class="w">    </span><span class="nt">role_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">e5a7b66e-5d08-da9c-7075-71984634b882</span>
+<span class="w">    </span><span class="nt">secret_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">841771dc-11c9-bbc7-bcac-6a3945a69cd9</span>
+<span class="w">  </span><span class="nt">cache</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">disk</span>
+<span class="w">  </span><span class="nt">issue</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">token</span>
+<span class="w">    </span><span class="nt">token</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">role_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">salt-master</span>
+<span class="w">      </span><span class="nt">params</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">explicit_max_ttl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<span class="w">        </span><span class="nt">num_uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">  </span><span class="nt">policies</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">assign</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'salt_minion'</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'salt_minion_{minion}'</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'salt_role_{pillar[roles]}'</span>
+<span class="w">  </span><span class="nt">server</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://vault.example.com:8200</span>
+</pre></div>
+</div>
+<p>:::</p>
+<p>:::{tab} AppRole</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vault</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">auth</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">approle</span>
+<span class="w">    </span><span class="nt">approle_mount</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">approle</span><span class="w">  </span><span class="c1"># &lt;-- mount the Salt master authenticates at</span>
+<span class="w">    </span><span class="nt">role_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">e5a7b66e-5d08-da9c-7075-71984634b882</span>
+<span class="w">    </span><span class="nt">secret_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">841771dc-11c9-bbc7-bcac-6a3945a69cd9</span>
+<span class="w">  </span><span class="nt">cache</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">disk</span>
+<span class="w">  </span><span class="nt">issue</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">approle</span>
+<span class="w">    </span><span class="nt">approle</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">mount</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">salt-minions</span><span class="w">   </span><span class="c1"># &lt;-- mount the Salt master manages</span>
+<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">entity</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">minion-id</span><span class="p">:</span><span class="w"> </span><span class="s">'{minion}'</span>
+<span class="w">      </span><span class="nt">roles</span><span class="p">:</span><span class="w"> </span><span class="s">'{pillar[roles]}'</span>
+<span class="w">  </span><span class="nt">policies</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">assign</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">salt_minion</span>
+<span class="w">  </span><span class="nt">server</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://vault.example.com:8200</span>
+</pre></div>
+</div>
+<p>:::</p>
+</section>
+</section>
+<section id="secrets-setup">
+<h2>Secrets setup<a class="headerlink" href="#secrets-setup" title="Link to this heading">¶</a></h2>
+<p>Decide how you want to map minions to authorizations. A common pattern is to create policies
+based on minion IDs and minion roles, as shown in the <a class="reference internal" href="#example-config-target"><span class="std std-ref">example config</span></a> above.
+This example setup is continued here.</p>
+<section id="mount-the-kv-backend">
+<h3>Mount the KV backend<a class="headerlink" href="#mount-the-kv-backend" title="Link to this heading">¶</a></h3>
+<p>Mount the Key/Value v2 backend to a path, e.g. <code class="docutils literal notranslate"><span class="pre">salt</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vault<span class="w"> </span>secrets<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>-path<span class="o">=</span>salt<span class="w"> </span>-version<span class="o">=</span><span class="m">2</span><span class="w"> </span>kv
+</pre></div>
+</div>
+</section>
+<section id="create-secrets">
+<h3>Create secrets<a class="headerlink" href="#create-secrets" title="Link to this heading">¶</a></h3>
+<p>Write a secret that is accessible to all minions:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vault<span class="w"> </span>kv<span class="w"> </span>put<span class="w"> </span>-mount<span class="o">=</span>salt<span class="w"> </span>general/accessible_for_all_minions<span class="w"> </span><span class="nv">all_foo</span><span class="o">=</span>bar
+</pre></div>
+</div>
+<p>Write a secret that is accessible to any minion that has the <code class="docutils literal notranslate"><span class="pre">db</span></code> role:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vault<span class="w"> </span>kv<span class="w"> </span>put<span class="w"> </span>-mount<span class="o">=</span>salt<span class="w"> </span>roles/db<span class="w"> </span><span class="nv">db_foo</span><span class="o">=</span>baz
+</pre></div>
+</div>
+<p>Write a secret that is accessible to a specific minion named <code class="docutils literal notranslate"><span class="pre">elliott</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vault<span class="w"> </span>kv<span class="w"> </span>put<span class="w"> </span>-mount<span class="o">=</span>salt<span class="w"> </span>minions/elliott<span class="w"> </span><span class="nv">minion_foo</span><span class="o">=</span>quux
+</pre></div>
+</div>
+</section>
+<section id="create-policies">
+<h3>Create policies<a class="headerlink" href="#create-policies" title="Link to this heading">¶</a></h3>
+<p>Create the policies that map necessary authorizations. The optimal setup
+depends on the </p>
+<p>:::{warning}
+If a secret path is used as a minion pillar, the minion <strong>must not have
+write access</strong>, otherwise a core security assumption in Salt is violated.
+:::</p>
+<p>:::{important}
+Even if you only intend to use the secrets for minion pillars, you need
+to create minion policies. The master uses these policies to decide
+whether a minion should receive a specific pillar. The master token should not
+have access to secret paths itself. For details, see <a class="reference internal" href="auth_faq.html#pillar-impersonation-target"><span class="std std-ref">Pillar impersonation</span></a>.
+:::</p>
+<p>:::{tab} Token
+When issuing tokens, you cannot take advantage of minion metadata for templated Vault policies.
+You need to create all policies explicitly (consider automating this):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vault<span class="w"> </span>policy<span class="w"> </span>write<span class="w"> </span>salt_minion<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;'EOF'</span>
+<span class="s">path "salt/data/general/*" {</span>
+<span class="s">  capabilities = ["read"]</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+
+vault<span class="w"> </span>policy<span class="w"> </span>write<span class="w"> </span>salt_role_db<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;'EOF'</span>
+<span class="s">path "salt/data/roles/db" {</span>
+<span class="s">  capabilities = ["read"]</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+<span class="c1"># + other roles as needed</span>
+
+vault<span class="w"> </span>policy<span class="w"> </span>write<span class="w"> </span>salt_minion_elliott<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;'EOF'</span>
+<span class="s">path "salt/data/minions/elliott" {</span>
+<span class="s">  capabilities = ["read"]</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+<span class="c1"># + other minions as needed</span>
+</pre></div>
+</div>
+<p>:::</p>
+<p>:::{tab} AppRole
+When issuing AppRoles, you can take advantage of minion metadata for templated Vault policies.
+This means a single policy should cover most minions and roles:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vault<span class="w"> </span>policy<span class="w"> </span>write<span class="w"> </span>salt_minion<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;'EOF'</span>
+<span class="s">path "salt/data/general/*" {</span>
+<span class="s">    capabilities = ["read"]</span>
+<span class="s">}</span>
+
+<span class="s">path "salt/data/minions/{{identity.entity.metadata.minion-id}}" {</span>
+<span class="s">    capabilities = ["read"]</span>
+<span class="s">}</span>
+
+<span class="s">path "salt/data/roles/{{identity.entity.metadata.roles__0}}" {</span>
+<span class="s">    capabilities = ["read"]</span>
+<span class="s">}</span>
+
+<span class="s">path "salt/data/roles/{{identity.entity.metadata.roles__1}}" {</span>
+<span class="s">    capabilities = ["read"]</span>
+<span class="s">}</span>
+
+<span class="s">path "salt/data/roles/{{identity.entity.metadata.roles__2}}" {</span>
+<span class="s">    capabilities = ["read"]</span>
+<span class="s">}</span>
+
+<span class="s">path "salt/data/roles/{{identity.entity.metadata.roles__3}}" {</span>
+<span class="s">    capabilities = ["read"]</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+<p>::::{hint}
+See <a class="reference internal" href="templating.html#metadata-templating-target"><span class="std std-ref">entity metadata templating</span></a> for details, especially
+to understand why the <code class="docutils literal notranslate"><span class="pre">roles</span></code> mapping is repeated multiple times.
+::::</p>
+</section>
+<section id="test-access">
+<h3>Test access<a class="headerlink" href="#test-access" title="Link to this heading">¶</a></h3>
+<p>Now you can test that the minion is able to read all secrets:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">[root@master ~]# </span>salt<span class="w"> </span>elliott<span class="w"> </span>vault.read_secret<span class="w"> </span>salt/general/accessible_for_all_minions
+<span class="go">elliott:</span>
+<span class="go">    ----------</span>
+<span class="go">    all_foo: bar</span>
+<span class="gp">[root@master ~]# </span>salt<span class="w"> </span>elliott<span class="w"> </span>vault.read_secret<span class="w"> </span>salt/roles/db
+<span class="go">elliott:</span>
+<span class="go">    ----------</span>
+<span class="go">    db_foo: baz</span>
+<span class="gp">[root@master ~]# </span>salt<span class="w"> </span>elliott<span class="w"> </span>vault.read_secret<span class="w"> </span>salt/minions/elliott
+<span class="go">elliott:</span>
+<span class="go">    ----------</span>
+<span class="go">    minion_foo: quux</span>
+</pre></div>
+</div>
+<p>If this fails, re-issue the minion’s token and try again:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>salt<span class="w"> </span>elliott<span class="w"> </span>vault.clear_cache
+</pre></div>
+</div>
+<p>If it still fails and you are issuing AppRoles, manually sync AppRoles and Entities,
+re-issue the minion’s SecretID and try again:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>salt-run<span class="w"> </span>vault.sync_approles
+salt-run<span class="w"> </span>vault.sync_entities
+salt<span class="w"> </span>elliott<span class="w"> </span>vault.clear_cache
+</pre></div>
+</div>
+<p>Lastly, verify that minions without authorization to access these can’t.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2020 - 2026, VMware, Inc.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Quickstart</a><ul>
+<li><a class="reference internal" href="#security">Security</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#salt-master-configuration">Salt master configuration</a><ul>
+<li><a class="reference internal" href="#credential-orchestration">Credential orchestration</a></li>
+<li><a class="reference internal" href="#required-parameters">Required parameters</a><ul>
+<li><a class="reference internal" href="#master-authentication">Master authentication</a></li>
+<li><a class="reference internal" href="#credential-issuance">Credential issuance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#common-customizations">Common customizations</a><ul>
+<li><a class="reference internal" href="#cache">Cache</a></li>
+<li><a class="reference internal" href="#credential-validity">Credential validity</a></li>
+<li><a class="reference internal" href="#policies">Policies</a></li>
+<li><a class="reference internal" href="#entity-metadata">Entity metadata</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#complete-examples">Complete examples</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#secrets-setup">Secrets setup</a><ul>
+<li><a class="reference internal" href="#mount-the-kv-backend">Mount the KV backend</a></li>
+<li><a class="reference internal" href="#create-secrets">Create secrets</a></li>
+<li><a class="reference internal" href="#create-policies">Create policies</a></li>
+<li><a class="reference internal" href="#test-access">Test access</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../../_static/documentation_options.js?v=d587a469"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../../../_static/extension-index.js?v=435383a2"></script>
+    </body>
+</html>

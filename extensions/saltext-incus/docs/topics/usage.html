@@ -1,0 +1,701 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../../genindex.html"><link rel="search" title="Search" href="../../../../search.html">
+        <link rel="prefetch" href="../../../../_static/SaltProject_altlogo_teal.png" as="image">
+
+    <link rel="shortcut icon" href="../../../../_static/SaltProject_Logomark_teal.png"><!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
+        <title>Using saltext-incus - Salt Extensions</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../index.html"><div class="brand">Salt Extensions</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../../_static/SaltProject_altlogo_teal.png" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="using-saltext-incus">
+<h1>Using saltext-incus<a class="headerlink" href="#using-saltext-incus" title="Link to this heading">¶</a></h1>
+<p>This extension manages Incus instances from Salt. It has two surfaces:</p>
+<ol class="arabic simple">
+<li><p>Instance lifecycle (create, start, stop, configure, delete) driven through
+the <code class="docutils literal notranslate"><span class="pre">incus</span></code> command line.</p></li>
+<li><p>Agentless in-instance state application: apply SLS inside an instance over
+<code class="docutils literal notranslate"><span class="pre">incus</span> <span class="pre">exec</span></code> with no resident minion, the way <code class="docutils literal notranslate"><span class="pre">docker.sls</span></code> works for
+containers.</p></li>
+</ol>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
+<p>Run these modules on the minion that is the Incus host (the machine where the
+<code class="docutils literal notranslate"><span class="pre">incus</span></code> client talks to the local daemon). That minion needs the <code class="docutils literal notranslate"><span class="pre">incus</span></code>
+binary on its PATH. The control node runs Salt 3007 or 3008.</p>
+<p>For the in-instance apply functions (<code class="docutils literal notranslate"><span class="pre">incus.call</span></code>, <code class="docutils literal notranslate"><span class="pre">incus.sls</span></code>, and the
+<code class="docutils literal notranslate"><span class="pre">sls_applied</span></code> state) with the default <code class="docutils literal notranslate"><span class="pre">thin</span></code> transport, the target instance
+needs only a Python 3 interpreter. No Salt installation in the instance is
+required. If the instance already has Salt installed, you can use
+<code class="docutils literal notranslate"><span class="pre">transport:</span> <span class="pre">baked</span></code> to run its own <code class="docutils literal notranslate"><span class="pre">salt-call</span></code> instead of shipping the thin.</p>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h2>
+<p>Optional settings live under the <code class="docutils literal notranslate"><span class="pre">incus:</span></code> namespace in the minion config,
+grains or pillar, and are read with <code class="docutils literal notranslate"><span class="pre">config.get</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">incus</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># Extra Python modules to fold into the shipped thin, same meaning as in</span>
+<span class="w">  </span><span class="c1"># salt-ssh. Usually unnecessary.</span>
+<span class="w">  </span><span class="nt">thin_extra_mods</span><span class="p">:</span><span class="w"> </span><span class="s">""</span>
+<span class="w">  </span><span class="nt">thin_so_mods</span><span class="p">:</span><span class="w"> </span><span class="s">""</span>
+</pre></div>
+</div>
+<p>Most calls take an optional <code class="docutils literal notranslate"><span class="pre">project</span></code> argument to scope the operation to a
+non-default Incus project. Projects, networks, storage pools and profiles are
+referenced by name; this version does not manage them as their own resources.</p>
+</section>
+<section id="execution-module">
+<h2>Execution module<a class="headerlink" href="#execution-module" title="Link to this heading">¶</a></h2>
+<p>All examples target a single Incus host minion. Replace <code class="docutils literal notranslate"><span class="pre">'incus-host'</span></code> with
+your own target, or use <code class="docutils literal notranslate"><span class="pre">salt-call</span></code> locally on the host.</p>
+<section id="lifecycle">
+<h3>Lifecycle<a class="headerlink" href="#lifecycle" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create from an image and start it</span>
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.create<span class="w"> </span>web01<span class="w"> </span>images:alpine/edge<span class="w"> </span><span class="nv">start</span><span class="o">=</span>True
+
+<span class="c1"># Create with config and a profile, leave it stopped</span>
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.create<span class="w"> </span>web01<span class="w"> </span>images:alpine/edge<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">profiles</span><span class="o">=</span><span class="s1">'[default, web]'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">config</span><span class="o">=</span><span class="s1">'{limits.cpu: "2", boot.autostart: true}'</span>
+
+<span class="c1"># Start, stop, restart</span>
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.start<span class="w"> </span>web01
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.stop<span class="w"> </span>web01<span class="w"> </span><span class="nv">timeout</span><span class="o">=</span><span class="m">30</span>
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.restart<span class="w"> </span>web01
+
+<span class="c1"># Inspect: returns the full instance dict (status, config, devices, profiles)</span>
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.info<span class="w"> </span>web01
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.exists<span class="w"> </span>web01
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.list
+
+<span class="c1"># Config keys</span>
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.config_set<span class="w"> </span>web01<span class="w"> </span>boot.autostart<span class="w"> </span><span class="nb">true</span>
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.config_unset<span class="w"> </span>web01<span class="w"> </span>boot.autostart
+
+<span class="c1"># Devices</span>
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.device_add<span class="w"> </span>web01<span class="w"> </span>data<span class="w"> </span>disk<span class="w"> </span><span class="nv">source</span><span class="o">=</span>/srv/web01<span class="w"> </span><span class="nv">path</span><span class="o">=</span>/data
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.device_remove<span class="w"> </span>web01<span class="w"> </span>data
+
+<span class="c1"># Delete</span>
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.delete<span class="w"> </span>web01
+</pre></div>
+</div>
+</section>
+<section id="running-a-command-inside-an-instance">
+<h3>Running a command inside an instance<a class="headerlink" href="#running-a-command-inside-an-instance" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">incus.call</span></code> runs a single Salt execution function inside the instance:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.call<span class="w"> </span>web01<span class="w"> </span>test.ping
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.call<span class="w"> </span>web01<span class="w"> </span>cmd.run<span class="w"> </span><span class="s1">'id -un'</span>
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.call<span class="w"> </span>web01<span class="w"> </span>pkg.install<span class="w"> </span>nginx
+</pre></div>
+</div>
+</section>
+<section id="applying-sls-inside-an-instance">
+<h3>Applying SLS inside an instance<a class="headerlink" href="#applying-sls-inside-an-instance" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">incus.sls</span></code> applies one or more SLS modules inside the instance and returns
+the highstate result. The SLS and any pillar are resolved on the control node;
+the instance does not need a master or a minion.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply two SLS modules</span>
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.sls<span class="w"> </span>web01<span class="w"> </span><span class="nv">mods</span><span class="o">=</span>access.users,access.sshd
+
+<span class="c1"># Dry run (nothing changes inside the instance)</span>
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.sls<span class="w"> </span>web01<span class="w"> </span><span class="nv">mods</span><span class="o">=</span>hardening<span class="w"> </span><span class="nv">test</span><span class="o">=</span>True
+
+<span class="c1"># Precompiled mode: no SLS source or Jinja ever reaches the instance</span>
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.sls<span class="w"> </span>web01<span class="w"> </span><span class="nv">mods</span><span class="o">=</span>hardening<span class="w"> </span><span class="nv">precompiled</span><span class="o">=</span>True
+</pre></div>
+</div>
+<p>Key arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mods</span></code>: SLS modules, as a comma-separated string on the CLI or a list in a
+state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pillar</span></code>: pillar data, already resolved on the control node. It is shipped
+as a root-only file and never placed on the command line.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">test</span></code>: run in test mode.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transport</span></code>: <code class="docutils literal notranslate"><span class="pre">thin</span></code> (default) ships the thin per run; <code class="docutils literal notranslate"><span class="pre">baked</span></code> uses the
+instance’s own <code class="docutils literal notranslate"><span class="pre">salt-call</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">precompiled</span></code>: <code class="docutils literal notranslate"><span class="pre">False</span></code> (default) ships SLS source and renders in-instance;
+<code class="docutils literal notranslate"><span class="pre">True</span></code> compiles on the control node and applies a self-contained tarball.
+See <a class="reference internal" href="#choosing-a-render-strategy">Choosing a render strategy</a> below.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cleanup</span></code>: <code class="docutils literal notranslate"><span class="pre">True</span></code> (default) removes the in-instance staging directory
+after the run. Set <code class="docutils literal notranslate"><span class="pre">False</span></code> to leave it for debugging.</p></li>
+</ul>
+</section>
+<section id="building-an-image">
+<h3>Building an image<a class="headerlink" href="#building-an-image" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">incus.sls_build</span></code> launches a throwaway instance from a base image, applies SLS
+inside it, stops it, publishes it as a local image, and always deletes the
+throwaway instance afterward:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build and publish an image aliased mycorp/web</span>
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.sls_build<span class="w"> </span>mycorp/web<span class="w"> </span><span class="nv">base</span><span class="o">=</span>images:alpine/edge<span class="w"> </span><span class="nv">mods</span><span class="o">=</span>web,hardening
+
+<span class="c1"># Dry run: apply in test mode, do not publish</span>
+salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>incus.sls_build<span class="w"> </span>mycorp/web<span class="w"> </span><span class="nv">base</span><span class="o">=</span>images:alpine/edge<span class="w"> </span><span class="nv">mods</span><span class="o">=</span>web<span class="w"> </span><span class="nv">test</span><span class="o">=</span>True
+</pre></div>
+</div>
+</section>
+</section>
+<section id="state-module">
+<h2>State module<a class="headerlink" href="#state-module" title="Link to this heading">¶</a></h2>
+<section id="incus-present">
+<h3>incus.present<a class="headerlink" href="#incus-present" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">present</span></code> ensures an instance exists with the declared config and devices. It
+reconciles additively: it sets the config keys and devices you declare and
+leaves everything else alone. It does not remove the <code class="docutils literal notranslate"><span class="pre">volatile.*</span></code> and
+<code class="docutils literal notranslate"><span class="pre">image.*</span></code> keys Incus injects, and it does not remove devices inherited from
+profiles. Profiles are attached at creation and are not reconciled afterward.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">web01 present</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">incus.present</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web01</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">images:alpine/edge</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">running</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">profiles</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">limits.cpu</span><span class="p">:</span><span class="w"> </span><span class="s">"2"</span>
+<span class="w">        </span><span class="nt">limits.memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2GiB</span>
+<span class="w">        </span><span class="nt">boot.autostart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">devices</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">data</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">disk</span>
+<span class="w">          </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/srv/web01-data</span>
+<span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/data</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">running:</span> <span class="pre">true</span></code> ensures the instance is started, <code class="docutils literal notranslate"><span class="pre">running:</span> <span class="pre">false</span></code> ensures it
+is stopped, and omitting it leaves the run state untouched. <code class="docutils literal notranslate"><span class="pre">image</span></code> is required
+only when the instance must be created.</p>
+</section>
+<section id="incus-running-incus-stopped-incus-absent">
+<h3>incus.running, incus.stopped, incus.absent<a class="headerlink" href="#incus-running-incus-stopped-incus-absent" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">web01 running</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">incus.running</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web01</span>
+
+<span class="nt">batch01 stopped</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">incus.stopped</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">batch01</span>
+
+<span class="nt">old01 absent</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">incus.absent</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">old01</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">running</span></code> and <code class="docutils literal notranslate"><span class="pre">stopped</span></code> fail if the instance does not exist. <code class="docutils literal notranslate"><span class="pre">absent</span></code> is a
+no-op if it is already gone.</p>
+</section>
+<section id="incus-sls-applied">
+<h3>incus.sls_applied<a class="headerlink" href="#incus-sls-applied" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">sls_applied</span></code> applies SLS inside a running instance through the agentless thin
+path. The instance must already exist and be running, so compose it after
+<code class="docutils literal notranslate"><span class="pre">present</span></code> or <code class="docutils literal notranslate"><span class="pre">running</span></code> with a requisite. The in-instance highstate result is
+mapped onto this state: any failed inner state fails this state, <code class="docutils literal notranslate"><span class="pre">test=True</span></code>
+yields a <code class="docutils literal notranslate"><span class="pre">None</span></code> result, and the inner changes are reported through
+<code class="docutils literal notranslate"><span class="pre">changes</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">web01 present</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">incus.present</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web01</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">images:alpine/edge</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">running</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="nt">web01 configured</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">incus.sls_applied</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web01</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">mods</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">access.users</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">access.sshd</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">require</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">incus</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web01 present</span>
+</pre></div>
+</div>
+</section>
+<section id="a-complete-sls-applied-example-nginx-on-alpine">
+<h3>A complete sls_applied example: nginx on Alpine<a class="headerlink" href="#a-complete-sls-applied-example-nginx-on-alpine" title="Link to this heading">¶</a></h3>
+<p>If you have not used <code class="docutils literal notranslate"><span class="pre">sls_applied</span></code> before, here is the whole chain end to end.
+The goal: stand up an Alpine instance and, inside it, install nginx and enable it
+as a boot service. Nothing runs an agent inside the instance; Salt ships itself
+in for the duration of the run and cleans up after.</p>
+<p>There are two pieces: the ordinary SLS that describes the in-instance state, and
+the orchestrating SLS that runs on the Incus host minion.</p>
+<p><strong>1. The in-instance SLS</strong> lives in your control node’s file_roots, exactly like
+any other SLS you would apply to a minion. Save this as <code class="docutils literal notranslate"><span class="pre">nginx/init.sls</span></code> (so it
+is referenced by the mod name <code class="docutils literal notranslate"><span class="pre">nginx</span></code>):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># salt://nginx/init.sls</span>
+<span class="nt">nginx</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pkg.installed</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+
+<span class="nt">nginx service</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">service.running</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">require</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pkg</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+</pre></div>
+</div>
+<p>This is not Incus-specific in any way. <code class="docutils literal notranslate"><span class="pre">pkg.installed</span></code> installs the <code class="docutils literal notranslate"><span class="pre">nginx</span></code>
+package, and <code class="docutils literal notranslate"><span class="pre">service.running</span></code> with <code class="docutils literal notranslate"><span class="pre">enable:</span> <span class="pre">true</span></code> starts it and adds it to
+the boot runlevel. The <code class="docutils literal notranslate"><span class="pre">require</span></code> makes sure the package is installed before
+Salt tries to start the service.</p>
+<p><strong>2. The orchestrating SLS</strong> runs on the minion that is the Incus host. Save it
+as <code class="docutils literal notranslate"><span class="pre">incus_web.sls</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># salt://incus_web.sls   (applied on the Incus host minion)</span>
+
+<span class="nt">web01 present</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">incus.present</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web01</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">images:alpine/3.20</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">running</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="nt">web01 has python3</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">cmd.run</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">incus exec web01 -- apk add --no-cache python3</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">unless</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">incus exec web01 -- /bin/sh -c "command -v python3"</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">require</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">incus</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web01 present</span>
+
+<span class="nt">web01 nginx configured</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">incus.sls_applied</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web01</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">mods</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">require</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cmd</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web01 has python3</span>
+</pre></div>
+</div>
+<p>The middle state is the one Alpine-specific wrinkle: stock Alpine images do not
+ship a Python interpreter, and the default <code class="docutils literal notranslate"><span class="pre">thin</span></code> transport needs Python 3
+inside the instance to run <code class="docutils literal notranslate"><span class="pre">salt-call</span></code>. This <code class="docutils literal notranslate"><span class="pre">cmd.run</span></code> installs it once (the
+<code class="docutils literal notranslate"><span class="pre">unless</span></code> guard skips it on later runs), using the instance’s outbound network,
+which the default Incus bridge provides. An image that already includes Python 3
+would not need this step.</p>
+<p>Apply it on the host:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>state.apply<span class="w"> </span>incus_web
+</pre></div>
+</div>
+<p>What happens, in order:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">web01</span> <span class="pre">present</span></code> runs on the host. Salt calls the <code class="docutils literal notranslate"><span class="pre">incus</span></code> CLI to create
+<code class="docutils literal notranslate"><span class="pre">web01</span></code> from <code class="docutils literal notranslate"><span class="pre">images:alpine/3.20</span></code> and start it. On the first run this
+reports the instance as created; on later runs it finds the instance already
+matches and reports no changes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">web01</span> <span class="pre">has</span> <span class="pre">python3</span></code> runs <code class="docutils literal notranslate"><span class="pre">apk</span> <span class="pre">add</span> <span class="pre">python3</span></code> inside the instance so the thin
+has an interpreter to run under.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">web01</span> <span class="pre">nginx</span> <span class="pre">configured</span></code> is the <code class="docutils literal notranslate"><span class="pre">sls_applied</span></code> call. Under the hood it:</p>
+<ol class="arabic simple">
+<li><p>Confirms <code class="docutils literal notranslate"><span class="pre">web01</span></code> exists and is running (it fails fast if not, which is
+why the requisites above start it first).</p></li>
+<li><p>On the control node, gathers the <code class="docutils literal notranslate"><span class="pre">nginx</span></code> SLS source from your file_roots.</p></li>
+<li><p>Ships the Salt thin, that SLS source, and a small masterless minion config
+into a root-only directory under <code class="docutils literal notranslate"><span class="pre">/run</span></code> inside the instance.</p></li>
+<li><p>Runs <code class="docutils literal notranslate"><span class="pre">salt-call</span> <span class="pre">--local</span> <span class="pre">state.apply</span> <span class="pre">nginx</span></code> inside the instance. Salt
+detects the OS as Alpine, so <code class="docutils literal notranslate"><span class="pre">pkg.installed</span></code> resolves to <code class="docutils literal notranslate"><span class="pre">apk</span> <span class="pre">add</span>
+<span class="pre">nginx</span></code> and <code class="docutils literal notranslate"><span class="pre">service.running</span></code> uses OpenRC (<code class="docutils literal notranslate"><span class="pre">rc-service</span> <span class="pre">nginx</span> <span class="pre">start</span></code>
+plus <code class="docutils literal notranslate"><span class="pre">rc-update</span> <span class="pre">add</span> <span class="pre">nginx</span></code>).</p></li>
+<li><p>Removes the staging directory from the instance.</p></li>
+<li><p>Returns the in-instance highstate to the host. <code class="docutils literal notranslate"><span class="pre">sls_applied</span></code> maps it onto
+its own result: every inner state succeeded, so this state’s result is
+<code class="docutils literal notranslate"><span class="pre">True</span></code>, and the inner changes surface under <code class="docutils literal notranslate"><span class="pre">changes</span></code>.</p></li>
+</ol>
+</li>
+</ol>
+<p><strong>Reading the result.</strong> The host-side output for the last state looks roughly
+like this on the first run:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>----------
+          ID: web01 nginx configured
+    Function: incus.sls_applied
+      Result: True
+     Comment: applied 2 in-instance states (2 changed)
+     Changes:
+              ----------
+              nginx:
+                  ----------
+                  new:
+                      &lt;installed nginx version&gt;
+                  old:
+              nginx service:
+                  ----------
+                  nginx:
+                      True
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Changes</span></code> block is the in-instance highstate folded up: the <code class="docutils literal notranslate"><span class="pre">nginx</span></code>
+package was installed, and the <code class="docutils literal notranslate"><span class="pre">nginx</span> <span class="pre">service</span></code> state reports the service is now
+running and enabled.</p>
+<p><strong>Idempotency.</strong> Apply the same SLS again and nothing changes. <code class="docutils literal notranslate"><span class="pre">web01</span> <span class="pre">present</span></code>
+finds the instance already in its declared state, <code class="docutils literal notranslate"><span class="pre">web01</span> <span class="pre">has</span> <span class="pre">python3</span></code> is
+skipped by its <code class="docutils literal notranslate"><span class="pre">unless</span></code>, and <code class="docutils literal notranslate"><span class="pre">web01</span> <span class="pre">nginx</span> <span class="pre">configured</span></code> runs the in-instance
+apply again but finds nginx already installed and the service already running and
+enabled. <code class="docutils literal notranslate"><span class="pre">sls_applied</span></code> then reports <code class="docutils literal notranslate"><span class="pre">Result:</span> <span class="pre">True</span></code> with <code class="docutils literal notranslate"><span class="pre">applied</span> <span class="pre">2</span>
+<span class="pre">in-instance</span> <span class="pre">states</span> <span class="pre">(0</span> <span class="pre">changed)</span></code> and an empty <code class="docutils literal notranslate"><span class="pre">Changes</span></code> block. It is safe to
+run on every highstate.</p>
+<p><strong>Test mode.</strong> To preview without changing anything, add <code class="docutils literal notranslate"><span class="pre">test=True</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>salt<span class="w"> </span><span class="s1">'incus-host'</span><span class="w"> </span>state.apply<span class="w"> </span>incus_web<span class="w"> </span><span class="nv">test</span><span class="o">=</span>True
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">incus.present</span></code> reports what it would create or change, and <code class="docutils literal notranslate"><span class="pre">sls_applied</span></code>
+runs the in-instance apply in test mode so each inner state reports what it would
+do with a <code class="docutils literal notranslate"><span class="pre">None</span></code> result, while nothing is actually installed or started inside
+the instance.</p>
+</section>
+<section id="passing-pillar-to-sls-applied">
+<h3>Passing pillar to sls_applied<a class="headerlink" href="#passing-pillar-to-sls-applied" title="Link to this heading">¶</a></h3>
+<p>Pillar is resolved on the control node and passed through the <code class="docutils literal notranslate"><span class="pre">pillar</span></code>
+argument. The idiomatic way to forward a pillar subtree is the <code class="docutils literal notranslate"><span class="pre">json</span></code> Jinja
+filter, which emits a JSON object that is also valid YAML, so the state receives
+a real dict:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">web01 configured</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">incus.sls_applied</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web01</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">mods</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">access.users</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pillar</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">access</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">salt</span><span class="p p-Indicator">[</span><span class="s">'pillar.get'</span><span class="p p-Indicator">]</span><span class="nv">('access'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="nv">) | json</span><span class="w"> </span><span class="p p-Indicator">}}</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">require</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">incus</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web01 present</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Decrypt any GPG or Vault values before passing them, since the resolved
+values are what gets shipped (as a root-only file) into the instance.</p>
+</div>
+</section>
+<section id="precompiled-application-in-a-state">
+<h3>Precompiled application in a state<a class="headerlink" href="#precompiled-application-in-a-state" title="Link to this heading">¶</a></h3>
+<p>Set <code class="docutils literal notranslate"><span class="pre">precompiled:</span> <span class="pre">true</span></code> to compile on the control node and ship low state
+instead of SLS source:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">web01 hardened</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">incus.sls_applied</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web01</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">mods</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hardening</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">precompiled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">require</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">incus</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web01 present</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="choosing-a-render-strategy">
+<h2>Choosing a render strategy<a class="headerlink" href="#choosing-a-render-strategy" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">incus.sls</span></code> and <code class="docutils literal notranslate"><span class="pre">sls_applied</span></code> support two strategies, selected by
+<code class="docutils literal notranslate"><span class="pre">precompiled</span></code>.</p>
+<p>Use the default (<code class="docutils literal notranslate"><span class="pre">precompiled:</span> <span class="pre">false</span></code>) for most cases. The requested SLS
+source is shipped into the instance and <code class="docutils literal notranslate"><span class="pre">state.apply</span></code> runs there, so Jinja and
+<code class="docutils literal notranslate"><span class="pre">map.jinja</span></code> render against the instance’s own grains. The one limitation is
+that only the requested mods’ top-level component directories are shipped
+(applying <code class="docutils literal notranslate"><span class="pre">access.users</span></code> ships all of <code class="docutils literal notranslate"><span class="pre">salt://access/</span></code>). A <code class="docutils literal notranslate"><span class="pre">salt://</span></code> file
+source that lives in a different component is not shipped by this strategy.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">precompiled:</span> <span class="pre">true</span></code> when you need files from other components shipped, or
+when you want no SLS source, Jinja or macros to reach the instance at all. The
+low state is compiled on the control node using the instance’s grains (gathered
+first), referenced files are gathered, and a self-contained tarball is applied
+with <code class="docutils literal notranslate"><span class="pre">state.pkg</span></code>. The trade-off is that the state set must compile cleanly
+off-instance.</p>
+</section>
+<section id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Link to this heading">¶</a></h2>
+<p>Set <code class="docutils literal notranslate"><span class="pre">cleanup:</span> <span class="pre">false</span></code> (state) or <code class="docutils literal notranslate"><span class="pre">cleanup=False</span></code> (CLI) to leave the
+in-instance staging directory in place after a run so you can inspect it. It
+lives under <code class="docutils literal notranslate"><span class="pre">/run/salt.incus.&lt;random&gt;</span></code> and is owned by root with mode 0700.</p>
+<p>If the instance already has Salt installed and you want to use it instead of
+shipping the thin, pass <code class="docutils literal notranslate"><span class="pre">transport:</span> <span class="pre">baked</span></code>.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2020 - 2026, VMware, Inc.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Using saltext-incus</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#execution-module">Execution module</a><ul>
+<li><a class="reference internal" href="#lifecycle">Lifecycle</a></li>
+<li><a class="reference internal" href="#running-a-command-inside-an-instance">Running a command inside an instance</a></li>
+<li><a class="reference internal" href="#applying-sls-inside-an-instance">Applying SLS inside an instance</a></li>
+<li><a class="reference internal" href="#building-an-image">Building an image</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#state-module">State module</a><ul>
+<li><a class="reference internal" href="#incus-present">incus.present</a></li>
+<li><a class="reference internal" href="#incus-running-incus-stopped-incus-absent">incus.running, incus.stopped, incus.absent</a></li>
+<li><a class="reference internal" href="#incus-sls-applied">incus.sls_applied</a></li>
+<li><a class="reference internal" href="#a-complete-sls-applied-example-nginx-on-alpine">A complete sls_applied example: nginx on Alpine</a></li>
+<li><a class="reference internal" href="#passing-pillar-to-sls-applied">Passing pillar to sls_applied</a></li>
+<li><a class="reference internal" href="#precompiled-application-in-a-state">Precompiled application in a state</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#choosing-a-render-strategy">Choosing a render strategy</a></li>
+<li><a class="reference internal" href="#debugging">Debugging</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../../_static/documentation_options.js?v=d587a469"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../../../_static/extension-index.js?v=435383a2"></script>
+    </body>
+</html>

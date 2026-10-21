@@ -1,0 +1,21 @@
+saltext-virt
+============
+
+Salt extension documentation
+
+Release: ``v0.1.0``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/installation
+   docs/topics/virt/disk
+   docs/topics/virt/nic
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-virt/ref/modules/index.html>`_
+* `State modules <https://salt-extensions.github.io/saltext-virt/ref/states/index.html>`_

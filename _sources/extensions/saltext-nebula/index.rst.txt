@@ -1,0 +1,26 @@
+saltext-nebula
+==============
+
+A SaltStack extension module that allows you to fully manage the lifecycle of your nebula mesh infrastructure.
+
+Release: ``v1.2.0``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/certificate-management
+   docs/topics/cross-platform
+   docs/topics/installation
+   docs/topics/ip-allocation
+   docs/topics/master-configuration
+   docs/topics/pillar-configuration
+   docs/topics/quickstart
+   docs/topics/state-examples
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-nebula/ref/modules/index.html>`_
+* `State modules <https://salt-extensions.github.io/saltext-nebula/ref/states/index.html>`_

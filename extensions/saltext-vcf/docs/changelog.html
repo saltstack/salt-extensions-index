@@ -1,0 +1,352 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../genindex.html"><link rel="search" title="Search" href="../../../search.html">
+        <link rel="prefetch" href="../../../_static/SaltProject_altlogo_teal.png" as="image">
+
+    <link rel="shortcut icon" href="../../../_static/SaltProject_Logomark_teal.png"><!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
+        <title>Changelog - Salt Extensions</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">Salt Extensions</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/SaltProject_altlogo_teal.png" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">¶</a></h1>
+<p>The changelog format is based on <a class="reference external" href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>.</p>
+<p>This project uses <a class="reference external" href="https://semver.org/">Semantic Versioning</a> - MAJOR.MINOR.PATCH</p>
+<section id="id1">
+<h2>1.0.0 (2026-06-07)<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<section id="breaking-changes">
+<h3>Breaking changes<a class="headerlink" href="#breaking-changes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Renamed project from <code class="docutils literal notranslate"><span class="pre">saltext-vmware</span></code> to <code class="docutils literal notranslate"><span class="pre">saltext-vcf</span></code>. The PyPI distribution, GitHub repository, and Python import path (<code class="docutils literal notranslate"><span class="pre">saltext.vmware</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">saltext.vcf</span></code>) all change. Salt loader module names also rename from <code class="docutils literal notranslate"><span class="pre">vmware_*</span></code> to <code class="docutils literal notranslate"><span class="pre">vcf_*</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">vmware_vcenter_appliance</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">vcf_vcenter_appliance</span></code>); update any state, pillar, or CLI references accordingly. VMware-defined identifiers (<code class="docutils literal notranslate"><span class="pre">vmware_accepted</span></code> / <code class="docutils literal notranslate"><span class="pre">vmware_certified</span></code> VIB acceptance levels, <code class="docutils literal notranslate"><span class="pre">vmware_soap_session</span></code> cookie, <code class="docutils literal notranslate"><span class="pre">vmware-api-session-id</span></code> header, <code class="docutils literal notranslate"><span class="pre">pyvmomi</span></code>, <code class="docutils literal notranslate"><span class="pre">vmware-vcenter</span></code>/<code class="docutils literal notranslate"><span class="pre">vmware-vcf</span></code> PyPI dependencies) are unchanged.</p></li>
+</ul>
+</section>
+<section id="removed">
+<h3>Removed<a class="headerlink" href="#removed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Removed the <code class="docutils literal notranslate"><span class="pre">installer_credentials</span></code>, <code class="docutils literal notranslate"><span class="pre">installer_logs</span></code>, and <code class="docutils literal notranslate"><span class="pre">installer_system</span></code> clients and execution modules. Their <code class="docutils literal notranslate"><span class="pre">/v1/system/security/passwords</span></code> / <code class="docutils literal notranslate"><span class="pre">/v1/system/log-bundles</span></code> / <code class="docutils literal notranslate"><span class="pre">/v1/system/*</span></code> endpoints did not exist on the actual VCF Installer build; <code class="docutils literal notranslate"><span class="pre">installer_bringup</span></code> and <code class="docutils literal notranslate"><span class="pre">fleet_password</span></code> remain as the verified installer-side surfaces.</p></li>
+</ul>
+</section>
+<section id="changed">
+<h3>Changed<a class="headerlink" href="#changed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>ESXi standalone clients (<code class="docutils literal notranslate"><span class="pre">esxi_advanced</span></code>, <code class="docutils literal notranslate"><span class="pre">esxi_firewall</span></code>, <code class="docutils literal notranslate"><span class="pre">esxi_host</span></code>, <code class="docutils literal notranslate"><span class="pre">esxi_ntp</span></code>, <code class="docutils literal notranslate"><span class="pre">esxi_service</span></code>, <code class="docutils literal notranslate"><span class="pre">esxi_syslog</span></code>) and <code class="docutils literal notranslate"><span class="pre">utils/esxi</span></code> now use pyVmomi SOAP (<code class="docutils literal notranslate"><span class="pre">SmartConnect</span></code> / <code class="docutils literal notranslate"><span class="pre">/sdk</span></code>) instead of REST <code class="docutils literal notranslate"><span class="pre">/api/session</span></code>. Shuttle-deployed lab hosts omit the vAPI endpoint entirely, and ESXi joined to vCenter blocks <code class="docutils literal notranslate"><span class="pre">/api/session</span></code> with HTTP 400; SOAP is the universally available surface. The execution-module names and dunder keys (<code class="docutils literal notranslate"><span class="pre">vcf_esxi_*</span></code>) are unchanged.</p></li>
+</ul>
+</section>
+<section id="fixed">
+<h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fix several vCenter 9 / VCF 9 REST body shapes discovered against the live lab: <code class="docutils literal notranslate"><span class="pre">vcenter_content_library.update_session_add_file</span></code> now uses the path-style <code class="docutils literal notranslate"><span class="pre">/api/content/library/item/update-session/{session_id}/file?action=add</span></code> (the legacy POST <code class="docutils literal notranslate"><span class="pre">/updatesession/file</span></code> shape 404s on vSphere 9); <code class="docutils literal notranslate"><span class="pre">vcenter_content_library.create_local</span></code> / <code class="docutils literal notranslate"><span class="pre">create_subscribed</span></code> send the spec at the root (no more <code class="docutils literal notranslate"><span class="pre">create_spec</span></code> wrapper); <code class="docutils literal notranslate"><span class="pre">vcenter_appliance.dns_set</span></code> / <code class="docutils literal notranslate"><span class="pre">logging_forwarding_set</span></code> use PUT (PATCH returns 405); <code class="docutils literal notranslate"><span class="pre">sddc_certificates.create_csrs</span></code> sends <code class="docutils literal notranslate"><span class="pre">{csrGenerationSpec,</span> <span class="pre">resources}</span></code> instead of a flat list.</p></li>
+<li><p>VDS and DPG (Distributed Port Group) lifecycle mutators (<code class="docutils literal notranslate"><span class="pre">vim_dvs.create</span></code>/<code class="docutils literal notranslate"><span class="pre">reconfigure</span></code>/<code class="docutils literal notranslate"><span class="pre">delete</span></code>/<code class="docutils literal notranslate"><span class="pre">add_host</span></code>/<code class="docutils literal notranslate"><span class="pre">remove_host</span></code>, <code class="docutils literal notranslate"><span class="pre">vim_dvs_portgroup._add</span></code>/<code class="docutils literal notranslate"><span class="pre">reconfigure</span></code>/<code class="docutils literal notranslate"><span class="pre">delete</span></code>) now wait on the underlying pyVmomi <code class="docutils literal notranslate"><span class="pre">*_Task</span></code> before returning. A shared <code class="docutils literal notranslate"><span class="pre">utils/vim.wait_for_task</span></code> helper drives the wait. Previously callers raced the task and <code class="docutils literal notranslate"><span class="pre">list_()</span></code> could return a stale view immediately after a successful-looking create.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nsx_ipsec_vpn.create_ike_profile</span></code> / <code class="docutils literal notranslate"><span class="pre">create_tunnel_profile</span></code> / <code class="docutils literal notranslate"><span class="pre">create_dpd_profile</span></code> now auto-inject the appropriate <code class="docutils literal notranslate"><span class="pre">resource_type</span></code> (<code class="docutils literal notranslate"><span class="pre">IPSecVpnIkeProfile</span></code> / <code class="docutils literal notranslate"><span class="pre">IPSecVpnTunnelProfile</span></code> / <code class="docutils literal notranslate"><span class="pre">IPSecVpnDpdProfile</span></code>) so NSX 9 stops rejecting the PUT with HTTP 400. Callers can still override via <code class="docutils literal notranslate"><span class="pre">resource_type=</span></code> in the spec.</p></li>
+</ul>
+</section>
+<section id="added">
+<h3>Added<a class="headerlink" href="#added" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Added a <code class="docutils literal notranslate"><span class="pre">CLI</span> <span class="pre">Example:</span></code> doc-example harness: <code class="docutils literal notranslate"><span class="pre">tests/_doc_examples</span></code> parses every <code class="docutils literal notranslate"><span class="pre">salt</span> <span class="pre">'*'</span> <span class="pre">&lt;mod&gt;.&lt;func&gt;</span> <span class="pre">...</span></code> line out of module docstrings and exposes them to two passes. <code class="docutils literal notranslate"><span class="pre">tests/unit/test_doc_examples</span></code> is a signature-check pass that asserts the virtual module name resolves and the documented args bind to the function. The companion saltext-vcf-integration repo runs the same parsed examples against a live VCF lab.</p></li>
+<li><p>Bootstrap the VCF Installer onto a bare ESXi host via pyVmomi OVF deploy. <code class="docutils literal notranslate"><span class="pre">clients/ovf_deploy</span></code> adds a tarball-parse + <code class="docutils literal notranslate"><span class="pre">OvfManager.CreateImportSpec</span></code> + <code class="docutils literal notranslate"><span class="pre">HttpNfcLease</span></code> PUT pipeline (with vmware_soap_session cookie + <code class="docutils literal notranslate"><span class="pre">Overwrite:</span> <span class="pre">t</span></code> header so ESXi’s ha-nfc daemon authorizes the upload), a streaming HTTPS PUT for multi-GB VMDKs, and <code class="docutils literal notranslate"><span class="pre">wait_for_task</span></code>-driven power-on. State module <code class="docutils literal notranslate"><span class="pre">vcf_installer_appliance</span></code> exposes this as a declarative <code class="docutils literal notranslate"><span class="pre">installer.running</span></code> workflow.</p></li>
+<li><p>New topology + tooling clients: <code class="docutils literal notranslate"><span class="pre">automation_topology</span></code> (cross-component view of a VCF Automation deployment), <code class="docutils literal notranslate"><span class="pre">installer_topology</span></code> (introspects the bringup spec / running installer), and <code class="docutils literal notranslate"><span class="pre">ovftool_deploy</span></code> (subprocess wrapper around <code class="docutils literal notranslate"><span class="pre">ovftool</span></code> for callers that prefer it over the pure-pyVmomi path).</p></li>
+<li><p>The vCenter per-request HTTP timeout is now configurable. <code class="docutils literal notranslate"><span class="pre">utils/vcenter.api_*</span></code> helpers accept an optional <code class="docutils literal notranslate"><span class="pre">timeout=</span></code> kwarg; the default is also tunable via the <code class="docutils literal notranslate"><span class="pre">saltext.vcf.vcenter.timeout</span></code> pillar key. <code class="docutils literal notranslate"><span class="pre">vcenter_content_library.ovf_deploy</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">timeout=1800</span></code> (30 min) so OVF deploys no longer race the previous hard-coded 30 s read timeout.</p></li>
+<li><p>VCF Automation (VCFA / Aria Automation 9.x) end-to-end integration: new <code class="docutils literal notranslate"><span class="pre">utils/vcfa</span></code> with two-step CSP refresh-token auth, per-(host,user) token cache, transparent bearer re-mint on 401, configurable per-request timeout, multipart helper, and a <code class="docutils literal notranslate"><span class="pre">wait_for_deployment</span></code> poller. Eighteen new client / execution-module pairs cover cloud accounts, cloud zones, storage profiles, network profiles, projects, project users, cloud templates (blueprint versions), policies, catalog (items + sources), vRO packages, vRO configuration elements, workflow runs, ABX actions, action secrets, action subscriptions, resource actions, IAM role bindings, and custom roles.</p></li>
+<li><p>VCF Operations fleet certificate management: new <code class="docutils literal notranslate"><span class="pre">vcfops_fleet_certificates</span></code> client + module covering the fleet-wide certificate inventory, renewal scheduling, and rotation operations exposed by VCF Operations (separate from the truststore surface in <code class="docutils literal notranslate"><span class="pre">vcfops_certificate</span></code>). Contributed by <code class="docutils literal notranslate"><span class="pre">Denys</span> <span class="pre">Aleksandrov</span> <span class="pre">&lt;https://github.com/denysaleksandrov&gt;</span></code>_.</p></li>
+<li><p>VCF Operations fleet password and certificate surfaces: new <code class="docutils literal notranslate"><span class="pre">vcfops_fleet_passwords</span></code> (the VCF 9.x replacement for the SDDC-Manager-backed <code class="docutils literal notranslate"><span class="pre">fleet_password</span></code>) wraps <code class="docutils literal notranslate"><span class="pre">/suite-api/api/fleet-management/password-management</span></code> with paginated <code class="docutils literal notranslate"><span class="pre">list_</span></code>, <code class="docutils literal notranslate"><span class="pre">get_account</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, and a <code class="docutils literal notranslate"><span class="pre">check_expiry(threshold_days=90)</span></code> helper that buckets accounts into <code class="docutils literal notranslate"><span class="pre">ok</span></code> / <code class="docutils literal notranslate"><span class="pre">expiring</span></code> / <code class="docutils literal notranslate"><span class="pre">noExpiry</span></code> with ISO-rendered expiry dates. New <code class="docutils literal notranslate"><span class="pre">vcfops_certificate</span></code> wraps the VCF Ops truststore (<code class="docutils literal notranslate"><span class="pre">/suite-api/api/certificate</span></code>) for list / get / delete by thumbprint.</p></li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h2>0.1.0 (2026-05-14)<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="id3">
+<h3>Added<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>VCF Installer (formerly Cloud Builder) support: utils + clients for system/bringup/credentials/logs, modules, declarative bringup state, plus live lab spin-up/teardown coverage in the integration repo. <a class="reference external" href="https://github.com/salt-extensions/saltext-vcf/issues/3">#3</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2020 - 2026, VMware, Inc.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Changelog</a><ul>
+<li><a class="reference internal" href="#id1">1.0.0 (2026-06-07)</a><ul>
+<li><a class="reference internal" href="#breaking-changes">Breaking changes</a></li>
+<li><a class="reference internal" href="#removed">Removed</a></li>
+<li><a class="reference internal" href="#changed">Changed</a></li>
+<li><a class="reference internal" href="#fixed">Fixed</a></li>
+<li><a class="reference internal" href="#added">Added</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">0.1.0 (2026-05-14)</a><ul>
+<li><a class="reference internal" href="#id3">Added</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=d587a469"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../../_static/extension-index.js?v=435383a2"></script>
+    </body>
+</html>

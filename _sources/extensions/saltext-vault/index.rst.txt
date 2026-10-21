@@ -1,0 +1,23 @@
+saltext-vault
+=============
+
+Salt Extension for interacting with HashiCorp Vault (or OpenBao)
+
+Release: ``v1.8.0``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/auth_faq
+   docs/topics/installation
+   docs/topics/migration_from_core
+   docs/topics/quickstart
+   docs/topics/templating
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-vault/ref/modules/index.html>`_
+* `State modules <https://salt-extensions.github.io/saltext-vault/ref/states/index.html>`_

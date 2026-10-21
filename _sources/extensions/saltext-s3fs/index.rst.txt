@@ -1,0 +1,17 @@
+saltext-s3fs
+============
+
+Salt extension for S3FS
+
+Release: ``v1.0.0``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/installation
+
+Provided Modules
+----------------
+

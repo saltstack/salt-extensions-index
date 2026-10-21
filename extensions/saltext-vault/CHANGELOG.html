@@ -1,0 +1,677 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html">
+        <link rel="prefetch" href="../../_static/SaltProject_altlogo_teal.png" as="image">
+
+    <link rel="shortcut icon" href="../../_static/SaltProject_Logomark_teal.png"><!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
+        <title>Changelog - Salt Extensions</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">Salt Extensions</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/SaltProject_altlogo_teal.png" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <p>The changelog format is based on <a class="reference external" href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>.</p>
+<p>This project uses <a class="reference external" href="https://semver.org/">Semantic Versioning</a> - MAJOR.MINOR.PATCH</p>
+<section id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">¶</a></h1>
+<section id="id1">
+<h2>1.8.0 (2026-08-09)<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<section id="changed">
+<h3>Changed<a class="headerlink" href="#changed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Made <code class="docutils literal notranslate"><span class="pre">destroy</span></code> and <code class="docutils literal notranslate"><span class="pre">wipe</span></code> operations proxy to <code class="docutils literal notranslate"><span class="pre">delete</span></code> on KV v1 secrets instead of refusing with an exception</p></li>
+</ul>
+</section>
+<section id="fixed">
+<h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_pki.certificate_managed</span></code> not detecting changes to requested <code class="docutils literal notranslate"><span class="pre">alt_names</span></code> <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/127">#127</a></p></li>
+<li><p>Fixed KV lookup failures in very specific situations when a KV v1 mount has the full name of a KV v2 mount as a prefix</p></li>
+<li><p>Fixed KVv2 paths whose root key started with KVv2 prefixes such as <code class="docutils literal notranslate"><span class="pre">data</span></code> (example: <code class="docutils literal notranslate"><span class="pre">secret_mount/database</span></code>) from being mishandled and leading to permission denied/not found errors</p></li>
+<li><p>Fixed LeaseStore.get not flushing already expired leases from cache when called without <code class="docutils literal notranslate"><span class="pre">revoke</span></code> argument</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">sdb.get</span></code>/<code class="docutils literal notranslate"><span class="pre">sdb.set</span></code> raising an unhandled <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> instead of a usage error when the SDB URI did not contain a path/key separator</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">sdb.set</span></code> with SDB module and single-use tokens issued by the master when the <code class="docutils literal notranslate"><span class="pre">patch</span></code> option was enabled in the profile</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">sdb.set</span></code> with the <code class="docutils literal notranslate"><span class="pre">patch</span></code> option enabled unexpectedly overwriting the complete secret when its data could not be read (e.g. write-only policies or exhausted token uses)</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault.auth_info</span></code> runner crashing when AppRole is configured with <code class="docutils literal notranslate"><span class="pre">bind_secret_id:</span> <span class="pre">false</span></code></p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault.clear_cache</span></code> runner not clearing cached AppRole metadata/rendered policies when <code class="docutils literal notranslate"><span class="pre">cache:backend</span></code> is <code class="docutils literal notranslate"><span class="pre">session</span></code> and not revoking impersonated minion tokens</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_db.connection_present</span></code> failing and rewriting the connection on every run for plugins with secret parameters other than <code class="docutils literal notranslate"><span class="pre">password</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">private_key</span></code> for <code class="docutils literal notranslate"><span class="pre">mongodb_atlas</span></code></p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_db.connection_present</span></code> mishandling <code class="docutils literal notranslate"><span class="pre">root_rotation_statements</span></code> passed as a string</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_db.connection_present</span></code> raising an uncaught exception instead of failing cleanly when required plugin parameters were missing</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_db.creds_cached</span></code> crashing or misdetecting the need for renewal when the cached lease’s <code class="docutils literal notranslate"><span class="pre">min_ttl</span></code> and the requested <code class="docutils literal notranslate"><span class="pre">valid_for</span></code> were specified as a mix of time strings and integers</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_db.creds_cached</span></code> resetting cached lease attributes (<code class="docutils literal notranslate"><span class="pre">renew_increment</span></code>, <code class="docutils literal notranslate"><span class="pre">revoke_delay</span></code>, <code class="docutils literal notranslate"><span class="pre">meta</span></code>) that were not specified in the state call when applying other changes</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_db.creds_cached</span></code>/<code class="docutils literal notranslate"><span class="pre">creds_uncached</span></code> raising uncaught exceptions instead of reporting failures via the state result</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_lease</span></code> beacon configuration validation raising an exception instead of reporting a validation failure when lease cache keys were not strings</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_pki.certificate_managed</span></code> crashing instead of failing cleanly when the issuer reference did not exist</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_pki.certificate_managed</span></code> crashing on subsequent runs when <code class="docutils literal notranslate"><span class="pre">encoding</span></code> was set to <code class="docutils literal notranslate"><span class="pre">der</span></code></p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_pki.certificate_managed</span></code> with <code class="docutils literal notranslate"><span class="pre">append_ca_chain</span></code> never converging for binary encodings. The chain is now included for <code class="docutils literal notranslate"><span class="pre">pkcs7_der</span></code>, while the impossible combination with <code class="docutils literal notranslate"><span class="pre">der</span></code> fails early</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_pki.issue_certificate</span></code>/<code class="docutils literal notranslate"><span class="pre">sign_certificate</span></code> corrupting SANs when <code class="docutils literal notranslate"><span class="pre">alt_names</span></code> is passed as a mapping</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_pki.list_certificates</span></code>/<code class="docutils literal notranslate"><span class="pre">list_revoked_certificates</span></code> raising an exception instead of returning an empty list when no (revoked) certificates are present</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_pki.role_managed</span></code> rewriting the role on every run when list-type (e.g. <code class="docutils literal notranslate"><span class="pre">allowed_domains</span></code>) or duration (<code class="docutils literal notranslate"><span class="pre">not_before_duration</span></code>, not <code class="docutils literal notranslate"><span class="pre">ttl</span></code>/<code class="docutils literal notranslate"><span class="pre">max_ttl</span></code>) parameters were specified as strings</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_secret.present</span></code> crashing when replacing an existing scalar value with a mapping in the default patch mode</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_secret.present</span></code> failing or silently dropping secret keys named like function parameters (e.g. <code class="docutils literal notranslate"><span class="pre">path</span></code>) or prefixed with double underscores</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_ssh.ca_present/absent</span></code> failing to work as expected when the authenticated read CA config path was denied</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_ssh.get_signing_policy</span></code> reporting a phantom empty principal/extension when <code class="docutils literal notranslate"><span class="pre">allowed_users</span></code>, <code class="docutils literal notranslate"><span class="pre">allowed_domains</span></code> or <code class="docutils literal notranslate"><span class="pre">allowed_extensions</span></code> are unset on the role</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_ssh.list_roles_ip</span></code> returning None instead of an empty list when no role matches IP on recent Vault releases</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_ssh.role_present_ca</span></code> never converging when <code class="docutils literal notranslate"><span class="pre">allowed_user_key_lengths</span></code> values were specified as comma-separated strings</p></li>
+<li><p>Fixed authenticated unwrap requests not deducting a token use</p></li>
+<li><p>Fixed cache handling of static DB role credentials</p></li>
+<li><p>Fixed cached accessor information being lost when token/SecretID information was refreshed</p></li>
+<li><p>Fixed clearing session cache not invalidating active client in context, which could reintroduce stale data into permanent cache or cause unexpected permission issues during long-running contexts</p></li>
+<li><p>Fixed crash during loading of <code class="docutils literal notranslate"><span class="pre">vault_pki</span></code> modules when <code class="docutils literal notranslate"><span class="pre">cryptography</span></code> was not available. This should not happen in most cases since it’s a requirement of this extension and a Salt core requirement, but might happen when this extension is forwarded to the target host via Salt-SSH.</p></li>
+<li><p>Fixed handling of <code class="docutils literal notranslate"><span class="pre">all_principals</span></code> in <code class="docutils literal notranslate"><span class="pre">vault_ssh</span></code> <code class="docutils literal notranslate"><span class="pre">ssh_pki</span></code> backend</p></li>
+<li><p>Fixed handling of multiple values in <code class="docutils literal notranslate"><span class="pre">default_user</span></code> in <code class="docutils literal notranslate"><span class="pre">vault_ssh</span></code> <code class="docutils literal notranslate"><span class="pre">ssh_pki</span></code> backend</p></li>
+<li><p>Fixed raw KeyError when <code class="docutils literal notranslate"><span class="pre">cert_type</span></code> was not passed and not inferrable from a role definition in the <code class="docutils literal notranslate"><span class="pre">vault_ssh</span></code> <code class="docutils literal notranslate"><span class="pre">ssh_pki</span></code> backend</p></li>
+<li><p>Fixed remaining token ttl being corrupted by the templated policy rendering logic released in 1.7.0 (only used in <code class="docutils literal notranslate"><span class="pre">vault_ssh</span></code> backend for <code class="docutils literal notranslate"><span class="pre">ssh_pki.certificate_managed</span></code>)</p></li>
+<li><p>Fixed several execution module functions (<code class="docutils literal notranslate"><span class="pre">vault.clear_cache</span></code>/<code class="docutils literal notranslate"><span class="pre">clear_token_cache</span></code>/<code class="docutils literal notranslate"><span class="pre">update_config</span></code>, <code class="docutils literal notranslate"><span class="pre">vault_pki.read_issuer</span></code>, <code class="docutils literal notranslate"><span class="pre">vault_ssh.list_roles_ip</span></code>) leaking Vault exceptions instead of raising <code class="docutils literal notranslate"><span class="pre">CommandExecutionError</span></code></p></li>
+<li><p>Fixed the <code class="docutils literal notranslate"><span class="pre">vault_lease</span></code> beacon crashing when <code class="docutils literal notranslate"><span class="pre">min_ttl</span></code> was explicitly set to <code class="docutils literal notranslate"><span class="pre">null</span></code> in the beacon configuration</p></li>
+<li><p>Fixed the <code class="docutils literal notranslate"><span class="pre">vault_lease</span></code> beacon firing duplicate lease expiry events on the Salt event bus when <code class="docutils literal notranslate"><span class="pre">cache:expire_events</span></code> was enabled</p></li>
+<li><p>Fixed the <code class="docutils literal notranslate"><span class="pre">vault_lease</span></code> beacon reporting stale lease information in expiry events when a renewal attempt did not manage to extend the lease to <code class="docutils literal notranslate"><span class="pre">min_ttl</span></code></p></li>
+<li><p>Fixed the client unexpectedly raising ValueErrors when an error return was not valid JSON</p></li>
+<li><p>Improved error and implemented a workaround when trying to set otherNames while simultaneously passing a private key to <code class="docutils literal notranslate"><span class="pre">vault_pki.sign_certificate</span></code></p></li>
+</ul>
+</section>
+<section id="added">
+<h3>Added<a class="headerlink" href="#added" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Added the ability to override <code class="docutils literal notranslate"><span class="pre">server:url</span></code> in the minion config. The new value must be in a list of allowed values specified in the master configuration in <code class="docutils literal notranslate"><span class="pre">server:url_alts</span></code> to take effect. <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/156">#156</a></p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">vault.patch_raw</span></code> to patch secret data that cannot be passed as keyword arguments</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">vault_approle</span></code> execution, state and wrapper modules to manage and utilize the AppRole auth backend</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">vault_gpg</span></code> execution, state and wrapper modules to interface with the custom plugin <a class="reference external" href="https://github.com/LeSuisse/vault-gpg-plugin/">LeSuisse/vault-gpg-plugin</a>. It’s now possible to generate, manage, import and export GPG keys and sign, decrypt and verify data.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">vault_plugin</span></code> execution, state and wrapper modules to manage plugins and pinned versions</p></li>
+<li><p>Added expected creation path verification for wrapped secrets embedded in the <code class="docutils literal notranslate"><span class="pre">vault.get_config</span></code> response (token and role_id), derived from the fresh config itself</p></li>
+<li><p>Added support for <code class="docutils literal notranslate"><span class="pre">allow_commas_in_identity_templates</span></code> for SSH secret backend roles in OpenBao</p></li>
+<li><p>Added support for rendering of identity templates in <code class="docutils literal notranslate"><span class="pre">allowed_users</span></code>, <code class="docutils literal notranslate"><span class="pre">allowed_domains</span></code> and <code class="docutils literal notranslate"><span class="pre">default_user</span></code> in <code class="docutils literal notranslate"><span class="pre">vault_ssh</span></code> <code class="docutils literal notranslate"><span class="pre">ssh_pki</span></code> backend</p></li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h2>1.7.0 (2026-07-08)<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="id3">
+<h3>Fixed<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed SDB patch fallback when PATCH requests are not allowed</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_db.creds_uncached</span></code> clearing cached credentials with custom cache key when cache key was not specified</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_db.static_role_present</span></code> management of <code class="docutils literal notranslate"><span class="pre">rotation_statements</span></code>, which was not passed to Vault, but the failure was alerted about</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_pki.certificate_managed</span></code> deleting symlinks in test mode when <code class="docutils literal notranslate"><span class="pre">follow_symlinks</span></code> is explicitly set to <code class="docutils literal notranslate"><span class="pre">false</span></code></p></li>
+<li><p>Fixed an existing DB connection’s explicit <code class="docutils literal notranslate"><span class="pre">plugin_version</span></code> being reset when it was not specified in a call to <code class="docutils literal notranslate"><span class="pre">vault_db.write_connection</span></code></p></li>
+<li><p>Fixed autodetermination of unspecified <code class="docutils literal notranslate"><span class="pre">cert_type</span></code> in <code class="docutils literal notranslate"><span class="pre">ssh_pki</span></code> backend functionality</p></li>
+<li><p>Fixed clearing cache when <code class="docutils literal notranslate"><span class="pre">vault:cache:backend</span></code> overrides Salt’s <code class="docutils literal notranslate"><span class="pre">cache</span></code></p></li>
+<li><p>Fixed exception in <code class="docutils literal notranslate"><span class="pre">read_issuer_crl</span></code> when issuer is missing - now returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, as intended</p></li>
+<li><p>Fixed merging of <code class="docutils literal notranslate"><span class="pre">default_critical_options</span></code> and <code class="docutils literal notranslate"><span class="pre">default_extensions</span></code> with overrides in <code class="docutils literal notranslate"><span class="pre">ssh_pki</span></code> backend</p></li>
+<li><p>Fixed passing multiple entries of the same SAN type in <code class="docutils literal notranslate"><span class="pre">vault_pki.(issue|sign)_certificate</span></code></p></li>
+<li><p>Fixed reported failure in <code class="docutils literal notranslate"><span class="pre">vault_ssh.role_present_otp</span></code> when <code class="docutils literal notranslate"><span class="pre">port</span></code> was not set. The state application still worked.</p></li>
+<li><p>Fixed reporting of multiple subject element changes in <code class="docutils literal notranslate"><span class="pre">vault_pki.certificate_managed</span></code></p></li>
+<li><p>Fixed revocation delay of leases with <code class="docutils literal notranslate"><span class="pre">renew_increment</span></code> set</p></li>
+<li><p>Fixed the pillar module’s <code class="docutils literal notranslate"><span class="pre">merge_lists</span></code> being ignored when it was set to <code class="docutils literal notranslate"><span class="pre">false</span></code> and Salt’s <code class="docutils literal notranslate"><span class="pre">pillar_merge_lists</span></code> was enabled</p></li>
+<li><p>Synchronized event format for <code class="docutils literal notranslate"><span class="pre">vault/lease/*/expire</span></code> between sources to <code class="docutils literal notranslate"><span class="pre">ttl</span></code> - <code class="docutils literal notranslate"><span class="pre">ttl</span></code> and <code class="docutils literal notranslate"><span class="pre">ttl_left</span></code> were both used before, depending on the source of the event</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>Added<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">read_certificate_full</span></code> execution function to the <code class="docutils literal notranslate"><span class="pre">vault_pki</span></code> module, returning the certificate, its CA chain and miscellaneous information as a dictionary. <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/145">#145</a></p></li>
+<li><p>Added support for rendering identity templates in the <code class="docutils literal notranslate"><span class="pre">ssh_pki</span></code> backend, which fixes idempotency when <code class="docutils literal notranslate"><span class="pre">default_extensions_template</span></code> is enabled. This functionality requires an adjusted policy</p></li>
+</ul>
+</section>
+</section>
+<section id="id5">
+<h2>1.6.0 (2026-05-20)<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<section id="id6">
+<h3>Fixed<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed SSH wrappers in 3008.x <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/149">#149</a></p></li>
+<li><p>Fixed issued AppRoles unnecessarily being rewritten when config or SecretID were requested by minions and a TTL configuration was set as a time string <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/151">#151</a></p></li>
+</ul>
+</section>
+<section id="id7">
+<h3>Added<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Added compatibility for <code class="docutils literal notranslate"><span class="pre">vault_ssh</span></code> to be used as the <code class="docutils literal notranslate"><span class="pre">backend</span></code> for the new <code class="docutils literal notranslate"><span class="pre">ssh_pki.certificate_managed</span></code> state introduced in Salt 3008, making stateful SSH certificate management using Vault-issued certificates possible on Salt 3008+ <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/138">#138</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id8">
+<h2>1.5.0 (2026-03-09)<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<section id="id9">
+<h3>Fixed<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">vault_ssh.ca_(present|absent)</span></code> in OpenBao</p></li>
+</ul>
+</section>
+<section id="id10">
+<h3>Added<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Added official OpenBao support <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/139">#139</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id11">
+<h2>1.4.0 (2026-02-15)<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
+<section id="id12">
+<h3>Changed<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Marked some API methods using <code class="docutils literal notranslate"><span class="pre">POST</span></code>/<code class="docutils literal notranslate"><span class="pre">PATCH</span></code> requests as safe to retry by default since they are effectively idempotent <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/97">#97</a></p></li>
+</ul>
+</section>
+<section id="id13">
+<h3>Fixed<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed handling of <code class="docutils literal notranslate"><span class="pre">retry_after_max</span></code> with urllib3 2.6.3, which introduced the same parameter and set its default to 6h. When <code class="docutils literal notranslate"><span class="pre">retry_after_max</span></code> is explicitly set to <code class="docutils literal notranslate"><span class="pre">None</span></code>, we default to 6h from now on too, otherwise the previous default of 60s applies. <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/130">#130</a></p></li>
+<li><p>Fixed SDB URI resolution in <code class="docutils literal notranslate"><span class="pre">auth:token</span></code> to make documented token-from-env behavior work <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/133">#133</a></p></li>
+<li><p>Fixed Vault client token lookups using an accessor. These lookups used the wrong API method (<code class="docutils literal notranslate"><span class="pre">GET</span></code> instead of <code class="docutils literal notranslate"><span class="pre">POST</span></code>)</p></li>
+</ul>
+</section>
+<section id="id14">
+<h3>Added<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Added the ability to disallow non-impersonated authentication requests via <code class="docutils literal notranslate"><span class="pre">issue:block_minion_requests</span></code>, effectively limiting authentication credential issuance to the master only <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/109">#109</a></p></li>
+<li><p>Added SDB URI resolution for <code class="docutils literal notranslate"><span class="pre">auth:role_id</span></code> and <code class="docutils literal notranslate"><span class="pre">auth:secret_id</span></code> to achieve feature parity between auth methods <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/134">#134</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id15">
+<h2>1.3.2 (2025-05-04)<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h2>
+<section id="id16">
+<h3>Fixed<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed vault_pki.certificate_managed always recreating certificate with <code class="docutils literal notranslate"><span class="pre">append_ca_chain=True</span></code> <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/123">#123</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id17">
+<h2>1.3.1 (2025-03-24)<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h2>
+<section id="id18">
+<h3>Fixed<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed running <code class="docutils literal notranslate"><span class="pre">vault.sync_approles</span></code> on a fresh, empty mount <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/111">#111</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id19">
+<h2>1.3.0 (2024-12-09)<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h2>
+<section id="id20">
+<h3>Fixed<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed a crash when a templated field accesses an out-of-bounds list index</p></li>
+</ul>
+</section>
+<section id="id21">
+<h3>Added<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>When metadata that is written to Vault is templated using a list or dict, in addition to concatenating the values into a sorted comma-separated list, the master now additionally creates a separate suffixed key for each individual item <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/106">#106</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id22">
+<h2>1.2.2 (2024-11-10)<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h2>
+<section id="id23">
+<h3>Fixed<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed compatibility with master cluster mode <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/99">#99</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id24">
+<h2>1.2.1 (2024-11-07)<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h2>
+<section id="id25">
+<h3>Fixed<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed the client used for unwrapping authentication credentials not respecting <code class="docutils literal notranslate"><span class="pre">client</span></code> configuration when no cached configuration is available <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/95">#95</a></p></li>
+</ul>
+</section>
+</section>
+<section id="v1-2-0-2024-10-02">
+<h2>v1.2.0 (2024-10-02)<a class="headerlink" href="#v1-2-0-2024-10-02" title="Link to this heading">¶</a></h2>
+<section id="id26">
+<h3>Changed<a class="headerlink" href="#id26" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Readded direct package dependency on cryptography</p></li>
+</ul>
+</section>
+<section id="id27">
+<h3>Fixed<a class="headerlink" href="#id27" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Change unseal query to be always unauthenticated. <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/85">#85</a></p></li>
+</ul>
+</section>
+<section id="id28">
+<h3>Added<a class="headerlink" href="#id28" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Added support for credential orchestration in Salt-SSH wrappers, added wrappers for vault, vault_db, vault_pki modules <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/54">#54</a></p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">vault_ssh</span></code> execution, state and wrapper modules for managing and using the SSH secret backend <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/58">#58</a></p></li>
+<li><p>Improved handling of KV v2 secret versions <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/61">#61</a></p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">vault_secret</span></code> state module for statefully managing secrets <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/62">#62</a></p></li>
+</ul>
+</section>
+</section>
+<section id="v1-1-1-2024-07-24">
+<h2>v1.1.1 (2024-07-24)<a class="headerlink" href="#v1-1-1-2024-07-24" title="Link to this heading">¶</a></h2>
+<section id="id29">
+<h3>Changed<a class="headerlink" href="#id29" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Required x509_v2 modules to be available for specific parameters to <code class="docutils literal notranslate"><span class="pre">vault_pki</span></code>, dropped direct dependency on cryptography <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/78">#78</a></p></li>
+</ul>
+</section>
+<section id="id30">
+<h3>Fixed<a class="headerlink" href="#id30" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed vault.update_config crash <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/77">#77</a></p></li>
+</ul>
+</section>
+</section>
+<section id="v1-1-0-2024-07-23">
+<h2>v1.1.0 (2024-07-23)<a class="headerlink" href="#v1-1-0-2024-07-23" title="Link to this heading">¶</a></h2>
+<section id="removed">
+<h3>Removed<a class="headerlink" href="#removed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Dropped support for Python 3.7 <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/59">#59</a></p></li>
+<li><p>Dropped support for Salt 3005 <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/70">#70</a></p></li>
+</ul>
+</section>
+<section id="id31">
+<h3>Fixed<a class="headerlink" href="#id31" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed a crash when renewing/revoking leases that have been revoked on the Vault server early <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/45">#45</a></p></li>
+</ul>
+</section>
+<section id="id32">
+<h3>Added<a class="headerlink" href="#id32" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Added an optional switch for validating cached leases with the Vault server before returning them from the LeaseStore <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/46">#46</a></p></li>
+<li><p>Implemented setting per-lease defaults of lifecycle parameters <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/47">#47</a></p></li>
+<li><p>Implemented caching arbitrary metadata together with a lease and included it in expiry events <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/48">#48</a></p></li>
+<li><p>Added a LeaseStore method for listing cached lease information <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/49">#49</a></p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">vault_db</span></code> modules for management and usage of the Vault database secret backend <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/52">#52</a></p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">vault_lease</span></code> beacon module to monitor and renew cached leases <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/53">#53</a></p></li>
+<li><p>Added vault_pki modules for interfacing with the PKI backend and managing X.509 certificates <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/58">#58</a></p></li>
+<li><p>Added support for retry logic and specific connection settings in <code class="docutils literal notranslate"><span class="pre">vault:client</span></code> <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/65">#65</a></p></li>
+</ul>
+</section>
+</section>
+<section id="v1-0-0-2024-04-23">
+<h2>v1.0.0 (2024-04-23)<a class="headerlink" href="#v1-0-0-2024-04-23" title="Link to this heading">¶</a></h2>
+<section id="deprecated">
+<h3>Deprecated<a class="headerlink" href="#deprecated" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Deprecated Vault pillar configuration with <code class="docutils literal notranslate"><span class="pre">conf</span></code> parameter and <code class="docutils literal notranslate"><span class="pre">path=</span></code> prefix <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/30">#30</a></p></li>
+</ul>
+</section>
+<section id="id33">
+<h3>Changed<a class="headerlink" href="#id33" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Changed Vault pillar module configuration <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/30">#30</a></p></li>
+</ul>
+</section>
+<section id="id34">
+<h3>Fixed<a class="headerlink" href="#id34" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed Salt master does not renew token <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/10">#10</a></p></li>
+<li><p>Fixed vault module fetching more than one secret in one run with single-use tokens <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/11">#11</a></p></li>
+<li><p>Fixed Vault verify option to work on minions when only specified in master config <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/12">#12</a></p></li>
+<li><p>Fixed vault command errors configured locally <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/13">#13</a></p></li>
+<li><p>Fixed sdb.get_or_set_hash with Vault single-use tokens <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/14">#14</a></p></li>
+<li><p>Fixed Vault session storage to allow unlimited use tokens <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/15">#15</a></p></li>
+<li><p>Fixed salt-minion 3006.0 KeyError without ‘vault’ config key <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/22">#22</a></p></li>
+<li><p>Fixed verify parameter for unwrap requests <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/34">#34</a></p></li>
+</ul>
+</section>
+<section id="id35">
+<h3>Added<a class="headerlink" href="#id35" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Added Vault AppRole and identity issuance to minions <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/16">#16</a></p></li>
+<li><p>Added Vault AppRole auth mount path configuration option <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/17">#17</a></p></li>
+<li><p>Added distribution of Vault authentication details via response wrapping <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/18">#18</a></p></li>
+<li><p>Added Vault token lifecycle management <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/19">#19</a></p></li>
+<li><p>Added Vault lease management utility <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/20">#20</a></p></li>
+<li><p>Added patch option to Vault SDB driver <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/21">#21</a></p></li>
+<li><p>Added inline specification of trusted CA root certificate for Vault <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/23">#23</a></p></li>
+<li><p>Added support for dictionary keys in pattern <a class="reference external" href="https://github.com/salt-extensions/saltext-vault/issues/26">#26</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2020 - 2026, VMware, Inc.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Changelog</a><ul>
+<li><a class="reference internal" href="#id1">1.8.0 (2026-08-09)</a><ul>
+<li><a class="reference internal" href="#changed">Changed</a></li>
+<li><a class="reference internal" href="#fixed">Fixed</a></li>
+<li><a class="reference internal" href="#added">Added</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">1.7.0 (2026-07-08)</a><ul>
+<li><a class="reference internal" href="#id3">Fixed</a></li>
+<li><a class="reference internal" href="#id4">Added</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">1.6.0 (2026-05-20)</a><ul>
+<li><a class="reference internal" href="#id6">Fixed</a></li>
+<li><a class="reference internal" href="#id7">Added</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">1.5.0 (2026-03-09)</a><ul>
+<li><a class="reference internal" href="#id9">Fixed</a></li>
+<li><a class="reference internal" href="#id10">Added</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id11">1.4.0 (2026-02-15)</a><ul>
+<li><a class="reference internal" href="#id12">Changed</a></li>
+<li><a class="reference internal" href="#id13">Fixed</a></li>
+<li><a class="reference internal" href="#id14">Added</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id15">1.3.2 (2025-05-04)</a><ul>
+<li><a class="reference internal" href="#id16">Fixed</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id17">1.3.1 (2025-03-24)</a><ul>
+<li><a class="reference internal" href="#id18">Fixed</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id19">1.3.0 (2024-12-09)</a><ul>
+<li><a class="reference internal" href="#id20">Fixed</a></li>
+<li><a class="reference internal" href="#id21">Added</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id22">1.2.2 (2024-11-10)</a><ul>
+<li><a class="reference internal" href="#id23">Fixed</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id24">1.2.1 (2024-11-07)</a><ul>
+<li><a class="reference internal" href="#id25">Fixed</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-2-0-2024-10-02">v1.2.0 (2024-10-02)</a><ul>
+<li><a class="reference internal" href="#id26">Changed</a></li>
+<li><a class="reference internal" href="#id27">Fixed</a></li>
+<li><a class="reference internal" href="#id28">Added</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-1-1-2024-07-24">v1.1.1 (2024-07-24)</a><ul>
+<li><a class="reference internal" href="#id29">Changed</a></li>
+<li><a class="reference internal" href="#id30">Fixed</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-1-0-2024-07-23">v1.1.0 (2024-07-23)</a><ul>
+<li><a class="reference internal" href="#removed">Removed</a></li>
+<li><a class="reference internal" href="#id31">Fixed</a></li>
+<li><a class="reference internal" href="#id32">Added</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v1-0-0-2024-04-23">v1.0.0 (2024-04-23)</a><ul>
+<li><a class="reference internal" href="#deprecated">Deprecated</a></li>
+<li><a class="reference internal" href="#id33">Changed</a></li>
+<li><a class="reference internal" href="#id34">Fixed</a></li>
+<li><a class="reference internal" href="#id35">Added</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=d587a469"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../_static/extension-index.js?v=435383a2"></script>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+saltext-incus
+=============
+
+Manage your Incus deployments through Salt
+
+Release: ``v1.0.1``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/installation
+   docs/topics/usage
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-incus/ref/modules/index.html>`_
+* `State modules <https://salt-extensions.github.io/saltext-incus/ref/states/index.html>`_

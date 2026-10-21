@@ -1,0 +1,18 @@
+saltext-cassandra
+=================
+
+Salt extension documentation
+
+Release: ``v0.0.1``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/installation
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-cassandra/ref/modules/index.html>`_
