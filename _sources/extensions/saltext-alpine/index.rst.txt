@@ -3,7 +3,7 @@ saltext-alpine
 
 First class support for Alpine Linux
 
-Release: ``v1.0.3``
+Release: ``v1.0.4``
 
 .. toctree::
    :maxdepth: 2

@@ -1,7 +1,7 @@
 saltext-winshell
 ================
 
-Salt extension documentation
+Salt extension for managing windows via salt-ssh
 
 Release: ``v1.0.1``
 

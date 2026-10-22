@@ -231,21 +231,30 @@
 <p>The changelog format is based on <a class="reference external" href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>.</p>
 <p>This project uses <a class="reference external" href="https://semver.org/">Semantic Versioning</a> - MAJOR.MINOR.PATCH</p>
 <section id="id1">
-<h2>1.0.3 (2026-10-05)<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
-<p>Remove openrc module, and now depend on saltext-openrc</p>
+<h2>1.0.4 (2026-10-21)<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<section id="fixed">
+<h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add an Alpine-specific <code class="docutils literal notranslate"><span class="pre">system</span></code> module that reimplements <code class="docutils literal notranslate"><span class="pre">reboot</span></code>, <code class="docutils literal notranslate"><span class="pre">shutdown</span></code>, <code class="docutils literal notranslate"><span class="pre">poweroff</span></code>, and <code class="docutils literal notranslate"><span class="pre">halt</span></code> on top of BusyBox. This fixes <code class="docutils literal notranslate"><span class="pre">FileNotFoundError:</span> <span class="pre">'shutdown'</span></code> when calling <code class="docutils literal notranslate"><span class="pre">system.reboot</span></code> and friends on Alpine, where no <code class="docutils literal notranslate"><span class="pre">shutdown</span></code> binary is present.</p></li>
+</ul>
+</section>
 </section>
 <section id="id2">
-<h2>1.0.2 (2026-08-26)<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p>No significant changes.</p>
+<h2>1.0.3 (2026-10-05)<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>Remove openrc module, and now depend on saltext-openrc</p>
 </section>
 <section id="id3">
-<h2>1.0.1 (2026-08-26)<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<h2>1.0.2 (2026-08-26)<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>No significant changes.</p>
+</section>
+<section id="id4">
+<h2>1.0.1 (2026-08-26)<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Fix saltext entrypoint</p></li>
 </ul>
 </section>
-<section id="id4">
-<h2>1.0.0 (2026-05-22)<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<section id="id5">
+<h2>1.0.0 (2026-05-22)<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Migrated apkpkg from legacy repo and merged into broader Alpine support saltext</p></li>
 <li><p>Added openrc service support</p></li>
@@ -291,10 +300,14 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Changelog</a><ul>
-<li><a class="reference internal" href="#id1">1.0.3 (2026-10-05)</a></li>
-<li><a class="reference internal" href="#id2">1.0.2 (2026-08-26)</a></li>
-<li><a class="reference internal" href="#id3">1.0.1 (2026-08-26)</a></li>
-<li><a class="reference internal" href="#id4">1.0.0 (2026-05-22)</a></li>
+<li><a class="reference internal" href="#id1">1.0.4 (2026-10-21)</a><ul>
+<li><a class="reference internal" href="#fixed">Fixed</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">1.0.3 (2026-10-05)</a></li>
+<li><a class="reference internal" href="#id3">1.0.2 (2026-08-26)</a></li>
+<li><a class="reference internal" href="#id4">1.0.1 (2026-08-26)</a></li>
+<li><a class="reference internal" href="#id5">1.0.0 (2026-05-22)</a></li>
 </ul>
 </li>
 </ul>

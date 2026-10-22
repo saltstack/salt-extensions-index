@@ -4,6 +4,13 @@ This project uses [Semantic Versioning](https://semver.org/) - MAJOR.MINOR.PATCH
 
 # Changelog
 
+## 1.0.4 (2026-10-21)
+
+
+### Fixed
+
+- Add an Alpine-specific ``system`` module that reimplements ``reboot``, ``shutdown``, ``poweroff``, and ``halt`` on top of BusyBox. This fixes ``FileNotFoundError: 'shutdown'`` when calling ``system.reboot`` and friends on Alpine, where no ``shutdown`` binary is present.
+
 ## 1.0.3 (2026-10-05)
 
 Remove openrc module, and now depend on saltext-openrc

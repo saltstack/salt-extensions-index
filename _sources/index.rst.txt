@@ -3,7 +3,7 @@ Salt Extensions
 
 A catalog of public Salt extension repositories. Documentation is collected nightly from each repository's latest release. If a repository has no published GitHub release, its highest version tag is used. Repositories without tags are listed without imported documentation. The collected source files are rendered with this site's Sphinx configuration; extension-specific configuration code is not executed.
 
-Last generated: 2026-10-21 02:46 UTC
+Last generated: 2026-10-22 02:47 UTC
 
 .. raw:: html
 
@@ -33,8 +33,8 @@ Last generated: 2026-10-21 02:46 UTC
      - :doc:`Browse docs <extensions/saltext-acme/index>`
    * - `saltext-alpine <https://github.com/salt-extensions/saltext-alpine>`_
      - First class support for Alpine Linux
-     - `v1.0.3 <https://github.com/salt-extensions/saltext-alpine/tree/v1.0.3>`_
-     - 2026-10-05
+     - `v1.0.4 <https://github.com/salt-extensions/saltext-alpine/tree/v1.0.4>`_
+     - 2026-10-21
      - :doc:`Browse docs <extensions/saltext-alpine/index>`
    * - `saltext-apache <https://github.com/salt-extensions/saltext-apache>`_
      - Salt Extension for interacting with Apache
@@ -327,7 +327,7 @@ Last generated: 2026-10-21 02:46 UTC
      - 2026-03-06
      - :doc:`Browse docs <extensions/saltext-virt/index>`
    * - `saltext-winshell <https://github.com/salt-extensions/saltext-winshell>`_
-     - No description provided.
+     - Salt extension for managing windows via salt-ssh
      - `v1.0.1 <https://github.com/salt-extensions/saltext-winshell/tree/v1.0.1>`_
      - 2026-10-16
      - :doc:`Browse docs <extensions/saltext-winshell/index>`
