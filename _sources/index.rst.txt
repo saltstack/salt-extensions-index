@@ -3,7 +3,7 @@ Salt Extensions
 
 A catalog of public Salt extension repositories. Documentation is collected nightly from each repository's latest release. If a repository has no published GitHub release, its highest version tag is used. Repositories without tags are listed without imported documentation. The collected source files are rendered with this site's Sphinx configuration; extension-specific configuration code is not executed.
 
-Last generated: 2026-10-24 02:46 UTC
+Last generated: 2026-10-25 02:47 UTC
 
 .. raw:: html
 
@@ -112,10 +112,10 @@ Last generated: 2026-10-24 02:46 UTC
      - 2024-01-15
      - :doc:`Browse docs <extensions/saltext-freezer/index>`
    * - `saltext-gentoo <https://github.com/salt-extensions/saltext-gentoo>`_
-     - No description provided.
-     - No release tag
+     - Extensions for managing minions running Gentoo Linux
+     - `v0.3.0 <https://github.com/salt-extensions/saltext-gentoo/tree/v0.3.0>`_
      - —
-     - No published documentation
+     - :doc:`Browse docs <extensions/saltext-gentoo/index>`
    * - `saltext-github <https://github.com/salt-extensions/saltext-github>`_
      - Salt Extension for interacting with GitHub
      - `v1.0.0 <https://github.com/salt-extensions/saltext-github/tree/v1.0.0>`_

@@ -1,0 +1,19 @@
+saltext-gentoo
+==============
+
+Extensions for managing minions running Gentoo Linux
+
+Release: ``v0.3.0``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/installation
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-gentoo/ref/modules/index.html>`_
+* `State modules <https://salt-extensions.github.io/saltext-gentoo/ref/states/index.html>`_
