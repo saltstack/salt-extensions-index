@@ -3,14 +3,16 @@ saltext-github
 
 Salt Extension for interacting with GitHub
 
-Release: ``v1.0.0``
+Release: ``v1.1.0``
 
 .. toctree::
    :maxdepth: 2
    :caption: Documentation
 
    docs/changelog
+   docs/topics/configuration
    docs/topics/installation
+   docs/topics/repo_resources
 
 Provided Modules
 ----------------
