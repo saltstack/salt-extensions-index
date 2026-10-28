@@ -228,7 +228,8 @@
         <article role="main" id="furo-main-content">
           <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
-<p>Generally, extensions need to be installed into the same Python environment Salt uses.</p>
+<p>Generally, extensions need to be installed into the same Python
+environment Salt uses.</p>
 <p>:::{tab} State</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">Install Salt Mysql extension</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">pip.installed</span><span class="p">:</span>
@@ -245,10 +246,16 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>saltext-mysql
 </pre></div>
 </div>
+<p>Salt itself is expected to be provided by the environment. If it
+should be pip-managed as well, request the <code class="docutils literal notranslate"><span class="pre">salt</span></code> extra:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">'saltext-mysql[salt]'</span>
+</pre></div>
+</div>
 <p>:::</p>
 <p>:::{hint}
-Saltexts are not distributed automatically via the fileserver like custom modules, they need to be installed
-on each node you want them to be available on.
+Saltexts are not distributed automatically via the fileserver like
+custom modules, they need to be installed on each node you want them
+to be available on.
 :::</p>
 </section>
 

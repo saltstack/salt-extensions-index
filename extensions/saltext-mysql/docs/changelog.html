@@ -228,12 +228,26 @@
         <article role="main" id="furo-main-content">
           <section id="changelog">
 <h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">¶</a></h1>
-<p>The changelog format is based on <a class="reference external" href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>.</p>
-<p>This project uses <a class="reference external" href="https://semver.org/">Semantic Versioning</a> - MAJOR.MINOR.PATCH</p>
+<p>The changelog format is based on
+<a class="reference external" href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>.</p>
+<p>This project uses <a class="reference external" href="https://semver.org/">Semantic Versioning</a> -
+MAJOR.MINOR.PATCH</p>
 <section id="id1">
-<h2>1.1.0 (2025-02-07)<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<h2>1.1.1 (2026-10-27)<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <section id="fixed">
 <h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">mysql.grant_revoke</span></code> ignoring the <code class="docutils literal notranslate"><span class="pre">escape</span></code> parameter, which made it impossible to revoke grants on databases containing wildcard characters (<code class="docutils literal notranslate"><span class="pre">_</span></code>, <code class="docutils literal notranslate"><span class="pre">%</span></code>) when they were added with <code class="docutils literal notranslate"><span class="pre">escape:</span> <span class="pre">False</span></code> <a class="reference external" href="https://github.com/salt-extensions/saltext-mysql/issues/18">#18</a></p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">mysql_grants.absent</span></code> not passing the <code class="docutils literal notranslate"><span class="pre">escape</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">mysql.grant_revoke</span></code> <a class="reference external" href="https://github.com/salt-extensions/saltext-mysql/issues/21">#21</a></p></li>
+<li><p>Improved <code class="docutils literal notranslate"><span class="pre">__virtual__</span></code> error messages to explicitly name the missing Python MySQL client libraries (mysqlclient/PyMySQL) and how to install them <a class="reference external" href="https://github.com/salt-extensions/saltext-mysql/issues/25">#25</a></p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">mysql.query</span></code> failing with <code class="docutils literal notranslate"><span class="pre">TypeError:</span> <span class="pre">str()</span> <span class="pre">argument</span> <span class="pre">'encoding'</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">str,</span> <span class="pre">not</span> <span class="pre">dict</span></code> when using PyMySQL <a class="reference external" href="https://github.com/salt-extensions/saltext-mysql/issues/26">#26</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h2>1.1.0 (2025-02-07)<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="id3">
+<h3>Fixed<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Fixed <code class="docutils literal notranslate"><span class="pre">mysql_cache.list</span></code> not listing nested banks, thereby fixed presence detection when using the <code class="docutils literal notranslate"><span class="pre">mysql_cache</span></code> module <a class="reference external" href="https://github.com/salt-extensions/saltext-mysql/issues/9">#9</a></p></li>
 </ul>
@@ -289,8 +303,12 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Changelog</a><ul>
-<li><a class="reference internal" href="#id1">1.1.0 (2025-02-07)</a><ul>
+<li><a class="reference internal" href="#id1">1.1.1 (2026-10-27)</a><ul>
 <li><a class="reference internal" href="#fixed">Fixed</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">1.1.0 (2025-02-07)</a><ul>
+<li><a class="reference internal" href="#id3">Fixed</a></li>
 <li><a class="reference internal" href="#added">Added</a></li>
 </ul>
 </li>
