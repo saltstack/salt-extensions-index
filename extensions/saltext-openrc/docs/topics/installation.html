@@ -228,9 +228,9 @@
         <article role="main" id="furo-main-content">
           <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
-<p>The extension must be installed into the same Python environment Salt uses on
-each minion you want OpenRC service support on. Saltexts are not distributed
-automatically via the fileserver like custom modules.</p>
+<p>The extension must be installed into the same Python environment Salt
+uses on each minion you want OpenRC service support on. Saltexts are
+not distributed automatically via the fileserver like custom modules.</p>
 <p>:::{tab} State</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">Install saltext-openrc</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">pip.installed</span><span class="p">:</span>
@@ -247,21 +247,27 @@ automatically via the fileserver like custom modules.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>saltext-openrc
 </pre></div>
 </div>
+<p>Salt itself is expected to be provided by the environment. If it
+should be pip-managed as well, request the <code class="docutils literal notranslate"><span class="pre">salt</span></code> extra:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">'saltext-openrc[salt]'</span>
+</pre></div>
+</div>
 <p>:::</p>
 <p>:::{hint}
-On many OpenRC-based distributions Salt uses the system Python, so a regular
-<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> is correct for most setups. If you have installed Salt into a
-virtual environment, activate it first.
+On many OpenRC-based distributions Salt uses the system Python, so a
+regular <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> is correct for most setups. If you have
+installed Salt into a virtual environment, activate it first.
 :::</p>
 <section id="verifying-the-installation">
 <h2>Verifying the installation<a class="headerlink" href="#verifying-the-installation" title="Link to this heading">¶</a></h2>
-<p>After installing, confirm that Salt has loaded the module on your minion:</p>
+<p>After installing, confirm that Salt has loaded the module on your
+minion:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>salt<span class="w"> </span>&lt;minion-id&gt;<span class="w"> </span>sys.doc<span class="w"> </span>service.start
 </pre></div>
 </div>
-<p>This should return documentation pulled from this extension. If it returns
-nothing or shows a different provider, see :ref:<code class="docutils literal notranslate"><span class="pre">module-provider-override</span></code> in
-the Salt documentation.</p>
+<p>This should return documentation pulled from this extension. If it
+returns nothing or shows a different provider, see
+:ref:<code class="docutils literal notranslate"><span class="pre">module-provider-override</span></code> in the Salt documentation.</p>
 </section>
 </section>
 

@@ -3,7 +3,7 @@ saltext-openrc
 
 Salt Extension for interacting with the OpenRC init system
 
-Release: ``v0.2.0``
+Release: ``v0.2.1``
 
 .. toctree::
    :maxdepth: 2

@@ -4,6 +4,13 @@ This project uses [Semantic Versioning](https://semver.org/) - MAJOR.MINOR.PATCH
 
 # Changelog
 
+## 0.2.1 (2026-10-29)
+
+
+### Changed
+
+- Removed direct dependency on Salt, it is expected to be provided by the environment instead. You can still request it explicitly via the `salt` extra (`pip install saltext-openrc[salt]`)
+
 ## 0.2.0 (2026-09-17)
 
 

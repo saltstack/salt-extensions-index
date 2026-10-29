@@ -228,19 +228,30 @@
         <article role="main" id="furo-main-content">
           <section id="changelog">
 <h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">¶</a></h1>
-<p>The changelog format is based on <a class="reference external" href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>.</p>
-<p>This project uses <a class="reference external" href="https://semver.org/">Semantic Versioning</a> - MAJOR.MINOR.PATCH</p>
+<p>The changelog format is based on
+<a class="reference external" href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>.</p>
+<p>This project uses <a class="reference external" href="https://semver.org/">Semantic Versioning</a> -
+MAJOR.MINOR.PATCH</p>
 <section id="id1">
-<h2>0.2.0 (2026-09-17)<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<h2>0.2.1 (2026-10-29)<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<section id="changed">
+<h3>Changed<a class="headerlink" href="#changed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Removed direct dependency on Salt, it is expected to be provided by the environment instead. You can still request it explicitly via the <code class="docutils literal notranslate"><span class="pre">salt</span></code> extra (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">saltext-openrc[salt]</span></code>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h2>0.2.0 (2026-09-17)<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <section id="added">
 <h3>Added<a class="headerlink" href="#added" title="Link to this heading">¶</a></h3>
 <p>Support openrc’s <code class="docutils literal notranslate"><span class="pre">zap</span></code> call.</p>
 </section>
 </section>
-<section id="id2">
-<h2>0.1.0 (2026-09-16)<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <section id="id3">
-<h3>Added<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<h2>0.1.0 (2026-09-16)<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<section id="id4">
+<h3>Added<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>OpenRC <code class="docutils literal notranslate"><span class="pre">service</span></code> execution module, extracted from <code class="docutils literal notranslate"><span class="pre">saltext-alpine</span></code>.</p></li>
 </ul>
@@ -286,12 +297,16 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Changelog</a><ul>
-<li><a class="reference internal" href="#id1">0.2.0 (2026-09-17)</a><ul>
+<li><a class="reference internal" href="#id1">0.2.1 (2026-10-29)</a><ul>
+<li><a class="reference internal" href="#changed">Changed</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">0.2.0 (2026-09-17)</a><ul>
 <li><a class="reference internal" href="#added">Added</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id2">0.1.0 (2026-09-16)</a><ul>
-<li><a class="reference internal" href="#id3">Added</a></li>
+<li><a class="reference internal" href="#id3">0.1.0 (2026-09-16)</a><ul>
+<li><a class="reference internal" href="#id4">Added</a></li>
 </ul>
 </li>
 </ul>
