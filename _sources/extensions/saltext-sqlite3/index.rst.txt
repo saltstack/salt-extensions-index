@@ -1,0 +1,19 @@
+saltext-sqlite3
+===============
+
+Salt extension for interacting with SQLite3
+
+Release: ``v1.0.0``
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation
+
+   docs/changelog
+   docs/topics/installation
+
+Provided Modules
+----------------
+
+* `Execution modules <https://salt-extensions.github.io/saltext-sqlite3/ref/modules/index.html>`_
+* `State modules <https://salt-extensions.github.io/saltext-sqlite3/ref/states/index.html>`_
