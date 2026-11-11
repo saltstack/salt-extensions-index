@@ -226,15 +226,15 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="auth-and-lifecycle-faq">
-<span id="auth-faq-target"></span><h1>Auth and lifecycle FAQ<a class="headerlink" href="#auth-and-lifecycle-faq" title="Link to this heading">¶</a></h1>
+          <section id="auth-faq-target">
+<span id="auth-and-lifecycle-faq"></span><h1>Auth and lifecycle FAQ<a class="headerlink" href="#auth-faq-target" title="Link to this heading">¶</a></h1>
 <p>This page gives an overview of internal aspects regarding master authentication and authentication issuance to minions
 to address frequent sources of confusion and common setup questions by users.</p>
 <section id="manually-configured-daemon-auth">
 <h2>Manually configured daemon auth<a class="headerlink" href="#manually-configured-daemon-auth" title="Link to this heading">¶</a></h2>
 <p>Masters and minions (opt-in via ) can be configured statically.</p>
-<section id="token-vs-approle">
-<span id="auth-tradeoff-target"></span><h3>Token vs AppRole<a class="headerlink" href="#token-vs-approle" title="Link to this heading">¶</a></h3>
+<section id="auth-tradeoff-target">
+<span id="token-vs-approle"></span><h3>Token vs AppRole<a class="headerlink" href="#auth-tradeoff-target" title="Link to this heading">¶</a></h3>
 <p>Tokens are the basic entity of authentication. They carry metadata regarding validity, renewal and authorization (policies).
 Any other authentication method results in the generation of a token. Configuring a token directly gives simple and minute
 control over its properties. If the configured token becomes invalid, e.g. because it was not renewed in time, you need to
@@ -298,8 +298,8 @@ meaning you need to create a separate regular policy on the Vault server for eac
 </ol>
 </section>
 </section>
-<section id="pillar-impersonation">
-<span id="pillar-impersonation-target"></span><h2>Pillar impersonation<a class="headerlink" href="#pillar-impersonation" title="Link to this heading">¶</a></h2>
+<section id="pillar-impersonation-target">
+<span id="pillar-impersonation"></span><h2>Pillar impersonation<a class="headerlink" href="#pillar-impersonation-target" title="Link to this heading">¶</a></h2>
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">vault</span> <span class="pre">pillar</span></code>, which is rendered on the master daemon on behalf of the minion,
 must respect configured Vault policies when distributing secrets to minions.
 In order to verify that a minion has access to a secret, the master issues minion-specific credentials to itself,
@@ -349,7 +349,7 @@ authenticates to Vault using these and requests the secret.</p>
             <ul>
 <li><a class="reference internal" href="#">Auth and lifecycle FAQ</a><ul>
 <li><a class="reference internal" href="#manually-configured-daemon-auth">Manually configured daemon auth</a><ul>
-<li><a class="reference internal" href="#token-vs-approle">Token vs AppRole</a></li>
+<li><a class="reference internal" href="#auth-tradeoff-target">Token vs AppRole</a></li>
 <li><a class="reference internal" href="#caching">Caching</a></li>
 <li><a class="reference internal" href="#renewal">Renewal</a></li>
 <li><a class="reference internal" href="#validity">Validity</a></li>
@@ -359,7 +359,7 @@ authenticates to Vault using these and requests the secret.</p>
 <li><a class="reference internal" href="#issuance-tradeoff-target">Token vs AppRole</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#pillar-impersonation">Pillar impersonation</a></li>
+<li><a class="reference internal" href="#pillar-impersonation-target">Pillar impersonation</a></li>
 </ul>
 </li>
 </ul>

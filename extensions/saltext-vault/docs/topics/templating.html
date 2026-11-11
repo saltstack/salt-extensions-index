@@ -226,8 +226,8 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="templating">
-<span id="vault-templating"></span><h1>Templating<a class="headerlink" href="#templating" title="Link to this heading">¶</a></h1>
+          <section id="vault-templating">
+<span id="templating"></span><h1>Templating<a class="headerlink" href="#vault-templating" title="Link to this heading">¶</a></h1>
 <p>Several Vault extension configuration values allow templating.</p>
 <p>:::{admonition} Templating is allowed in…
 :class: dropdown</p>
@@ -325,8 +325,8 @@ is expanded into:</p>
 <h4>Policies/pillar paths<a class="headerlink" href="#policies-pillar-paths" title="Link to this heading">¶</a></h4>
 <p>Policies and pillar paths treat the values separately, as intended.</p>
 </section>
-<section id="entity-authentication-metadata">
-<span id="metadata-templating-target"></span><h4>Entity/authentication metadata<a class="headerlink" href="#entity-authentication-metadata" title="Link to this heading">¶</a></h4>
+<section id="metadata-templating-target">
+<span id="entity-authentication-metadata"></span><h4>Entity/authentication metadata<a class="headerlink" href="#metadata-templating-target" title="Link to this heading">¶</a></h4>
 <p>Entity and authentication metadata is written to Vault, which
 <a class="reference external" href="https://github.com/hashicorp/vault/issues/12039">only supports strings</a>.
 Consequently, it’s impossible to apply <a class="reference external" href="https://developer.hashicorp.com/vault/tutorials/policies/policy-templating">templated ACL policies</a> for composite values like lists
@@ -433,7 +433,7 @@ if any user-defined key begins with the designated prefix
 <li><a class="reference internal" href="#rendering">Rendering</a><ul>
 <li><a class="reference internal" href="#complex-data">Complex data</a><ul>
 <li><a class="reference internal" href="#policies-pillar-paths">Policies/pillar paths</a></li>
-<li><a class="reference internal" href="#entity-authentication-metadata">Entity/authentication metadata</a></li>
+<li><a class="reference internal" href="#metadata-templating-target">Entity/authentication metadata</a></li>
 </ul>
 </li>
 </ul>

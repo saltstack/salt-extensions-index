@@ -226,8 +226,8 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="quickstart">
-<span id="vault-setup"></span><h1>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">¶</a></h1>
+          <section id="vault-setup">
+<span id="quickstart"></span><h1>Quickstart<a class="headerlink" href="#vault-setup" title="Link to this heading">¶</a></h1>
 <p>For authenticating on a Vault server, each node needs credentials.
 Currently supported authentication methods are <a class="reference external" href="https://developer.hashicorp.com/vault/docs/auth/approle">AppRoles</a> and <a class="reference external" href="https://developer.hashicorp.com/vault/docs/concepts/tokens">tokens</a>.</p>
 <p>To ease the management overhead, this extension allows the Salt master to
@@ -462,8 +462,8 @@ configuration, e.g. in <code class="docutils literal notranslate"><span class="p
 </div>
 <p>:::</p>
 </section>
-<section id="credential-issuance">
-<span id="token-role-target"></span><h4>Credential issuance<a class="headerlink" href="#credential-issuance" title="Link to this heading">¶</a></h4>
+<section id="token-role-target">
+<span id="credential-issuance"></span><h4>Credential issuance<a class="headerlink" href="#token-role-target" title="Link to this heading">¶</a></h4>
 <p>:::{tab} Token
 By default, token issuance endpoints restrict assignment to only a subset
 of the requester’s policies and tie the child token’s validity to the parent token.
@@ -585,8 +585,8 @@ Entities are only created when issuing AppRoles, not tokens.
 :::</p>
 </section>
 </section>
-<section id="complete-examples">
-<span id="example-config-target"></span><h3>Complete examples<a class="headerlink" href="#complete-examples" title="Link to this heading">¶</a></h3>
+<section id="example-config-target">
+<span id="complete-examples"></span><h3>Complete examples<a class="headerlink" href="#example-config-target" title="Link to this heading">¶</a></h3>
 <p>:::{tab} Token</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vault</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">auth</span><span class="p">:</span>
@@ -819,7 +819,7 @@ salt<span class="w"> </span>elliott<span class="w"> </span>vault.clear_cache
 <li><a class="reference internal" href="#credential-orchestration">Credential orchestration</a></li>
 <li><a class="reference internal" href="#required-parameters">Required parameters</a><ul>
 <li><a class="reference internal" href="#master-authentication">Master authentication</a></li>
-<li><a class="reference internal" href="#credential-issuance">Credential issuance</a></li>
+<li><a class="reference internal" href="#token-role-target">Credential issuance</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#common-customizations">Common customizations</a><ul>
@@ -829,7 +829,7 @@ salt<span class="w"> </span>elliott<span class="w"> </span>vault.clear_cache
 <li><a class="reference internal" href="#entity-metadata">Entity metadata</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#complete-examples">Complete examples</a></li>
+<li><a class="reference internal" href="#example-config-target">Complete examples</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#secrets-setup">Secrets setup</a><ul>
