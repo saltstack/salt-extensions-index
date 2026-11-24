@@ -3,7 +3,7 @@ Salt Extensions
 
 A catalog of public Salt extension repositories. Documentation is collected nightly from each repository's latest release. If a repository has no published GitHub release, its highest version tag is used. Repositories without tags are listed without imported documentation. The collected source files are rendered with this site's Sphinx configuration; extension-specific configuration code is not executed.
 
-Last generated: 2026-11-23 02:38 UTC
+Last generated: 2026-11-24 02:36 UTC
 
 .. raw:: html
 
@@ -93,8 +93,8 @@ Last generated: 2026-11-23 02:38 UTC
      - No published documentation
    * - `saltext-dockermod <https://github.com/salt-extensions/saltext-dockermod>`_
      - No description provided.
-     - `v0.1.3 <https://github.com/salt-extensions/saltext-dockermod/tree/v0.1.3>`_
-     - 2026-09-21
+     - `v0.1.4 <https://github.com/salt-extensions/saltext-dockermod/tree/v0.1.4>`_
+     - 2026-11-23
      - :doc:`Browse docs <extensions/saltext-dockermod/index>`
    * - `saltext-elasticsearch <https://github.com/salt-extensions/saltext-elasticsearch>`_
      - Salt Extension for interacting with Elasticsearch
@@ -213,8 +213,8 @@ Last generated: 2026-11-23 02:38 UTC
      - :doc:`Browse docs <extensions/saltext-openrc/index>`
    * - `saltext-openscap <https://github.com/salt-extensions/saltext-openscap>`_
      - No description provided.
-     - `v0.1.0 <https://github.com/salt-extensions/saltext-openscap/tree/v0.1.0>`_
-     - 2026-03-05
+     - `v0.2.0 <https://github.com/salt-extensions/saltext-openscap/tree/v0.2.0>`_
+     - 2026-11-23
      - :doc:`Browse docs <extensions/saltext-openscap/index>`
    * - `saltext-pagerduty <https://github.com/salt-extensions/saltext-pagerduty>`_
      - Salt Extension for interacting with PagerDuty

@@ -3,7 +3,7 @@ saltext-openscap
 
 Salt extension documentation
 
-Release: ``v0.1.0``
+Release: ``v0.2.0``
 
 .. toctree::
    :maxdepth: 2
