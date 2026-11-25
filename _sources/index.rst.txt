@@ -3,7 +3,7 @@ Salt Extensions
 
 A catalog of public Salt extension repositories. Documentation is collected nightly from each repository's latest release. If a repository has no published GitHub release, its highest version tag is used. Repositories without tags are listed without imported documentation. The collected source files are rendered with this site's Sphinx configuration; extension-specific configuration code is not executed.
 
-Last generated: 2026-11-24 02:36 UTC
+Last generated: 2026-11-25 02:37 UTC
 
 .. raw:: html
 
@@ -58,8 +58,8 @@ Last generated: 2026-11-24 02:36 UTC
      - :doc:`Browse docs <extensions/saltext-bmc/index>`
    * - `saltext-boto3 <https://github.com/salt-extensions/saltext-boto3>`_
      - No description provided.
-     - `v1.2.0 <https://github.com/salt-extensions/saltext-boto3/tree/v1.2.0>`_
-     - 2026-09-29
+     - `v2.0.0 <https://github.com/salt-extensions/saltext-boto3/tree/v2.0.0>`_
+     - 2026-11-24
      - :doc:`Browse docs <extensions/saltext-boto3/index>`
    * - `saltext-btrfs <https://github.com/salt-extensions/saltext-btrfs>`_
      - No description provided.

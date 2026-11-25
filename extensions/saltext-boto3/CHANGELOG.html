@@ -231,9 +231,43 @@
 <section id="changelog">
 <h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>1.2.0 (2026-09-29)<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<h2>2.0.0 (2026-11-24)<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<section id="breaking-changes">
+<h3>Breaking changes<a class="headerlink" href="#breaking-changes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Renamed state functions <code class="docutils literal notranslate"><span class="pre">create_target_group</span></code> → <code class="docutils literal notranslate"><span class="pre">target_group_present</span></code> and <code class="docutils literal notranslate"><span class="pre">delete_target_group</span></code> → <code class="docutils literal notranslate"><span class="pre">target_group_absent</span></code>; fixed <code class="docutils literal notranslate"><span class="pre">targets_registered</span></code> and <code class="docutils literal notranslate"><span class="pre">targets_deregistered</span></code> to issue a single bulk API call instead of one call per target.</p></li>
+</ul>
+</section>
+<section id="changed">
+<h3>Changed<a class="headerlink" href="#changed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Changed <code class="docutils literal notranslate"><span class="pre">boto3_elbv2.target_group_exists</span></code> to accept explicit <code class="docutils literal notranslate"><span class="pre">name</span></code> or <code class="docutils literal notranslate"><span class="pre">arn</span></code> keyword arguments instead of a single positional argument that required ARN string-sniffing.</p></li>
+</ul>
+</section>
 <section id="added">
 <h3>Added<a class="headerlink" href="#added" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Add security-group rule description support to <code class="docutils literal notranslate"><span class="pre">boto3_secgroup.authorize</span></code>, rule readback, and <code class="docutils literal notranslate"><span class="pre">boto3_secgroup.present</span></code>. Description-only changes use the new <code class="docutils literal notranslate"><span class="pre">boto3_secgroup.update_rule_description</span></code> function without revoking rules. Omitted or null state descriptions remain unmanaged; empty strings clear descriptions. <code class="docutils literal notranslate"><span class="pre">boto3_secgroup.revoke</span></code> accepts description metadata without using it to identify the rule. Normalize numeric protocol comparisons so integer <code class="docutils literal notranslate"><span class="pre">-1</span></code> matches AWS’s string <code class="docutils literal notranslate"><span class="pre">&quot;-1&quot;</span></code> and does not trigger unnecessary rule replacement. Updating existing descriptions requires <code class="docutils literal notranslate"><span class="pre">ec2:UpdateSecurityGroupRuleDescriptionsIngress</span></code> or <code class="docutils literal notranslate"><span class="pre">ec2:UpdateSecurityGroupRuleDescriptionsEgress</span></code> permission.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">boto3_elbv2.describe_target_group</span></code> to look up a target group by <code class="docutils literal notranslate"><span class="pre">name</span></code> or <code class="docutils literal notranslate"><span class="pre">arn</span></code> and return its full AWS dict.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">boto3_rds.master_user_secret_ready</span></code> to wait with a bounded timeout until an RDS-managed master secret is active.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">boto3_secretsmanager.managed_rotation_present</span></code> and <code class="docutils literal notranslate"><span class="pre">boto3_secretsmanager.configure_managed_rotation</span></code> to update schedules for service-managed secrets without specifying a Lambda rotation function or starting an immediate rotation.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">manage_master_user_password</span></code> and <code class="docutils literal notranslate"><span class="pre">master_user_secret_kms_key_id</span></code> support to RDS execution calls, plus a <code class="docutils literal notranslate"><span class="pre">boto3_rds.master_user_password_managed</span></code> state for explicitly enabling RDS-managed master credentials on an existing instance.</p></li>
+<li><p>Added a <code class="docutils literal notranslate"><span class="pre">boto3_secretsmanager.rotation_present</span></code> state for configuring Lambda-based automatic rotation schedules without immediately rotating the secret by default.</p></li>
+</ul>
+</section>
+<section id="fixed">
+<h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fix <code class="docutils literal notranslate"><span class="pre">boto3_secgroup.present</span></code> for <code class="docutils literal notranslate"><span class="pre">all</span></code> (<code class="docutils literal notranslate"><span class="pre">-1</span></code>) protocol rules. Rules defined without <code class="docutils literal notranslate"><span class="pre">from_port</span></code>/<code class="docutils literal notranslate"><span class="pre">to_port</span></code> no longer raise <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> during comparison, and ports are stripped before authorize/revoke calls since AWS rejects <code class="docutils literal notranslate"><span class="pre">FromPort</span></code>/<code class="docutils literal notranslate"><span class="pre">ToPort</span></code> when the protocol is <code class="docutils literal notranslate"><span class="pre">-1</span></code> (“When protocol is ALL, you cannot specify from-port”). Applies to both ingress and egress rules.</p></li>
+<li><p>Fixed local ZIP package hash comparison in <code class="docutils literal notranslate"><span class="pre">boto3_lambda.function_present</span></code> on Python 3.</p></li>
+<li><p>Stringify datetime values in <code class="docutils literal notranslate"><span class="pre">boto3_ssm</span></code> command returns (<code class="docutils literal notranslate"><span class="pre">send_command</span></code>, <code class="docutils literal notranslate"><span class="pre">get_command_invocation</span></code>, <code class="docutils literal notranslate"><span class="pre">list_command_invocations</span></code>). Raw boto3 datetimes (e.g. <code class="docutils literal notranslate"><span class="pre">ExpiresAfter</span></code>) leaked into state returns and broke JSON consumers such as the Salt netapi, which returned HTTP 500 for <code class="docutils literal notranslate"><span class="pre">jobs.lookup_jid</span></code> on any orchestration embedding the result.</p></li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h2>1.2.0 (2026-09-29)<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="id3">
+<h3>Added<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Added <code class="docutils literal notranslate"><span class="pre">boto3_ec2.create_launch_template</span></code>, <code class="docutils literal notranslate"><span class="pre">boto3_ec2.delete_launch_template</span></code>, and <code class="docutils literal notranslate"><span class="pre">boto3_ec2.describe_launch_templates</span></code> execution functions along with <code class="docutils literal notranslate"><span class="pre">boto3_ec2.launch_template_present</span></code> and <code class="docutils literal notranslate"><span class="pre">boto3_ec2.launch_template_absent</span></code> state functions.</p></li>
 <li><p>Added <code class="docutils literal notranslate"><span class="pre">boto3_ec2.get_dns_name</span></code> to return the private or public DNS name of an EC2 instance looked up by Name tag or instance ID.</p></li>
@@ -242,50 +276,50 @@
 </ul>
 </section>
 </section>
-<section id="id2">
-<h2>1.1.0 (2026-09-15)<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<section id="changed">
-<h3>Changed<a class="headerlink" href="#changed" title="Link to this heading">¶</a></h3>
+<section id="id4">
+<h2>1.1.0 (2026-09-15)<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<section id="id5">
+<h3>Changed<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Added support for associating secondary CIDR blocks with VPCs through the <code class="docutils literal notranslate"><span class="pre">boto3_vpc</span></code> execution module and state, including backward-compatible list input for <code class="docutils literal notranslate"><span class="pre">cidr_block</span></code>.</p></li>
 <li><p>Expanded <code class="docutils literal notranslate"><span class="pre">boto3_rds</span></code> read-replica management with configurable instance, networking, storage, upgrade, parameter-group, option-group, accessibility, tagging, and AWS connection settings.</p></li>
 <li><p>Updated <code class="docutils literal notranslate"><span class="pre">boto3_vpc.route_table_absent</span></code> to disassociate non-main route-table associations before deleting a route table.</p></li>
 </ul>
 </section>
-<section id="fixed">
-<h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">¶</a></h3>
+<section id="id6">
+<h3>Fixed<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Updated documentaion for consistency. <a class="reference external" href="https://github.com/salt-extensions/saltext-boto3/issues/18">#18</a></p></li>
 </ul>
 </section>
-<section id="id3">
-<h3>Added<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<section id="id7">
+<h3>Added<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Added the <code class="docutils literal notranslate"><span class="pre">boto3_secretsmanager</span></code> execution module and state for creating, reading, and updating AWS Secrets Manager secrets.</p></li>
 <li><p>Expanded <code class="docutils literal notranslate"><span class="pre">boto3_s3</span></code> with object get, put, delete, download, and presigned URL operations, including AWS connection options, extra arguments, validation, and error handling.</p></li>
 </ul>
 </section>
 </section>
-<section id="id4">
-<h2>1.0.1 (2026-07-10)<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
-<section id="id5">
-<h3>Fixed<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<section id="id8">
+<h2>1.0.1 (2026-07-10)<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<section id="id9">
+<h3>Fixed<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Fixed boto3_vpc.dhcp_options_present to associate an existing DHCP options set to the target VPC when the desired options already exist but are not currently attached.</p></li>
 <li><p>Fixed profile-string authentication to use named AWS profiles when no static credentials are set, and isolated profile-only client caching by profile name to prevent cross-profile reuse.</p></li>
 </ul>
 </section>
 </section>
-<section id="id6">
-<h2>1.0.0 (2026-04-25)<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<section id="id10">
+<h2>1.0.0 (2026-04-25)<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h2>
 <section id="removed">
 <h3>Removed<a class="headerlink" href="#removed" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Removed all legacy boto2 <code class="docutils literal notranslate"><span class="pre">boto_*</span></code> execution modules and states; use the <code class="docutils literal notranslate"><span class="pre">boto3_*</span></code> equivalents instead. <a class="reference external" href="https://github.com/salt-extensions/saltext-boto3/issues/boto2-legacy">#boto2-legacy</a></p></li>
 </ul>
 </section>
-<section id="id7">
-<h3>Added<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<section id="id11">
+<h3>Added<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Initial release of the <code class="docutils literal notranslate"><span class="pre">saltext-boto3</span></code> Salt Extension, carved out of Salt core and modernized to require boto3 1.28+/botocore 1.31+ on Python 3.10+. <a class="reference external" href="https://github.com/salt-extensions/saltext-boto3/issues/initial-extension">#initial-extension</a></p></li>
 </ul>
@@ -331,23 +365,30 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Changelog</a><ul>
-<li><a class="reference internal" href="#id1">1.2.0 (2026-09-29)</a><ul>
+<li><a class="reference internal" href="#id1">2.0.0 (2026-11-24)</a><ul>
+<li><a class="reference internal" href="#breaking-changes">Breaking changes</a></li>
+<li><a class="reference internal" href="#changed">Changed</a></li>
 <li><a class="reference internal" href="#added">Added</a></li>
+<li><a class="reference internal" href="#fixed">Fixed</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id2">1.1.0 (2026-09-15)</a><ul>
-<li><a class="reference internal" href="#changed">Changed</a></li>
-<li><a class="reference internal" href="#fixed">Fixed</a></li>
+<li><a class="reference internal" href="#id2">1.2.0 (2026-09-29)</a><ul>
 <li><a class="reference internal" href="#id3">Added</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id4">1.0.1 (2026-07-10)</a><ul>
-<li><a class="reference internal" href="#id5">Fixed</a></li>
+<li><a class="reference internal" href="#id4">1.1.0 (2026-09-15)</a><ul>
+<li><a class="reference internal" href="#id5">Changed</a></li>
+<li><a class="reference internal" href="#id6">Fixed</a></li>
+<li><a class="reference internal" href="#id7">Added</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id6">1.0.0 (2026-04-25)</a><ul>
+<li><a class="reference internal" href="#id8">1.0.1 (2026-07-10)</a><ul>
+<li><a class="reference internal" href="#id9">Fixed</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id10">1.0.0 (2026-04-25)</a><ul>
 <li><a class="reference internal" href="#removed">Removed</a></li>
-<li><a class="reference internal" href="#id7">Added</a></li>
+<li><a class="reference internal" href="#id11">Added</a></li>
 </ul>
 </li>
 </ul>

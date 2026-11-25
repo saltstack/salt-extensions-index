@@ -3,7 +3,7 @@ saltext-boto3
 
 Salt extension documentation
 
-Release: ``v1.2.0``
+Release: ``v2.0.0``
 
 .. toctree::
    :maxdepth: 2

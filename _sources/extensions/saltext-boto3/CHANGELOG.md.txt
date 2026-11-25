@@ -4,6 +4,35 @@ This project uses [Semantic Versioning](https://semver.org/) - MAJOR.MINOR.PATCH
 
 # Changelog
 
+## 2.0.0 (2026-11-24)
+
+
+### Breaking changes
+
+- Renamed state functions `create_target_group` → `target_group_present` and `delete_target_group` → `target_group_absent`; fixed `targets_registered` and `targets_deregistered` to issue a single bulk API call instead of one call per target.
+
+
+### Changed
+
+- Changed `boto3_elbv2.target_group_exists` to accept explicit `name` or `arn` keyword arguments instead of a single positional argument that required ARN string-sniffing.
+
+
+### Added
+
+- Add security-group rule description support to `boto3_secgroup.authorize`, rule readback, and `boto3_secgroup.present`. Description-only changes use the new `boto3_secgroup.update_rule_description` function without revoking rules. Omitted or null state descriptions remain unmanaged; empty strings clear descriptions. `boto3_secgroup.revoke` accepts description metadata without using it to identify the rule. Normalize numeric protocol comparisons so integer `-1` matches AWS's string `"-1"` and does not trigger unnecessary rule replacement. Updating existing descriptions requires `ec2:UpdateSecurityGroupRuleDescriptionsIngress` or `ec2:UpdateSecurityGroupRuleDescriptionsEgress` permission.
+- Added `boto3_elbv2.describe_target_group` to look up a target group by `name` or `arn` and return its full AWS dict.
+- Added `boto3_rds.master_user_secret_ready` to wait with a bounded timeout until an RDS-managed master secret is active.
+- Added `boto3_secretsmanager.managed_rotation_present` and `boto3_secretsmanager.configure_managed_rotation` to update schedules for service-managed secrets without specifying a Lambda rotation function or starting an immediate rotation.
+- Added `manage_master_user_password` and `master_user_secret_kms_key_id` support to RDS execution calls, plus a `boto3_rds.master_user_password_managed` state for explicitly enabling RDS-managed master credentials on an existing instance.
+- Added a `boto3_secretsmanager.rotation_present` state for configuring Lambda-based automatic rotation schedules without immediately rotating the secret by default.
+
+
+### Fixed
+
+- Fix `boto3_secgroup.present` for `all` (`-1`) protocol rules. Rules defined without `from_port`/`to_port` no longer raise `KeyError` during comparison, and ports are stripped before authorize/revoke calls since AWS rejects `FromPort`/`ToPort` when the protocol is `-1` ("When protocol is ALL, you cannot specify from-port"). Applies to both ingress and egress rules.
+- Fixed local ZIP package hash comparison in `boto3_lambda.function_present` on Python 3.
+- Stringify datetime values in ``boto3_ssm`` command returns (``send_command``, ``get_command_invocation``, ``list_command_invocations``). Raw boto3 datetimes (e.g. ``ExpiresAfter``) leaked into state returns and broke JSON consumers such as the Salt netapi, which returned HTTP 500 for ``jobs.lookup_jid`` on any orchestration embedding the result.
+
 ## 1.2.0 (2026-09-29)
 
 
